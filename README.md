@@ -1,5 +1,6 @@
 # Proyecto-Final
 Proyecto final de 2 DAM - Gestor de Inventario
+
 Hecho por Joel Mendoza Domínguez
 
 El proyecto trata de crear una aplicación informativa de una tienda informática que nos permita ver los productos de la tienda y poder gestionarlos.
