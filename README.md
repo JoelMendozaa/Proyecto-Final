@@ -1,5 +1,5 @@
-# Proyecto-Final
-Proyecto final de 2 DAM - Gestor de Inventario
+# Gestor de Inventario
+Proyecto final de 2 DAM
 
 Hecho por Joel Mendoza Domínguez
 
