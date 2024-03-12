@@ -1,4 +1,4 @@
-# Gestor de Inventario
+# Gestor de Inventario InformaticaLI
 Proyecto final de 2 DAM
 
 Hecho por Joel Mendoza Domínguez
