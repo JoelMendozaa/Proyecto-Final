@@ -1,11 +1,19 @@
 # Anteproyecto
 
-## Modelo de Datos
-![Modelo de datos](CapturasPantalla/ModeloDato2.jpg)
+## Titulo: InformaticaLI
 
-### Hoja de calculo
-![Modelo de datos](CapturasPantalla/modeloejemplo.jpg)
+## Objetivos:
+El objetivo principal de esta aplicación es poder gestionar el inventario de una tienda de informática.
+
+##Temática:
+Programa que te permita editar, añadir, eliminar las publicaciones que hace la empresa y organizarlo para una mejor gestión.
+
+### Modelo de Datos
+![Modelo de datos](Anteproyecto/ModeloDato2.jpg)
+
+#### Hoja de calculo
+![Modelo de datos](Anteproyecto/modeloejemplo.jpg)
 
 ### Borrador figma
-![Modelo de datos](CapturasPantalla/Mockup.jpg)
+![Modelo de datos](Anteproyecto/Mockup.jpg)
 
