@@ -5,7 +5,7 @@
 ## Objetivos:
 El objetivo principal de esta aplicación es poder gestionar el inventario de una tienda de informática.
 
-##Temática:
+## Temática:
 Programa que te permita editar, añadir, eliminar las publicaciones que hace la empresa y organizarlo para una mejor gestión.
 
 ### Modelo de Datos
