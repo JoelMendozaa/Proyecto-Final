@@ -7,15 +7,3 @@ El proyecto trata de crear una aplicación informativa de una tienda informátic
 
 Para este proyecto se usará el lenguaje de programación de Kotlin usando Jetpack Compose con diferentes API’s si es posible y una base de datos con SQLite con su diagramas entidad relación, etc.
 
-
-### Hoja de calculo
-
-
-
-### Diagrama modelo de datos
-
-
-
-### Borrador figma
-
-
