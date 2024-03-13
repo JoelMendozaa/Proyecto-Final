@@ -4,8 +4,8 @@
 ![Modelo de datos](ModeloDato2.jpg)
 
 ### Hoja de calculo
-![Modelo de datos](modeloEjemplo.jpg)
+![Modelo de datos](modeloejemplo.jpg)
 
 ### Borrador figma
-![Modelo de datos](mockup.jpg)
+![Modelo de datos](Mockup.jpg)
 

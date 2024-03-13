@@ -6,14 +6,3 @@ Hecho por Joel Mendoza Domínguez
 El proyecto trata de crear una aplicación informativa de una tienda informática que nos permita ver los productos de la tienda y poder gestionarlos.
 
 Para este proyecto se usará el lenguaje de programación de Kotlin usando Jetpack Compose con diferentes API’s si es posible y una base de datos con SQLite con su diagramas entidad relación, etc.
-
-# Anteproyecto
-
-## Modelo de Datos
-![Modelo de datos](CapturasPantalla/ModeloDato2.jpg)
-
-## Hoja de calculo
-![Modelo de datos](CapturasPantalla/modeloejemplo.jpg)
-
-## Borrador figma
-![Modelo de datos](CapturasPantalla/Mockup.jpg)
