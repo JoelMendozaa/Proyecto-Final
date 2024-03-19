@@ -23,15 +23,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.informaticali.R
 
 @Composable
 fun Register(
     buttonClickedPrincipal: () ->  Unit,
-    buttonClickedInfoAppUnlog: () -> Unit,
-    buttonClickedSectionStock: () -> Unit,
-    buttonClickedUserUnlog: () -> Unit
 ){
     var nombre by remember { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }

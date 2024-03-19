@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "InformaticaLI"
+rootProject.name = "GestorInventarioInformaticaLI"
 include(":app")
+ 

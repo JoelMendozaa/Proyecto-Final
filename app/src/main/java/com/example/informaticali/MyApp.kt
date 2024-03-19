@@ -39,12 +39,8 @@ fun MyApp(navController: NavHostController = rememberNavController()){
         }
         composable(route = ScreenList.Register.name){ 
             Register(
-                buttonClickedPrincipal = { navController.navigate(ScreenList.Principal.name) },
-                buttonClickedInfoAppUnlog = { /*TODO*/ },
-                buttonClickedSectionStock = { /*TODO*/ }
-            ) {
-                
-            }
+                buttonClickedPrincipal = { navController.navigate(ScreenList.Principal.name) }
+            )
         }
         composable(route = ScreenList.Principal.name){
             Principal()

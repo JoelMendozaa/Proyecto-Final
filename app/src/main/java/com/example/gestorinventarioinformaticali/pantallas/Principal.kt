@@ -1,4 +1,4 @@
-package com.example.informaticali.pantallas
+package com.example.gestorinventarioinformaticali.pantallas
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
@@ -32,10 +32,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.informaticali.R
-@OptIn(ExperimentalMaterial3Api::class)
+import com.example.gestorinventarioinformaticali.R
+
 @Composable
-fun Principal() {
+fun Principal(
+    onButtonClickedInfoApp: () -> Unit,
+    onButtonClickedStock: () -> Unit,
+    onButtonClickedHome: () -> Unit,
+    onButtonClickedUser: () -> Unit,
+) {
     Scaffold(
         topBar = {
             TopAppBar()
@@ -45,11 +50,11 @@ fun Principal() {
                 BottomAppBar(
                     actions = {
                         IconButton(modifier = Modifier.weight(2f),
-                            onClick = { /* do something */ }) {
+                            onClick = { onButtonClickedInfoApp() }) {
                             Icon(Icons.Filled.Check, contentDescription = "InfoApp")
                         }
                         IconButton(modifier = Modifier.weight(2f),
-                            onClick = { /* do something */ }
+                            onClick = { onButtonClickedStock() }
                         ) {
                             Icon(
                                 painter = painterResource(id = R.drawable.baseline_bar_chart_24),
@@ -57,14 +62,14 @@ fun Principal() {
                             )
                         }
                         IconButton(modifier = Modifier.weight(2f),
-                            onClick = { /* do something */ }) {
+                            onClick = { onButtonClickedHome() }) {
                             Icon(
                                 Icons.Filled.Home,
                                 contentDescription = "Home",
                             )
                         }
                         IconButton(modifier = Modifier.weight(2f),
-                            onClick = { /* do something */ }) {
+                            onClick = { onButtonClickedUser() }) {
                             Icon(
                                 Icons.Filled.AccountCircle,
                                 contentDescription = "User",

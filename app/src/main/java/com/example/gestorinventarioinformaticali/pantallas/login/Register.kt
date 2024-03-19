@@ -1,4 +1,4 @@
-package com.example.informaticali.pantallas.login
+package com.example.gestorinventarioinformaticali.pantallas.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -23,17 +23,16 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.informaticali.R
+import com.example.gestorinventarioinformaticali.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Login(
-    buttonClickedRegister: () ->  Unit,
-    buttonClickedLogin: () -> Unit
-    ){
-    var user by remember { mutableStateOf("") }
+fun Register(
+    buttonClickedPrincipal: () ->  Unit,
+){
+    var nombre by remember { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    var correo by remember { mutableStateOf("") }
+    var numero by remember { mutableStateOf("")}
 
     Column (modifier = Modifier
         .fillMaxSize()
@@ -42,28 +41,29 @@ fun Login(
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Logo")
-        OutLineTextFieldUser(user = user){ newUser ->
-            user = newUser
+        OutLineTextFieldNombre(user = nombre){ newNombre ->
+            nombre = newNombre
         }
 
-        OutLineTextFieldPassword(password = password) { newPassword ->
+        OutLineTextFieldCorreo(correo = correo) { newCorreo ->
+            correo = newCorreo
+        }
+
+        OutLineTextFieldPassword2(password = password) { newPassword ->
             password = newPassword
         }
-        Text(text = "He olvidado la contraseña", modifier = Modifier.padding(start = 95.dp), fontSize = 14.sp)
+
+        OutLineTextFieldTelefono(numero = numero) { newNumero ->
+            numero = newNumero
+        }
         Row (modifier = Modifier
             .padding(15.dp),
             horizontalArrangement = Arrangement.Center
         ){
             Button(onClick = {
-                buttonClickedRegister()
+                buttonClickedPrincipal()
             }) {
                 Text(text = "Register")
-            }
-
-            Button(onClick = {
-                buttonClickedLogin()
-            }) {
-                Text (text = "Login")
             }
         }
     }
@@ -71,9 +71,8 @@ fun Login(
 
 
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun OutLineTextFieldUser(user: String, onUserChange: (String) -> Unit) {
+fun OutLineTextFieldNombre(user: String, onUserChange: (String) -> Unit) {
     OutlinedTextField(
         modifier = Modifier.padding(vertical = 10.dp),
         value = user,
@@ -85,14 +84,41 @@ fun OutLineTextFieldUser(user: String, onUserChange: (String) -> Unit) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
-fun OutLineTextFieldPassword(password: String, onPasswordChange: (String) -> Unit) {
+fun OutLineTextFieldCorreo(correo: String, onUserChange: (String) -> Unit) {
+    OutlinedTextField(
+        modifier = Modifier.padding(vertical = 10.dp),
+        value = correo,
+        label = { Text(text = "Introduce tu correo") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        onValueChange = {
+                newValue -> onUserChange(newValue)
+        }
+    )
+}
+
+@Composable
+fun OutLineTextFieldPassword2(password: String, onPasswordChange: (String) -> Unit) {
     OutlinedTextField(
         value = password,
         onValueChange = { newValue -> onPasswordChange(newValue) },
         label = { Text(text = "Introduce tu contraseña") },
         visualTransformation = PasswordVisualTransformation(),
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun OutLineTextFieldTelefono(numero: String, onUserChange: (String) -> Unit) {
+    OutlinedTextField(
+        modifier = Modifier.padding(vertical = 10.dp),
+        value = numero,
+        label = { Text(text = "Introduce tu numero") },
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        onValueChange = {
+                newValue -> onUserChange(newValue)
+        }
     )
 }

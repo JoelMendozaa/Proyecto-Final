@@ -1,4 +1,4 @@
-package com.example.informaticali.ui.theme
+package com.example.gestorinventarioinformaticali.ui.theme
 
 import android.app.Activity
 import android.os.Build
@@ -16,15 +16,15 @@ import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
-    primary = Blue,
-    secondary = LightBlue,
-    tertiary = Turquesa
+    primary = Purple80,
+    secondary = PurpleGrey80,
+    tertiary = Pink80
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = DarkBlue,
-    secondary = DarkBlue2,
-    tertiary = DarkBlue3
+    primary = Purple40,
+    secondary = PurpleGrey40,
+    tertiary = Pink40
 
     /* Other default colors to override
     background = Color(0xFFFFFBFE),
@@ -38,10 +38,10 @@ private val LightColorScheme = lightColorScheme(
 )
 
 @Composable
-fun InformaticaLITheme(
+fun GestorInventarioInformaticaLITheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = false,
+    dynamicColor: Boolean = true,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {

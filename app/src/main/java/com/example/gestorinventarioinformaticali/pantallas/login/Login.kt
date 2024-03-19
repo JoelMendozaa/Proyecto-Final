@@ -1,4 +1,4 @@
-package com.example.informaticali.pantallas.login
+package com.example.gestorinventarioinformaticali.pantallas.login
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -24,14 +24,13 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.informaticali.R
+import com.example.gestorinventarioinformaticali.R
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Login(
     buttonClickedRegister: () ->  Unit,
     buttonClickedLogin: () -> Unit
-    ){
+){
     var user by remember { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
 
@@ -70,8 +69,6 @@ fun Login(
 }
 
 
-
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldUser(user: String, onUserChange: (String) -> Unit) {
     OutlinedTextField(
@@ -85,7 +82,6 @@ fun OutLineTextFieldUser(user: String, onUserChange: (String) -> Unit) {
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldPassword(password: String, onPasswordChange: (String) -> Unit) {
     OutlinedTextField(
