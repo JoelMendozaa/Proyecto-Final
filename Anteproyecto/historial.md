@@ -22,18 +22,18 @@
 - En la pantalla principal se creó el apartado de Categorías y Productos.
  -Buscar templates de proyectos que contengan jetpack compose y sqlite.
 - Errores:
--- Crasheo a la hora de navegar a la pantalla de register debido a que no se estaba llamando correctamente. 
--Solución:
- -- Llamar a la función y pantalla.
+- - Crasheo a la hora de navegar a la pantalla de register debido a que no se estaba llamando correctamente.
+- Solución:
+- - Llamar a la función y pantalla.
 
 ## Día 19.
 - Continuar con la pantalla principal.
 - Crear TopAppBar y BottomAppBar para la pantalla principal.
 - Creamos la pantalla Usuario
 - Errores:
--- Problemas con el BottomAppBar y TopAppBar. No aparecía en pantalla ya que no estaban bien ordenados. 
--- Error de gradle.
--- Problema con el navigation desde la pantalla principal hasta la pantalla usuario.
+- - Problemas con el BottomAppBar y TopAppBar. No aparecía en pantalla ya que no estaban bien ordenados.
+  -  Error de gradle.
+  -   Problema con el navigation desde la pantalla principal hasta la pantalla usuario.
 - Solución:
--- Colocar de manera correcta el orden para que salga el BottomAppBar y TopAppBar junto al catálogo y productos.
--- Sin encontrar
+- - Colocar de manera correcta el orden para que salga el BottomAppBar y TopAppBar junto al catálogo y productos.
+  - Sin encontrar
