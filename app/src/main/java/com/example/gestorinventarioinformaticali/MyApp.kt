@@ -8,17 +8,16 @@ import androidx.navigation.compose.composable
 import com.example.gestorinventarioinformaticali.pantallas.Principal
 import com.example.gestorinventarioinformaticali.pantallas.login.Login
 import com.example.gestorinventarioinformaticali.pantallas.login.Register
+import com.example.gestorinventarioinformaticali.pantallas.user.User
 
 
 enum class ScreenList{
     Login,
     Register,
     User,
-    UserUnlogin,
     Principal,
     InfoProduct,
     InfoApp,
-    InfoAppUnlog,
     Categories,
     ActDesc,
     MoreProduct,
@@ -47,9 +46,20 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
             Principal(
                 onButtonClickedInfoApp = { navController.navigate(ScreenList.InfoApp.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) },
-                onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
+                onButtonClickedPrincipal = { navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) }
             )
+        }
+        composable(route = ScreenList.User.name){
+            User(
+                onButtonClickedLogin = { navController.navigate(ScreenList.Login.name) },
+                onButtonClickedInfoApp = { navController.navigate(ScreenList.InfoApp.name) },
+                onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
+                onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
+                onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) }
+            )
+        }
+
 //        composable(route = ScreenList.InfoAppUnlog.name){
 //            InfoAppUnlogued()
 //        }
@@ -61,4 +71,3 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
 //        }
         }
     }
-}

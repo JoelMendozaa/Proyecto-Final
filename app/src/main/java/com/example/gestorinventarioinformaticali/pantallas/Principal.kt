@@ -38,8 +38,8 @@ import com.example.gestorinventarioinformaticali.R
 fun Principal(
     onButtonClickedInfoApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
-    onButtonClickedHome: () -> Unit,
-    onButtonClickedUser: () -> Unit,
+    onButtonClickedPrincipal: () -> Unit,
+    onButtonClickedUser: () -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -62,7 +62,7 @@ fun Principal(
                             )
                         }
                         IconButton(modifier = Modifier.weight(2f),
-                            onClick = { onButtonClickedHome() }) {
+                            onClick = { onButtonClickedPrincipal() }) {
                             Icon(
                                 Icons.Filled.Home,
                                 contentDescription = "Home",

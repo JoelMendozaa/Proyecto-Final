@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -109,7 +108,6 @@ fun OutLineTextFieldPassword2(password: String, onPasswordChange: (String) -> Un
     )
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldTelefono(numero: String, onUserChange: (String) -> Unit) {
     OutlinedTextField(
