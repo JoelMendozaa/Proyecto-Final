@@ -37,3 +37,15 @@
 - Solución:
 - - Colocar de manera correcta el orden para que salga el BottomAppBar y TopAppBar junto al catálogo y productos.
   - Sin encontrar
+
+## Día 20.
+- Hemos continuado con las pantallas de Usuario e InfoProduct.
+- Se está corrigiendo los fallos de la pantalla Principal y Usuario para que la navegación entre pantalla funcione correctamente.
+- Errores:
+- - Problemas a la hora de implementar el navhost junto con el Scaffold.
+- - Crasheo al navegar entre pantallas de los productos de la pagina Principal hacia la información de productos.
+- - Fallo en la navegación desde la pantalla Principal a la pantalla Usuario
+
+- Soluciones:
+- - Cambiar el orden
+- - Sin solucionar de momento la navegación entre pantallas
