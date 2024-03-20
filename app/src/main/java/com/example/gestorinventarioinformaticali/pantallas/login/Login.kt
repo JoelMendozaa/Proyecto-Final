@@ -32,6 +32,8 @@ fun Login(
 ){
     var user by remember { mutableStateOf("") }
     var password by rememberSaveable { mutableStateOf("") }
+    val valido = remember (user,password){ user.trim().isNotEmpty() && password.trim().isNotEmpty() }
+
 
     Column (modifier = Modifier
         .fillMaxSize()
@@ -47,7 +49,6 @@ fun Login(
         OutLineTextFieldPassword(password = password) { newPassword ->
             password = newPassword
         }
-        Text(text = "He olvidado la contraseña", modifier = Modifier.padding(start = 95.dp), fontSize = 14.sp)
         Row (modifier = Modifier
             .padding(15.dp),
             horizontalArrangement = Arrangement.Center
@@ -60,7 +61,9 @@ fun Login(
 
             Button(onClick = {
                 buttonClickedLogin()
-            }) {
+            },
+                enabled = valido
+            ) {
                 Text (text = "Login")
             }
         }

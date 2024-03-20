@@ -8,6 +8,7 @@ import androidx.navigation.compose.composable
 import com.example.gestorinventarioinformaticali.pantallas.Principal
 import com.example.gestorinventarioinformaticali.pantallas.login.Login
 import com.example.gestorinventarioinformaticali.pantallas.login.Register
+import com.example.gestorinventarioinformaticali.pantallas.product.ProductoInfo
 import com.example.gestorinventarioinformaticali.pantallas.user.User
 
 
@@ -59,10 +60,16 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
                 onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) }
             )
         }
+        composable(route = ScreenList.InfoProduct.name){
+            ProductoInfo(
+                onButtonClickedInfoApp = { navController.navigate(ScreenList.InfoApp.name) },
+                onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
+                onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
+                onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) }
+            )
+        }
 
-//        composable(route = ScreenList.InfoAppUnlog.name){
-//            InfoAppUnlogued()
-//        }
+
 //        composable(route = ScreenList.SectionStock.name){
 //            SectionStock()
 //        }
