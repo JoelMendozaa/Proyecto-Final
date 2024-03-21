@@ -4,10 +4,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,7 +24,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.example.gestorinventarioinformaticali.R
 
 @Composable
@@ -30,8 +31,8 @@ fun Login(
     buttonClickedRegister: () ->  Unit,
     buttonClickedLogin: () -> Unit,
 ){
-    var user by remember { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
+    var user by rememberSaveable { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     val valido = remember (user,password){ user.trim().isNotEmpty() && password.trim().isNotEmpty() }
 
 
@@ -59,6 +60,8 @@ fun Login(
                 Text(text = "Register")
             }
 
+            Spacer(modifier = Modifier.padding(5.dp))
+
             Button(onClick = {
                 buttonClickedLogin()
             },
@@ -70,6 +73,7 @@ fun Login(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldUser(user: String, onUserChange: (String) -> Unit) {
     OutlinedTextField(
@@ -83,6 +87,7 @@ fun OutLineTextFieldUser(user: String, onUserChange: (String) -> Unit) {
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldPassword(password: String, onPasswordChange: (String) -> Unit) {
     OutlinedTextField(

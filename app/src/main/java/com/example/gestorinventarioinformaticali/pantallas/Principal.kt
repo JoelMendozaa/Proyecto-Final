@@ -2,6 +2,7 @@ package com.example.gestorinventarioinformaticali.pantallas
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,12 +13,10 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
-import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -38,8 +37,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.gestorinventarioinformaticali.R
 import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
-import androidx.navigation.compose.NavHost
 import com.example.gestorinventarioinformaticali.ScreenList
 
 
@@ -49,45 +46,20 @@ fun Principal(
     onButtonClickedStock: () -> Unit,
     onButtonClickedPrincipal: () -> Unit,
     onButtonClickedUser: () -> Unit,
-    navController: NavHostController = rememberNavController()
+    onButtonClickedInfoProduct: () -> Unit,
+    navController: NavHostController
 ) {
     Scaffold(
         topBar = {
-            TopAppBar()
+            TopAppBar(navController)
         },
         bottomBar = {
-            Row () {
-                BottomAppBar(
-                    actions = {
-                        IconButton(modifier = Modifier.weight(2f),
-                            onClick = { onButtonClickedInfoApp() }) {
-                            Icon(Icons.Filled.Check, contentDescription = "InfoApp")
-                        }
-                        IconButton(modifier = Modifier.weight(2f),
-                            onClick = { onButtonClickedStock() }
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.baseline_bar_chart_24),
-                                contentDescription = "Stock",
-                            )
-                        }
-                        IconButton(modifier = Modifier.weight(2f),
-                            onClick = { onButtonClickedPrincipal() }) {
-                            Icon(
-                                Icons.Filled.Home,
-                                contentDescription = "Home",
-                            )
-                        }
-                        IconButton(modifier = Modifier.weight(2f),
-                            onClick = { onButtonClickedUser() }) {
-                            Icon(
-                                Icons.Filled.AccountCircle,
-                                contentDescription = "User",
-                            )
-                        }
-                    }
-                )
-            }
+            BottomAppBar(
+                onButtonClickedInfoApp = onButtonClickedInfoApp,
+                onButtonClickedStock = onButtonClickedStock,
+                onButtonClickedHome = onButtonClickedPrincipal,
+                onButtonClickedUser = onButtonClickedUser,
+            )
         },
     ) { innerPadding ->
         Column(
@@ -104,29 +76,29 @@ fun Principal(
                     Image(painter = painterResource(id = R.drawable.tarjeta), contentDescription = "Tarjeta")
                     Image(painter = painterResource(id = R.drawable.procesador), contentDescription = "Procesador")
                 }
-
             }
             DividerExample()
             Column (
                 modifier = Modifier
                     .padding(vertical = 70.dp),
-                horizontalAlignment = Alignment.CenterHorizontally) {
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
                 Text(text = "PRODUCTOS", fontSize = 28.sp)
 
                 Row(modifier = Modifier
                     .horizontalScroll(ScrollState(0))
                     .padding(3.dp)) {
-                        Image(
-                            painter = painterResource(id = R.drawable.tarjeta2),
-                            contentDescription = "Tarjeta"
-                        )
-                        Image(
-                            painter = painterResource(id = R.drawable.procesador2),
-                            contentDescription = "Procesador"
-                        )
                     Image(
-                            painter = painterResource(id = R.drawable.ram),
-                            contentDescription = "RAM"
+                        painter = painterResource(id = R.drawable.tarjeta2),
+                        contentDescription = "Tarjeta"
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.procesador2),
+                        contentDescription = "Procesador"
+                    )
+                    Image(
+                        painter = painterResource(id = R.drawable.ram),
+                        contentDescription = "RAM"
                     )
                     Image(painter = painterResource(
                         id = R.drawable.ssd), contentDescription = "SSD"
@@ -137,117 +109,161 @@ fun Principal(
     }
 }
 
-@Composable
-fun DividerExample() {
-        Column(modifier = Modifier.padding(20.dp)) {
-            Divider(thickness = 1.dp, color = Color.Black)
-        }
-    }
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar(navController: NavHostController = rememberNavController()) {
+fun TopAppBar(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-        Scaffold(
-            modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-            topBar = {
-                CenterAlignedTopAppBar(
-                    title = {
-                        Text(
-                            "Principal",
-                            maxLines = 1,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    },
-                    actions = {
-                        IconButton(onClick = { /* do something */ }) {
-                            Icon(
-                                imageVector = Icons.Filled.Menu,
-                                contentDescription = "Localized description"
-                            )
-                        }
-                    },
-                    scrollBehavior = scrollBehavior
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "Principal",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
                 },
-            ) { innerPadding ->
-                Column(
-                    modifier = Modifier
-                        .padding(innerPadding)
-                        .fillMaxSize()
-                        .verticalScroll(ScrollState(0)),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(text = "CATEGORIA", fontSize = 28.sp)
-
-                    Row(
-                        modifier = Modifier
-                            .horizontalScroll(ScrollState(0))
-                            .padding(3.dp)
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.tarjeta),
-                            contentDescription = "Tarjeta"
+                actions = {
+                    IconButton(onClick = { /* Agregar la acción */ }) {
+                        Icon(
+                            imageVector = Icons.Filled.Menu,
+                            contentDescription = "Localized description"
                         )
-                        Image(
-                            painter = painterResource(id = R.drawable.procesador),
-                            contentDescription = "Procesador"
-                        )
-
                     }
-                    DividerExample()
-                    Column(
-                        modifier = Modifier
-                            .padding(vertical = 70.dp),
-                        horizontalAlignment = Alignment.CenterHorizontally
-                    ) {
-                        Text(text = "PRODUCTOS", fontSize = 28.sp)
+                },
+                scrollBehavior = scrollBehavior
+            )
+        },
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize()
+                .verticalScroll(ScrollState(0)),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            Text(text = "CATEGORIA", fontSize = 28.sp)
 
-                        LazyRow(
+            Row(
+                modifier = Modifier
+                    .horizontalScroll(ScrollState(0))
+                    .padding(3.dp)
+            ) {
+                Image(
+                    painter = painterResource(id = R.drawable.tarjeta),
+                    contentDescription = "Tarjeta"
+                )
+                Image(
+                    painter = painterResource(id = R.drawable.procesador),
+                    contentDescription = "Procesador"
+                )
+
+            }
+            DividerExample()
+            Column(
+                modifier = Modifier
+                    .padding(vertical = 70.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(text = "PRODUCTOS", fontSize = 28.sp)
+
+                LazyRow(
+                    modifier = Modifier
+                        .padding(3.dp)
+                ) {
+
+                    item {
+                        Image(
+                            painter = painterResource(id = R.drawable.procesador2),
+                            contentDescription = "Procesador",
                             modifier = Modifier
-                                .padding(3.dp)
-                        ) {
+                                .clickable { navController.navigate(ScreenList.InfoProduct.name) }
+                                .padding(4.dp)
+                        )
 
-                            item(5) {
-                                Button(
-                                    onClick = { navController.navigate(ScreenList.InfoProduct.name) },
-                                    colors = ButtonDefaults.buttonColors(Color.White)
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.procesador2),
-                                        contentDescription = "Procesador"
-                                    )
-                                }
-                                Button(
-                                    onClick = { navController.navigate(ScreenList.InfoProduct.name) },
-                                    colors = ButtonDefaults.buttonColors(Color.White)
-                                ) {
-                                    Image(
-                                        painter = painterResource(id = R.drawable.tarjeta2),
-                                        contentDescription = "Tarjeta Grafica"
-                                    )
-                                }
-                                Button(
-                                    onClick = { navController.navigate(ScreenList.InfoProduct.name) },
-                                    colors = ButtonDefaults.buttonColors(Color.White)
-                                ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.ram),
-                                    contentDescription = "RAM"
-                                )
-                            }
-                            Button(
-                                onClick = { navController.navigate(ScreenList.InfoProduct.name) },
-                                colors = ButtonDefaults.buttonColors(Color.White)
-                            ) {
-                                Image(
-                                    painter = painterResource(id = R.drawable.ssd),
-                                    contentDescription = "SSD"
-                            )
-                        }
+                        Image(
+                            painter = painterResource(id = R.drawable.tarjeta2),
+                            contentDescription = "Tarjeta",
+                            modifier = Modifier
+                                .clickable { navController.navigate(ScreenList.InfoProduct.name) }
+                                .padding(4.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.ram),
+                            contentDescription = "RAM",
+                            modifier = Modifier
+                                .clickable { navController.navigate(ScreenList.InfoProduct.name) }
+                                .padding(4.dp)
+                        )
+                        Image(
+                            painter = painterResource(id = R.drawable.ssd),
+                            contentDescription = "SSD",
+                            modifier = Modifier
+                                .clickable { navController.navigate(ScreenList.InfoProduct.name) }
+                                .padding(4.dp)
+                        )
                     }
                 }
             }
         }
+    }
+}
+
+@Composable
+fun BottomAppBar(
+    onButtonClickedInfoApp: () -> Unit,
+    onButtonClickedStock: () -> Unit,
+    onButtonClickedHome: () -> Unit,
+    onButtonClickedUser: () -> Unit,
+) {
+    Row {
+        BottomAppBar(
+            actions = {
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedInfoApp
+                ) {
+                    Icon(Icons.Filled.Star, contentDescription = "InfoApp")
+                }
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedStock
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_bar_chart_24),
+                        contentDescription = "Stock",
+                    )
+                }
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedHome
+                ) {
+                    Icon(
+                        Icons.Filled.Home,
+                        contentDescription = "Home",
+                    )
+                }
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedUser
+                ) {
+                    Icon(
+                        Icons.Filled.AccountCircle,
+                        contentDescription = "User",
+                    )
+                }
+            }
+        )
+    }
+}
+
+
+
+
+@Composable
+fun DividerExample() {
+    Column(modifier = Modifier.padding(20.dp)) {
+        Divider(thickness = 1.dp, color = Color.Black)
     }
 }

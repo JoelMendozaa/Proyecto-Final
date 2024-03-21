@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import com.example.gestorinventarioinformaticali.pantallas.Principal
 import com.example.gestorinventarioinformaticali.pantallas.login.Login
 import com.example.gestorinventarioinformaticali.pantallas.login.Register
-import com.example.gestorinventarioinformaticali.pantallas.product.ProductoInfo
+import com.example.gestorinventarioinformaticali.pantallas.product.InfoProduct
 import com.example.gestorinventarioinformaticali.pantallas.user.User
 
 
@@ -48,7 +48,9 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
                 onButtonClickedInfoApp = { navController.navigate(ScreenList.InfoApp.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) },
                 onButtonClickedPrincipal = { navController.navigate(ScreenList.Principal.name) },
-                onButtonClickedUser = { navController.navigate(ScreenList.User.name) }
+                onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
+                onButtonClickedInfoProduct = { navController.navigate(ScreenList.InfoProduct.name) },
+                navController = navController
             )
         }
         composable(route = ScreenList.User.name){
@@ -61,11 +63,12 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
             )
         }
         composable(route = ScreenList.InfoProduct.name){
-            ProductoInfo(
+            InfoProduct(
                 onButtonClickedInfoApp = { navController.navigate(ScreenList.InfoApp.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
-                onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) }
+                onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) },
+                navController = navController
             )
         }
 
@@ -73,8 +76,6 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
 //        composable(route = ScreenList.SectionStock.name){
 //            SectionStock()
 //        }
-//        composable(route = ScreenList.UserUnlogin.name){
-//            UserUnlogin()
-//        }
+
         }
     }

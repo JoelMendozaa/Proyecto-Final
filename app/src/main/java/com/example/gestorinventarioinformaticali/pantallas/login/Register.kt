@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -32,6 +33,12 @@ fun Register(
     var password by rememberSaveable { mutableStateOf("") }
     var correo by remember { mutableStateOf("") }
     var numero by remember { mutableStateOf("")}
+    val valido = remember (nombre,password,correo,numero){
+        nombre.trim().isNotEmpty() &&
+        password.trim().isNotEmpty() &&
+        correo.trim().isNotEmpty() &&
+        numero.trim().isNotEmpty()
+    }
 
     Column (modifier = Modifier
         .fillMaxSize()
@@ -61,7 +68,9 @@ fun Register(
         ){
             Button(onClick = {
                 buttonClickedPrincipal()
-            }) {
+            },
+                    enabled = valido
+            ) {
                 Text(text = "Register")
             }
         }
@@ -70,12 +79,13 @@ fun Register(
 
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldNombre(user: String, onUserChange: (String) -> Unit) {
     OutlinedTextField(
         modifier = Modifier.padding(vertical = 10.dp),
         value = user,
-        label = { Text(text = "Introduce tu usuario o correo") },
+        label = { Text(text = "Introduce tu nombre") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
         onValueChange = {
                 newValue -> onUserChange(newValue)
@@ -84,6 +94,7 @@ fun OutLineTextFieldNombre(user: String, onUserChange: (String) -> Unit) {
 }
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldCorreo(correo: String, onUserChange: (String) -> Unit) {
     OutlinedTextField(
@@ -97,6 +108,7 @@ fun OutLineTextFieldCorreo(correo: String, onUserChange: (String) -> Unit) {
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldPassword2(password: String, onPasswordChange: (String) -> Unit) {
     OutlinedTextField(
@@ -108,13 +120,14 @@ fun OutLineTextFieldPassword2(password: String, onPasswordChange: (String) -> Un
     )
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldTelefono(numero: String, onUserChange: (String) -> Unit) {
     OutlinedTextField(
         modifier = Modifier.padding(vertical = 10.dp),
         value = numero,
         label = { Text(text = "Introduce tu numero") },
-        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
         onValueChange = {
                 newValue -> onUserChange(newValue)
         }
