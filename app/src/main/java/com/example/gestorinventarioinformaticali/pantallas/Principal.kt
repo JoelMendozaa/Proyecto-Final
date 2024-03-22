@@ -224,7 +224,7 @@ fun BottomAppBar(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedInfoApp
                 ) {
-                    Icon(Icons.Filled.Star, contentDescription = "InfoApp")
+                    Icon(Icons.Filled.Star, contentDescription = "FuncApp")
                 }
                 IconButton(
                     modifier = Modifier.weight(2f),
