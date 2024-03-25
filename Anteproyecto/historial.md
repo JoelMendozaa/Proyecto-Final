@@ -39,7 +39,7 @@
   - Sin encontrar
 
 ## Día 20.
-- Hemos continuado con las pantallas de Usuario e InfoProduct.
+- He continuado con las pantallas de Usuario e InfoProduct.
 - Se está corrigiendo los fallos de la pantalla Principal y Usuario para que la navegación entre pantalla funcione correctamente.
 - Errores:
 - - Problemas a la hora de implementar el navhost junto con el Scaffold.
@@ -49,3 +49,18 @@
 - Soluciones:
 - - Cambiar el orden
 - - Sin solucionar de momento la navegación entre pantallas
+
+ ## Día 21 en casa
+ - He arreglado la navegación entre pantallas.
+ - Actualización de la pantalla User.kt
+ - Actualización de pantalla de Login.kt, Register.kt, Principal.kt y InfoProduct.kt
+ - Solución:
+ - - El error de navegaciónn entre pantallas era un Row() mal puesto en un Scaffold dando conflictos.
+  
+## Día 22 en casa
+- Actualización de la pantalla InfoProduct.
+- Comienzo de la pantalla FuncApp.kt (Actualizacion de nombre de InfoApp.kt).
+- Problemas:
+-  - Hubo un problema con el background que dibujaba toda la pantalla.
+- Solucion:
+-  - Crear un Box
