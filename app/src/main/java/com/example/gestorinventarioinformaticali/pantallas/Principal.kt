@@ -124,14 +124,6 @@ fun TopAppBar(navController: NavHostController) {
                         overflow = TextOverflow.Ellipsis
                     )
                 },
-                actions = {
-                    IconButton(onClick = { /* Agregar la acción */ }) {
-                        Icon(
-                            imageVector = Icons.Filled.Menu,
-                            contentDescription = "Localized description"
-                        )
-                    }
-                },
                 scrollBehavior = scrollBehavior
             )
         },

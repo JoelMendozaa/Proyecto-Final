@@ -6,12 +6,12 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Edit
@@ -36,7 +36,9 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.gestorinventarioinformaticali.R
+import com.example.gestorinventarioinformaticali.ScreenList
 
 
 @Composable
@@ -49,7 +51,7 @@ fun InfoProduct(
 ) {
     Scaffold(
         topBar = {
-            TopAppBar3()
+            TopAppBar3(onButtonClickedActDesc = { navController.navigate(ScreenList.ActDesc.name) })
         },
         bottomBar = {
             BottomAppBar3(
@@ -120,7 +122,9 @@ fun BottomAppBar3(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar3() {
+fun TopAppBar3(
+    onButtonClickedActDesc: () -> Unit,
+) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -132,14 +136,6 @@ fun TopAppBar3() {
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
-                },
-                actions = {
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(
-                            imageVector = Icons.Filled.Menu,
-                            contentDescription = "Localized description"
-                        )
-                    }
                 },
                 scrollBehavior = scrollBehavior,
             )
@@ -163,17 +159,25 @@ fun TopAppBar3() {
                         painter = painterResource(id = R.drawable.procesador2),
                         contentDescription = "Ejemplo imagen",
                     )
-                    IconButton(onClick = {  }){
+                    IconButton(onClick = { onButtonClickedActDesc() }){
                         Icon(imageVector = Icons.Filled.Edit, contentDescription = "Editar")
                     }
                 }
             }
-            Row {
-                Text(text = "Nombree Producto")
+            Row (
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.Top,
+                horizontalArrangement = Arrangement.Center
+                ) {
+                Text(text = "Nombre Producto")
             }
-            Text(text = "Descripción")
+            Row (
+                modifier = Modifier.fillMaxWidth(),
+                verticalAlignment = Alignment.Top,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Text(text = "Descripcion")
+            }
         }
     }
 }
-
-

@@ -72,9 +72,4 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:$nav_version")
     implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
 
-    // API Shopify
-    implementation ("com.shopify.mobilebuysdk:buy3:3.2.3")
-
-
-
 }

@@ -10,6 +10,7 @@ import com.example.gestorinventarioinformaticali.pantallas.infoApp.FuncApp
 import com.example.gestorinventarioinformaticali.pantallas.login.Login
 import com.example.gestorinventarioinformaticali.pantallas.login.Register
 import com.example.gestorinventarioinformaticali.pantallas.product.InfoProduct
+import com.example.gestorinventarioinformaticali.pantallas.stock.SectionStock
 import com.example.gestorinventarioinformaticali.pantallas.user.User
 
 
@@ -20,7 +21,6 @@ enum class ScreenList{
     Principal,
     InfoProduct,
     FuncApp,
-    Categories,
     ActDesc,
     MoreProduct,
     SectionStock,
@@ -47,7 +47,7 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
         composable(route = ScreenList.Principal.name) {
             Principal(
                 onButtonClickedInfoApp = { navController.navigate(ScreenList.FuncApp.name) },
-                onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) },
+                onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 onButtonClickedPrincipal = { navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 onButtonClickedInfoProduct = { navController.navigate(ScreenList.InfoProduct.name) },
@@ -60,7 +60,7 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
                 onButtonClickedInfoApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
-                onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) }
+                onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) }
             )
         }
         composable(route = ScreenList.InfoProduct.name){
@@ -68,24 +68,28 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
-                onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) },
+                onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 navController = navController
             )
         }
         composable(route = ScreenList.FuncApp.name){
             FuncApp(
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
-                onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) },
+                onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
+                onButtonClickedHome = {  navController.navigate(ScreenList.Principal.name) },
+                onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
+                navController = navController
+            )
+        }
+        composable(route = ScreenList.SectionStock.name){
+            SectionStock(
+                onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
+                onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 onButtonClickedHome = {  navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 navController = navController
             )
         }
 
-
-//        composable(route = ScreenList.SectionStock.name){
-//            SectionStock()
-//        }
-
-        }
     }
+}

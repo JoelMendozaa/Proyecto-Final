@@ -232,14 +232,6 @@ fun TopAppBar2(onButtonClickedLogin: () -> Unit) {
                         overflow = TextOverflow.Ellipsis
                     )
                 },
-                actions = {
-                    IconButton(onClick = { /* do something */ }) {
-                        Icon(
-                            imageVector = Icons.Filled.Menu,
-                            contentDescription = "Localized description"
-                        )
-                    }
-                },
                 scrollBehavior = scrollBehavior,
             )
         },
