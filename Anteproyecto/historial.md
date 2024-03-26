@@ -64,3 +64,15 @@
 -  - Hubo un problema con el background que dibujaba toda la pantalla.
 - Solucion:
 -  - Crear un Box
+
+## Día 25 en casa
+- Creación y diseño de la pantalla SectionStock.kt 
+- Actualizacion de InfoProduct.kt
+- Actualizacion de User.kt
+- Actualizacion de FuncApp.kt
+- Actualizacion de MyApp.kt
+
+## Día 26 en casa
+- Creación y diseño de la pantalla Stock.kt
+- Actualizacion de SectionStock.kt
+- Actualizacion de MyApp.kt
