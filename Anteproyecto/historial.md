@@ -76,3 +76,7 @@
 - Creación y diseño de la pantalla Stock.kt
 - Actualizacion de SectionStock.kt
 - Actualizacion de MyApp.kt
+- Errores:
+-  - Posicionar el DropdownMenu con el align
+- Soluciones:
+-  - Usar offset = DpOffset()
