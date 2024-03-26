@@ -30,6 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
+import com.example.gestorinventarioinformaticali.ScreenList
 import com.example.gestorinventarioinformaticali.pantallas.infoApp.BottomAppBar4
 import com.example.gestorinventarioinformaticali.pantallas.infoApp.TopAppBar4
 import com.example.gestorinventarioinformaticali.pantallas.user.OutlinedText
@@ -45,7 +46,7 @@ fun SectionStock(
     Column() {
         Scaffold(
             topBar = {
-                TopAppBar5()
+                TopAppBar5(navController)
             },
             bottomBar = {
                 BottomAppBar5(
@@ -115,7 +116,7 @@ fun BottomAppBar5(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar5() {
+fun TopAppBar5(navController: NavHostController) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -140,11 +141,11 @@ fun TopAppBar5() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ) {
-                    Button(onClick = { /*TODO*/ }) { Text(text = "PC") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "PC") }
                     Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { /*TODO*/ }) { Text(text = "GPU") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "GPU") }
                     Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { /*TODO*/ }) { Text(text = "CPU") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "CPU") }
                 }
                 Row (
                     modifier = Modifier
@@ -152,11 +153,11 @@ fun TopAppBar5() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ){
-                    Button(onClick = { /*TODO*/ }) { Text(text = "PSU") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "PSU") }
                     Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { /*TODO*/ }) { Text(text = "RAM") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "RAM") }
                     Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { /*TODO*/ }) { Text(text = "SSD") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "SSD") }
                 }
                 Row (
                     modifier = Modifier
@@ -164,11 +165,11 @@ fun TopAppBar5() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ){
-                    Button(onClick = { /*TODO*/ }) { Text(text = "HDD") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "HDD") }
                     Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { /*TODO*/ }) { Text(text = "Teclados") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Teclados") }
                     Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { /*TODO*/ }) { Text(text = "Ratones") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Ratones") }
                 }
                 Row (
                     modifier = Modifier
@@ -176,11 +177,11 @@ fun TopAppBar5() {
                     verticalAlignment = Alignment.CenterVertically,
                     horizontalArrangement = Arrangement.Center
                 ){
-                    Button(onClick = { /*TODO*/ }) { Text(text = "Monitores") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Monitores") }
                     Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { /*TODO*/ }) { Text(text = "Accesorios") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Accesorios") }
                     Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { /*TODO*/ }) { Text(text = "Torres") }
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Torres") }
                 }
 
             }

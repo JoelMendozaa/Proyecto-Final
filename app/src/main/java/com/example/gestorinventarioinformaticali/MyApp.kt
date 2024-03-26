@@ -11,6 +11,7 @@ import com.example.gestorinventarioinformaticali.pantallas.login.Login
 import com.example.gestorinventarioinformaticali.pantallas.login.Register
 import com.example.gestorinventarioinformaticali.pantallas.product.InfoProduct
 import com.example.gestorinventarioinformaticali.pantallas.stock.SectionStock
+import com.example.gestorinventarioinformaticali.pantallas.stock.Stock
 import com.example.gestorinventarioinformaticali.pantallas.user.User
 
 
@@ -90,6 +91,14 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
                 navController = navController
             )
         }
-
+        composable(route = ScreenList.Stock.name){
+            Stock(
+                onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
+                onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
+                onButtonClickedHome = {  navController.navigate(ScreenList.Principal.name) },
+                onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
+                navController = navController
+            )
+        }
     }
 }
