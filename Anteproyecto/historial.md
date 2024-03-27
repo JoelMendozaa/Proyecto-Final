@@ -81,7 +81,7 @@
 - Soluciones:
 -  - Usar offset = DpOffset()
 
-##  Día 277 en casa
+##  Día 27 en casa
 - Creacion de Pantalla y desarrollo Products.kt
 - Actualizacion de MyApp.kt
 - Actualizacion de Principal.kt
