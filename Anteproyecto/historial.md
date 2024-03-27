@@ -80,3 +80,9 @@
 -  - Posicionar el DropdownMenu con el align
 - Soluciones:
 -  - Usar offset = DpOffset()
+
+##  Día 277 en casa
+- Creacion de Pantalla y desarrollo Products.kt
+- Actualizacion de MyApp.kt
+- Actualizacion de Principal.kt
+- Comienzo de creacion de ROOM y Base de Datos
