@@ -30,10 +30,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
-import com.example.gestorinventarioinformaticali.ScreenList
-import com.example.gestorinventarioinformaticali.pantallas.infoApp.BottomAppBar4
-import com.example.gestorinventarioinformaticali.pantallas.infoApp.TopAppBar4
-import com.example.gestorinventarioinformaticali.pantallas.user.OutlinedText
+import com.example.gestorinventarioinformaticali.navigation.ScreenList
 
 @Composable
 fun SectionStock(
