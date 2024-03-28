@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -40,13 +41,13 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.navigation.ScreenList
-import com.example.gestorinventarioinformaticali.viewmodel.UsuariosViewModel
+import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 
 @Composable
 fun InicioView(
     navController: NavHostController,
-    viewModel: UsuariosViewModel
+    viewModel: ProductosViewModel
 ) {
     Scaffold(
         topBar = {
@@ -88,7 +89,7 @@ fun TopAppBar8(navController: NavHostController) {
             modifier = Modifier
                 .padding(innerPadding)
                 .fillMaxSize()
-                .verticalScroll(ScrollState(0)),
+                .verticalScroll(rememberScrollState()),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = "CATEGORIA", fontSize = 28.sp)
@@ -166,14 +167,14 @@ fun TopAppBar8(navController: NavHostController) {
 
 
 @Composable
-fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel: UsuariosViewModel){
+fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
     val state = viewModel.state
 
     Column (
         modifier = Modifier.padding(it)
     ) {
         LazyColumn(){
-            items (state.listaUsuarios){
+            items (state.listaProductos){
                 Box(
                     modifier = Modifier
                         .padding(8.dp)
@@ -183,15 +184,14 @@ fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel
                         modifier = Modifier
                             .padding(12.dp)
                     ) {
-                        Text(text = it.nomApels)
-                        Text(text = it.email)
-                        Text(text = "${it.telefono}")
+                        Text(text = it.nombre)
+                        Text(text = it.marca)
                         IconButton(
-                            onClick = { navController.navigate("editar/${it.id}/${it.nomApels}/${it.email}/${it.telefono}") }
+                            onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}") }
                         ) {
                             Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit")
                         }
-                        IconButton(onClick = { viewModel.borrarUsuario(it) }) {
+                        IconButton(onClick = { viewModel.borrarProducto(it) }) {
                             Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
                         }
                     }

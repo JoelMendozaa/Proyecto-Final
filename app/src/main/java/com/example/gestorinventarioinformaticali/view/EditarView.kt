@@ -1,7 +1,5 @@
 package com.example.gestorinventarioinformaticali.view
 
-import androidx.compose.foundation.gestures.scrollable
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,13 +32,13 @@ import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
+fun EditarView(navController: NavController, viewModel: ProductosViewModel, id: Int, nombre: String?, marca: String?){
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "Agregar View",
+                        "Editar View",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -53,12 +51,19 @@ fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
             )
         }
     ) {
-        ContentAgregarView( it , navController, viewModel)
+        ContentEditarView( it , navController, viewModel, id, nombre, marca)
     }
 }
 
 @Composable
-fun ContentAgregarView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
+fun ContentEditarView(
+    it: PaddingValues,
+    navController: NavController,
+    viewModel: ProductosViewModel,
+    id: Int,
+    nombre: String?,
+    marca: String?,
+){
     var nombre by remember { mutableStateOf("") }
     var marca by remember { mutableStateOf("") }
 
@@ -71,7 +76,7 @@ fun ContentAgregarView(it: PaddingValues, navController: NavController, viewMode
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         OutlinedTextField(
-            value = nombre,
+            value = nombre ?: "",
             onValueChange = { nombre = it},
             label = { Text(text = "Nombre") },
             modifier = Modifier
@@ -81,7 +86,7 @@ fun ContentAgregarView(it: PaddingValues, navController: NavController, viewMode
         )
 
         OutlinedTextField(
-            value = marca,
+            value = marca ?: "",
             onValueChange = { marca = it},
             label = { Text(text = "Marca") },
             modifier = Modifier
@@ -90,13 +95,14 @@ fun ContentAgregarView(it: PaddingValues, navController: NavController, viewMode
                 .padding(bottom = 15.dp)
         )
 
+
         Button(onClick = {
-            val nombre = Productos(nombre = nombre, marca = marca)
-            
-            viewModel.agregarProducto(nombre)
+            val nombre = Productos(id = id, nombre = nombre!!, marca = marca!!)
+
+            viewModel.actualizarProducto(nombre)
             navController.popBackStack()
         }) {
-            Text(text = "Agregar")
+            Text(text = "Editar")
         }
     }
 

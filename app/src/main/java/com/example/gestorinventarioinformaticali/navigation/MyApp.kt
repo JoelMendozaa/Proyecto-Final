@@ -12,13 +12,15 @@ import com.example.gestorinventarioinformaticali.pantallas.infoApp.FuncApp
 import com.example.gestorinventarioinformaticali.pantallas.login.Login
 import com.example.gestorinventarioinformaticali.pantallas.login.Register
 import com.example.gestorinventarioinformaticali.pantallas.product.InfoProduct
+import com.example.gestorinventarioinformaticali.pantallas.product.MainScreen
 import com.example.gestorinventarioinformaticali.pantallas.product.Productos
 import com.example.gestorinventarioinformaticali.pantallas.stock.SectionStock
 import com.example.gestorinventarioinformaticali.pantallas.stock.Stock
 import com.example.gestorinventarioinformaticali.pantallas.user.User
 import com.example.gestorinventarioinformaticali.view.AgregarView
+import com.example.gestorinventarioinformaticali.view.EditarView
 import com.example.gestorinventarioinformaticali.view.InicioView
-import com.example.gestorinventarioinformaticali.viewmodel.UsuariosViewModel
+import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 
 enum class ScreenList{
@@ -31,43 +33,12 @@ enum class ScreenList{
     ActDesc,
     SectionStock,
     Stock,
-    Product
+    Product,
+    MainScreen
 }
 
 @Composable
-fun NavManager(viewModel: UsuariosViewModel){
-    val navController = rememberNavController()
-
-    NavHost(navController = navController, startDestination = "inicio"){
-        composable("inicio"){
-            InicioView(navController, viewModel)
-        }
-        composable("agregar"){
-            AgregarView(navController, viewModel)
-        }
-        composable("editar/{id}/{nomApels}/{email}/{telefono}", arguments = listOf(
-            navArgument("id"){ type = NavType.IntType},
-            navArgument("nomApels"){ type = NavType.StringType},
-            navArgument("email"){ type = NavType.StringType},
-            navArgument("telefono"){ type = NavType.StringType}
-        )){
-            EditarView(
-                navController,
-                viewModel,
-                it.arguments!!.getInt("id"),
-                it.arguments?.getString("nomApels"),
-                it.arguments?.getString("email"),
-                it.arguments?.getInt("telefono")
-            )
-        }
-    }
-}
-
-
-
-
-@Composable
-fun MyApp(navController: NavHostController = rememberNavController()) {
+fun MyApp(navController: NavHostController = rememberNavController(), viewModel: ProductosViewModel) {
     NavHost(
         navController = navController,
         startDestination = ScreenList.Login.name
@@ -109,7 +80,9 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
-                navController = navController
+                navController = navController,
+                onButtonClickedActDesc = { navController.navigate(ScreenList.ActDesc.name) }
+
             )
         }
         composable(route = ScreenList.FuncApp.name){
@@ -147,6 +120,25 @@ fun MyApp(navController: NavHostController = rememberNavController()) {
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 onButtonClickedInfoProduct = { navController.navigate(ScreenList.InfoProduct.name) },
                 navController = navController
+            )
+        }
+        composable(route = ScreenList.ActDesc.name){
+            MainScreen(viewModel = viewModel, navController = navController)
+        }
+        composable("agregar"){
+            AgregarView(navController, viewModel)
+        }
+        composable("editar/{id}/{nombre}/{marca}", arguments = listOf(
+            navArgument("id"){ type = NavType.IntType},
+            navArgument("nombre"){ type = NavType.StringType},
+            navArgument("marca"){ type = NavType.StringType},
+        )){
+            EditarView(
+                navController,
+                viewModel,
+                it.arguments!!.getInt("id"),
+                it.arguments?.getString("nombre"),
+                it.arguments?.getString("marca"),
             )
         }
     }

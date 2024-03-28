@@ -4,15 +4,13 @@ import androidx.room.ColumnInfo
 import  androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "usuarios")
-data class Usuarios(
+@Entity(tableName = "productos")
+data class Productos(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    @ColumnInfo("Usuario")
-    val nomApels: String,
-    @ColumnInfo("Email")
-    val email: String,
-    @ColumnInfo("Telefono")
-    val telefono: String
+    @ColumnInfo("Nombre")
+    val nombre: String,
+    @ColumnInfo("Marca")
+    val marca: String
 )
 

@@ -32,6 +32,7 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.navigation.ScreenList
@@ -43,11 +44,15 @@ fun InfoProduct(
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
+    onButtonClickedActDesc: () -> Unit,
     navController: NavHostController
 ) {
     Scaffold(
         topBar = {
-            TopAppBar3(onButtonClickedActDesc = { navController.navigate(ScreenList.ActDesc.name) })
+            TopAppBar3(
+                navController = navController,
+                onButtonClickedActDesc = onButtonClickedActDesc
+            )
         },
         bottomBar = {
             BottomAppBar3(
@@ -119,8 +124,10 @@ fun BottomAppBar3(
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar3(
+    navController: NavController,
     onButtonClickedActDesc: () -> Unit,
-) {
+
+    ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -155,7 +162,7 @@ fun TopAppBar3(
                         painter = painterResource(id = R.drawable.procesador2),
                         contentDescription = "Ejemplo imagen",
                     )
-                    IconButton(onClick = { onButtonClickedActDesc() }){
+                    IconButton(onClick =  onButtonClickedActDesc ){
                         Icon(imageVector = Icons.Filled.Edit, contentDescription = "Editar")
                     }
                 }

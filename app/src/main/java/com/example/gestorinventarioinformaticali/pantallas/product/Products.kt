@@ -159,21 +159,22 @@ fun TopAppBar7() {
 data class Productos(
     val nombre: String,
     val descripcion: String,
-    val imagenID: Int,
+    val marca: String,
+    val imagenID: Int
 )
 
 val listaProductos = listOf(
-    Productos("Producto1", "Descipcion1", R.drawable.procesador2),
-    Productos("Producto2", "Descipcion2", R.drawable.procesador2),
-    Productos("Producto3", "Descipcion3", R.drawable.procesador2),
-    Productos("Producto4", "Descipcion4", R.drawable.procesador2),
-    Productos("Producto5", "Descipcion5", R.drawable.procesador2),
-    Productos("Producto6", "Descipcion6", R.drawable.procesador2),
-    Productos("Producto7", "Descipcion7", R.drawable.procesador2),
-    Productos("Producto8", "Descipcion8", R.drawable.procesador2),
-    Productos("Producto9", "Descipcion9", R.drawable.procesador2),
-    Productos("Producto10", "Descipcion10", R.drawable.procesador2),
-    Productos("Producto11", "Descipcion11", R.drawable.procesador2)
+    Productos("Producto1", "Descipcion1", "Marca", R.drawable.procesador2),
+    Productos("Producto2", "Descipcion2", "Marca", R.drawable.procesador2),
+    Productos("Producto3", "Descipcion3", "Marca", R.drawable.procesador2),
+    Productos("Producto4", "Descipcion4", "Marca", R.drawable.procesador2),
+    Productos("Producto5", "Descipcion5", "Marca", R.drawable.procesador2),
+    Productos("Producto6", "Descipcion6", "Marca", R.drawable.procesador2),
+    Productos("Producto7", "Descipcion7", "Marca", R.drawable.procesador2),
+    Productos("Producto8", "Descipcion8", "Marca", R.drawable.procesador2),
+    Productos("Producto9", "Descipcion9","Marca", R.drawable.procesador2),
+    Productos("Producto10", "Descipcion10", "Marca", R.drawable.procesador2),
+    Productos("Producto11", "Descipcion11", "Marca", R.drawable.procesador2)
 )
 
 
