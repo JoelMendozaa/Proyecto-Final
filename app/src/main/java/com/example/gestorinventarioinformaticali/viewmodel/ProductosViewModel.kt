@@ -14,9 +14,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class ProductosViewModel (
-    private val dao: ProductosDatabaseDao
-): ViewModel(){
+
+class ProductosViewModel (private val dao: ProductosDatabaseDao): ViewModel(){
     val listaProductos: Flow<List<Productos>> = dao.obtenerProducto()
     var state by mutableStateOf(ProductosState())
         private set
