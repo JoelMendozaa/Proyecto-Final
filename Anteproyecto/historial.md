@@ -86,3 +86,17 @@
 - Actualizacion de MyApp.kt
 - Actualizacion de Principal.kt
 - Comienzo de creacion de ROOM y Base de Datos
+
+## Día 28 en casa
+- Hemos terminado la configuracion de ROOM para la creacion de stock.
+- Se ha terminado la Base de Datos para poder hacer que se guarde en pantalla y muestre lo pedido.
+- Modificar imports
+- Corrección de errores.
+-  - Llamadas a funciones, navegacion entre pantallas, crasheos
+
+## Día 29 en casa
+- Actualizar ROOM para ponerlo en las pantallas deseadas.
+- Arreglar y actualizar dichas pantallas.
+- Modificar imports
+- Corrección de errores
+-  - Arreglar otra vez las navegaciones entre pantallas
