@@ -100,3 +100,8 @@
 - Modificar imports
 - Corrección de errores
 -  - Arreglar otra vez las navegaciones entre pantallas
+
+## Día 01
+- Actualizar pantallas
+- Mejorar pantallas
+- Empezar a hacer que los productos agregados aparezcan en el buscador
