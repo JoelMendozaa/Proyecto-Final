@@ -1,6 +1,9 @@
-package com.example.gestorinventarioinformaticali.pantallas.stock
+package com.example.gestorinventarioinformaticali.pantallas.product
+
 
 import android.annotation.SuppressLint
+import android.widget.Toast
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -10,6 +13,8 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.Card
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
@@ -19,21 +24,28 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.SearchBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.models.Productos
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
@@ -42,7 +54,7 @@ import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Stock(
+fun Producto(
     onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
@@ -50,13 +62,12 @@ fun Stock(
     viewModel: ProductosViewModel,
     navController: NavController
 ) {
-    val stocks by viewModel.listaProductos.collectAsState(initial = emptyList())
+    val productos by viewModel.listaProductos.collectAsState(initial = emptyList())
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(text = "Stock") }
+                title = { Text(text = "Producto") }
             )
-            Divider(modifier = Modifier.padding(10.dp))
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -66,7 +77,7 @@ fun Stock(
             }
         },
         bottomBar = {
-            BottomAppBar9(
+            BottomAppBar12(
                 onButtonClickedFuncApp = onButtonClickedFuncApp,
                 onButtonClickedStock = onButtonClickedStock,
                 onButtonClickedHome = onButtonClickedHome,
@@ -80,12 +91,12 @@ fun Stock(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            stocks.forEach { stock ->
-                StockItem(
-                    producto = stock,
-                    onItemClick = { navController.navigate("editar/${stock.id}/${stock.nombre}/${stock.marca}") }
+            productos.forEach { producto ->
+                ProductItem(
+                    producto = producto,
+                    onItemClick = { navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}") }
                 ) {
-                    viewModel.borrarProducto(stock)
+                    viewModel.borrarProducto(producto)
                 }
             }
         }
@@ -93,7 +104,7 @@ fun Stock(
 }
 
 @Composable
-fun StockItem(
+fun ProductItem(
     producto: Productos,
     onItemClick: () -> Unit,
     onClickDelete: () -> Unit
@@ -125,7 +136,7 @@ fun StockItem(
 
 
 @Composable
-fun BottomAppBar9(
+fun BottomAppBar12(
     onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
@@ -171,3 +182,58 @@ fun BottomAppBar9(
         )
     }
 }
+
+data class Product(
+    val nombre: String,
+    val marca: String,
+)
+
+val listaProducto = listOf(
+    Product("Prueba", "Prueba")
+)
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun BarraBusqueda2(navController: NavHostController){
+    val context = LocalContext.current
+    var query by remember { mutableStateOf("") }
+    var active by remember { mutableStateOf(false) }
+    val onSearch: (String) -> Unit = {
+        Toast.makeText(context, "Search", Toast.LENGTH_SHORT).show()
+        active = false
+    }
+    SearchBar(
+        query = query,
+        onQueryChange = { query = it},
+        onSearch = onSearch,
+        active = active,
+        onActiveChange = {active = it},
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        placeholder = { Text(text = "Buscar") },
+        leadingIcon = { IconButton(onClick = { /*TODO*/ }) {
+            Icon(imageVector = Icons.Default.Menu, contentDescription = null)
+        }},
+        trailingIcon = {
+            IconButton(
+                onClick = { onSearch(query) },
+                enabled = query.isNotEmpty()
+            ) {
+                Icon(imageVector = Icons.Default.Search, contentDescription = null)
+            }
+        }
+    ) {
+        if(query.isNotEmpty()) {
+            val filteredProducts = listaProductos.filter { productos ->  productos.nombre.contains(query, true) ||   productos.descripcion.contains(query, true)}
+            filteredProducts.forEach { producto ->
+                Row (modifier = Modifier.clickable {  }){
+                    Text(text = "${producto.nombre} ${producto.descripcion}")
+                    Image(painter = painterResource(id = producto.imagenID), contentDescription = "Productos", modifier = Modifier.size(48.dp))
+                }
+            }
+        }
+    }
+}
+

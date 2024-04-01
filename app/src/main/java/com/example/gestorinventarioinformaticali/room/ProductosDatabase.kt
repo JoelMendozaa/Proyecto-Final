@@ -17,7 +17,6 @@ abstract class ProductosDatabase: RoomDatabase() {
         @Volatile
         private var INSTANCE: ProductosDatabase? = null
 
-        // Método para obtener una instancia de la base de datos
         fun getInstance(context: Context): ProductosDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(

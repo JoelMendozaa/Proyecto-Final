@@ -33,11 +33,9 @@ class ProductosViewModel (private val dao: ProductosDatabaseDao): ViewModel(){
     fun  agregarProducto(productos: Productos) = viewModelScope.launch {
         dao.agregarProducto(productos = productos)
     }
-
     fun actualizarProducto(productos: Productos) = viewModelScope.launch {
         dao.actualizarProducto(productos = productos)
     }
-
     fun borrarProducto(productos: Productos) = viewModelScope.launch {
         dao.borrarProducto(productos = productos)
     }

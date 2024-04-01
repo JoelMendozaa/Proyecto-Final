@@ -82,7 +82,8 @@ fun OutLineTextFieldUser(user: String, onUserChange: (String) -> Unit) {
         label = { Text(text = "Introduce tu usuario o correo") },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
         onValueChange = {
-                newValue -> onUserChange(newValue)
+                newValue ->
+            onUserChange(newValue)
         }
     )
 }

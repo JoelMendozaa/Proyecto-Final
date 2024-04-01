@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -40,7 +41,7 @@ fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "Agregar View",
+                        "Agregar Stock",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -62,41 +63,41 @@ fun ContentAgregarView(it: PaddingValues, navController: NavController, viewMode
     var nombre by remember { mutableStateOf("") }
     var marca by remember { mutableStateOf("") }
 
-    Column (
+    LazyColumn (
         modifier = Modifier
             .padding(it)
             .padding(top = 30.dp)
-            .fillMaxSize()
-            .verticalScroll(rememberScrollState()),
+            .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        OutlinedTextField(
-            value = nombre,
-            onValueChange = { nombre = it},
-            label = { Text(text = "Nombre") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp)
-                .padding(bottom = 15.dp)
-        )
+        item{
+            OutlinedTextField(
+                value = nombre,
+                onValueChange = { nombre = it},
+                label = { Text(text = "Nombre") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp)
+                    .padding(bottom = 15.dp)
+            )
 
-        OutlinedTextField(
-            value = marca,
-            onValueChange = { marca = it},
-            label = { Text(text = "Marca") },
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(horizontal = 30.dp)
-                .padding(bottom = 15.dp)
-        )
+            OutlinedTextField(
+                value = marca,
+                onValueChange = { marca = it},
+                label = { Text(text = "Marca") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp)
+                    .padding(bottom = 15.dp)
+            )
+            Button(onClick = {
+                val nombre = Productos(nombre = nombre, marca = marca)
 
-        Button(onClick = {
-            val nombre = Productos(nombre = nombre, marca = marca)
-            
-            viewModel.agregarProducto(nombre)
-            navController.popBackStack()
-        }) {
-            Text(text = "Agregar")
+                viewModel.agregarProducto(nombre)
+                navController.popBackStack()
+            }) {
+                Text(text = "Agregar")
+            }
         }
     }
 

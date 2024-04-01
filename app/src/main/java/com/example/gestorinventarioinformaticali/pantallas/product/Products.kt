@@ -90,14 +90,10 @@ fun Productos(
         ) { innerPadding ->
             ContentInicioView(it = PaddingValues(), navController, viewModel)
             Column(modifier = Modifier.padding(innerPadding)) {
-
             }
         }
     }
 }
-
-
-
 
 @Composable
 fun BottomAppBar7(
@@ -289,5 +285,3 @@ fun BarraBusqueda(navController: NavHostController){
         }
     }
 }
-
-

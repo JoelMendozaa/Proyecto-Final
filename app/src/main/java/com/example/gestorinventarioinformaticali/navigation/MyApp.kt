@@ -55,7 +55,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
         }
         composable(route = ScreenList.Principal.name) {
             Principal(
-                onButtonClickedInfoApp = { navController.navigate(ScreenList.FuncApp.name) },
+                onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 onButtonClickedPrincipal = { navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
@@ -81,7 +81,6 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 navController = navController,
                 onButtonClickedActDesc = { navController.navigate(ScreenList.ActDesc.name) }
-
             )
         }
         composable(route = ScreenList.ActDesc.name){

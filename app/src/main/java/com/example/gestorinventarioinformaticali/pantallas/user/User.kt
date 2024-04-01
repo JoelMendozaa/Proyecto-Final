@@ -1,5 +1,6 @@
 package com.example.gestorinventarioinformaticali.pantallas.user
 
+import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -8,7 +9,9 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
@@ -90,7 +93,7 @@ fun User(
         },
         modifier = Modifier.padding(15.dp)
     ){ innerPadding ->
-        Column {
+        Column (modifier = Modifier.verticalScroll(rememberScrollState())) {
             OutlinedText()
             Row (modifier = Modifier
                 .padding(innerPadding),
@@ -102,7 +105,6 @@ fun User(
                     Text(text = "Cerrar Sesión")
                 }
             }
-
         }
     }
 }

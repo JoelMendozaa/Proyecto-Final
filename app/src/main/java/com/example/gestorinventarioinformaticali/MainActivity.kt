@@ -18,7 +18,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GestorInventarioInformaticaLITheme {
-                // A surface container using the 'background' color from the theme
                 val database = Room.databaseBuilder(this, ProductosDatabase::class.java, "db_usuarios").build()
                 val dao = database.productoDao()
                 val viewModel = ProductosViewModel(dao)

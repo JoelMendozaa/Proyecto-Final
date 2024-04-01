@@ -40,7 +40,7 @@ import com.example.gestorinventarioinformaticali.navigation.ScreenList
 
 @Composable
 fun Principal(
-    onButtonClickedInfoApp: () -> Unit,
+    onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedPrincipal: () -> Unit,
     onButtonClickedUser: () -> Unit,
@@ -55,10 +55,10 @@ fun Principal(
         },
         bottomBar = {
             BottomAppBar(
-                onButtonClickedInfoApp = onButtonClickedInfoApp,
+                onButtonClickedFuncApp = onButtonClickedFuncApp,
                 onButtonClickedStock = onButtonClickedStock,
                 onButtonClickedHome = onButtonClickedPrincipal,
-                onButtonClickedUser = onButtonClickedUser,
+                onButtonClickedUser = onButtonClickedUser
             )
         },
     ) { innerPadding ->
@@ -68,7 +68,7 @@ fun Principal(
                 .fillMaxSize()
                 .verticalScroll(ScrollState(0)),
             horizontalAlignment = Alignment.CenterHorizontally
-        ) {
+        ){
 
         }
     }
@@ -84,9 +84,10 @@ fun TopAppBar(navController: NavHostController) {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "Principal",
+                        "InformaticaLI",
                         maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
+                        overflow = TextOverflow.Ellipsis,
+                        fontSize = 30.sp
                     )
                 },
                 scrollBehavior = scrollBehavior
@@ -144,7 +145,6 @@ fun TopAppBar(navController: NavHostController) {
                                 .clickable { navController.navigate(ScreenList.InfoProduct.name) }
                                 .padding(4.dp)
                         )
-
                         Image(
                             painter = painterResource(id = R.drawable.tarjeta2),
                             contentDescription = "Tarjeta",
@@ -175,7 +175,7 @@ fun TopAppBar(navController: NavHostController) {
 
 @Composable
 fun BottomAppBar(
-    onButtonClickedInfoApp: () -> Unit,
+    onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
@@ -185,7 +185,7 @@ fun BottomAppBar(
             actions = {
                 IconButton(
                     modifier = Modifier.weight(2f),
-                    onClick = onButtonClickedInfoApp
+                    onClick = onButtonClickedFuncApp
                 ) {
                     Icon(Icons.Filled.Star, contentDescription = "FuncApp")
                 }
@@ -221,12 +221,10 @@ fun BottomAppBar(
     }
 }
 
-
-
-
 @Composable
 fun DividerExample() {
     Column(modifier = Modifier.padding(20.dp)) {
         Divider(thickness = 1.dp, color = Color.Black)
     }
 }
+

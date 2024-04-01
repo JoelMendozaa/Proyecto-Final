@@ -57,7 +57,7 @@ fun ActDesc(
             )
         },
         bottomBar = {
-            BottomAppBar9(
+            BottomAppBar10(
                 onButtonClickedFuncApp = onButtonClickedFuncApp,
                 onButtonClickedStock = onButtonClickedStock,
                 onButtonClickedHome = onButtonClickedHome,
@@ -73,12 +73,10 @@ fun ActDesc(
     }
 }
 
-
-
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Descripcion() {
-    var savedText by remember { mutableStateOf("") }
+    var savedText by remember { mutableStateOf(" ") }
     var isEditing by remember { mutableStateOf(true) }
 
     if (isEditing) {
@@ -95,7 +93,7 @@ fun Descripcion() {
 }
 
 @Composable
-fun BottomAppBar9(
+fun BottomAppBar10(
     onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
@@ -145,7 +143,7 @@ fun BottomAppBar9(
 
 @Composable
 fun TextEditorScreen(onTextChange: (String) -> Unit) {
-    var text by remember { mutableStateOf("") }
+    var text by remember { mutableStateOf(" ") }
     Column (
         modifier = Modifier
         .fillMaxSize()
@@ -159,12 +157,10 @@ fun TextEditorScreen(onTextChange: (String) -> Unit) {
             label = { Text(text = "Escribe aquí") },
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
             onValueChange = { newText ->
-                text = newText
                 onTextChange(newText)
             }
         )
     }
-
 }
 
 @Composable
