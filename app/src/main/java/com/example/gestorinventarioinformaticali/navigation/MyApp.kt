@@ -21,7 +21,6 @@ import com.example.gestorinventarioinformaticali.view.AgregarView
 import com.example.gestorinventarioinformaticali.view.EditarView
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
-
 enum class ScreenList{
     Login,
     Register,
@@ -33,7 +32,6 @@ enum class ScreenList{
     SectionStock,
     Stock,
     Product,
-    MainScreen
 }
 
 @Composable

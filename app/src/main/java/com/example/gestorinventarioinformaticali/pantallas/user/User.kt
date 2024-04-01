@@ -119,7 +119,7 @@ fun OutlinedText (){
 
     Column (
         modifier = Modifier.fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
+        verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = "User", modifier = Modifier.size(200.dp) )
