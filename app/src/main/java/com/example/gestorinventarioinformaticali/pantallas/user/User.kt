@@ -252,7 +252,6 @@ fun TopAppBar2(onButtonClickedLogin: () -> Unit) {
                         Text(text = "Cerrar Sesión")
                     }
                 }
-
             }
         }
     }
