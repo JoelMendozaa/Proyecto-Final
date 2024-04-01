@@ -80,12 +80,12 @@ fun Stock(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            stocks.forEach { stock ->
+            stocks.forEach { stockItem ->
                 StockItem(
-                    producto = stock,
-                    onItemClick = { navController.navigate("editar/${stock.id}/${stock.nombre}/${stock.marca}") }
+                    producto = stockItem,
+                    onItemClick = { navController.navigate("editar/${stockItem.id}/${stockItem.nombre}/${stockItem.marca}") }
                 ) {
-                    viewModel.borrarProducto(stock)
+                    viewModel.borrarProducto(stockItem)
                 }
             }
         }

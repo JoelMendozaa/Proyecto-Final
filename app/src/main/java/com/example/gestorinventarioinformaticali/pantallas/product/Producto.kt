@@ -195,7 +195,9 @@ val listaProducto = listOf(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BarraBusqueda2(navController: NavHostController){
+fun BarraBusqueda2(
+    navController: NavHostController
+){
     val context = LocalContext.current
     var query by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
