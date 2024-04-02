@@ -30,7 +30,6 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
-import com.example.gestorinventarioinformaticali.models.Productos
 import com.example.gestorinventarioinformaticali.navigation.ScreenList
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
@@ -41,7 +40,7 @@ fun SectionStock(
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
     navController: NavHostController,
-    viewModel: ProductosViewModel // Asumiendo que tienes viewModel aquí
+    viewModel: ProductosViewModel
 ){
     Column() {
         Scaffold(
@@ -58,7 +57,6 @@ fun SectionStock(
             },
         ) { innerPadding ->
             Column(modifier = Modifier.padding(innerPadding)) {
-                // Llama a Stock sin pasar ningún objeto stock aquí
                 Stock(
                     onButtonClickedFuncApp = onButtonClickedFuncApp,
                     onButtonClickedStock = onButtonClickedStock,
