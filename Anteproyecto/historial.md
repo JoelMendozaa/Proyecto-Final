@@ -105,3 +105,13 @@
 - Actualizar pantallas
 - Mejorar pantallas
 - Empezar a hacer que los productos agregados aparezcan en el buscador
+
+## Día 02
+- Arreglar el agregar, editar y eliminar de Producto.kt
+- Añadir y quitar Categoria y Stock de Room
+- Arreglar ActDesc.kt
+- Errores:
+-  - Se tuvo que quitar Categorias y Stock de Room debido a que fallaba la base de datos internamente impidiendo que se pueda modificar el archivo donde estaba el error ya que no se podia editar.
+   - A la hora de Actualizar la descripcion no se guarda. (Pendiente)
+   - A la hora de arreglar el CRUD de producto.kt hay que arreglar las paginas respetivas que contienen esas funciones ya que están mezcladas con Stock.kt (Pendiente)
+
