@@ -133,10 +133,11 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
         composable("agregar"){
             AgregarView(navController, viewModel)
         }
-        composable("editar/{id}/{nombre}/{marca}", arguments = listOf(
+        composable("editar/{id}/{nombre}/{marca}/{stock}", arguments = listOf(
             navArgument("id"){ type = NavType.IntType},
             navArgument("nombre"){ type = NavType.StringType},
             navArgument("marca"){ type = NavType.StringType},
+            navArgument("stock"){type = NavType.StringType}
         )){
             EditarView(
                 navController,
@@ -144,6 +145,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 it.arguments!!.getInt("id"),
                 it.arguments?.getString("nombre"),
                 it.arguments?.getString("marca"),
+                it.arguments?.getString("stock")
             )
         }
     }

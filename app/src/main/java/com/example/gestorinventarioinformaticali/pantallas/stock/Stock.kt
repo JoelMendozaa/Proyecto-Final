@@ -13,6 +13,7 @@ import androidx.compose.material3.Card
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
@@ -24,6 +25,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
@@ -53,7 +55,6 @@ import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Stock(
     onButtonClickedFuncApp: () -> Unit,
@@ -66,7 +67,7 @@ fun Stock(
     val stocks by viewModel.listaProductos.collectAsState(initial = emptyList())
     Scaffold(
         topBar = {
-            TopAppBar(title = { "Stock" })
+           TopAppBar9()
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -91,7 +92,7 @@ fun Stock(
             stocks.forEach { stockItem ->
                 item {
                     StockItem(
-                        modifier = Modifier.padding(top = 20.dp),
+                        modifier = Modifier.fillMaxSize(),
                         producto = stockItem,
                         onItemClick = {
                             navController.navigate(
@@ -125,6 +126,7 @@ fun StockItem(
         ) {
             Text(text = "Nombre: ${producto.nombre}")
             Text(text = "Marca: ${producto.marca}")
+            Text(text = "Stock: ${producto.stock}")
             Spacer(modifier = Modifier.height(8.dp))
             Row(
                 horizontalArrangement = Arrangement.End,
@@ -188,5 +190,31 @@ fun BottomAppBar9(
                 }
             }
         )
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar9() {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "Stock",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                scrollBehavior = scrollBehavior,
+            )
+        }
+    ) { innerPadding ->
+        LazyColumn(modifier = Modifier.padding(innerPadding)) {
+            item {
+            }
+        }
     }
 }

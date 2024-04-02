@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
@@ -22,6 +23,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -57,6 +59,7 @@ fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
 fun ContentAgregarView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
     var nombre by remember { mutableStateOf("") }
     var marca by remember { mutableStateOf("") }
+    var stock by remember { mutableStateOf("") }
 
     LazyColumn (
         modifier = Modifier
@@ -75,7 +78,6 @@ fun ContentAgregarView(it: PaddingValues, navController: NavController, viewMode
                     .padding(horizontal = 30.dp)
                     .padding(bottom = 15.dp)
             )
-
             OutlinedTextField(
                 value = marca,
                 onValueChange = { marca = it},
@@ -85,9 +87,18 @@ fun ContentAgregarView(it: PaddingValues, navController: NavController, viewMode
                     .padding(horizontal = 30.dp)
                     .padding(bottom = 15.dp)
             )
+            OutlinedTextField(
+                value = stock,
+                onValueChange = { stock = it},
+                label = { Text(text = "Stock") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp)
+                    .padding(bottom = 15.dp),
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+            )
             Button(onClick = {
-                val nombre = tablaProductos(nombre = nombre, marca = marca)
-
+                val nombre = tablaProductos(nombre = nombre, marca = marca, stock = stock)
                 viewModel.agregarProducto(nombre)
                 navController.popBackStack()
             }) {

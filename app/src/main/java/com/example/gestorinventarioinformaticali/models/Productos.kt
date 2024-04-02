@@ -11,5 +11,7 @@ data class tablaProductos(
     @ColumnInfo("Nombre")
     val nombre: String,
     @ColumnInfo("Marca")
-    val marca: String
+    val marca: String,
+    @ColumnInfo("Stock")
+    val stock: String
 )

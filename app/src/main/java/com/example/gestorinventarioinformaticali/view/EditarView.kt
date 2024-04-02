@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
@@ -25,6 +26,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -33,7 +35,7 @@ import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditarView(navController: NavController, viewModel: ProductosViewModel, id: Int, nombre: String?, marca: String?){
+fun EditarView(navController: NavController, viewModel: ProductosViewModel, id: Int, nombre: String?, marca: String?, stock: String?){
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -52,7 +54,7 @@ fun EditarView(navController: NavController, viewModel: ProductosViewModel, id: 
             )
         }
     ) {
-        ContentEditarView( it , navController, viewModel, id, nombre, marca)
+        ContentEditarView( it , navController, viewModel, id, nombre, marca, stock)
     }
 }
 
@@ -64,9 +66,11 @@ fun ContentEditarView(
     id: Int,
     nombre: String?,
     marca: String?,
+    stock: String?
 ){
     var nombre by remember { mutableStateOf("") }
     var marca by remember { mutableStateOf("") }
+    var stock by remember { mutableStateOf("") }
 
     LazyColumn (
         modifier = Modifier
@@ -95,9 +99,19 @@ fun ContentEditarView(
                     .padding(horizontal = 30.dp)
                     .padding(bottom = 15.dp)
             )
-            Button(onClick = {
-                val nombre = tablaProductos(id = id, nombre = nombre!!, marca = marca!!)
+            OutlinedTextField(
+                value = stock ?: "",
+                onValueChange = { stock = it},
+                label = { Text(text = "Stock") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp)
+                    .padding(bottom = 15.dp),
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
 
+            )
+            Button(onClick = {
+                val nombre = tablaProductos(id = id, nombre = nombre!!, marca = marca!!, stock = stock!!)
                 viewModel.actualizarProducto(nombre)
                 navController.popBackStack()
             }) {

@@ -3,6 +3,7 @@ package com.example.gestorinventarioinformaticali.pantallas.product
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -76,22 +77,26 @@ fun ActDesc(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Descripcion() {
-    var savedText by remember { mutableStateOf(" ") }
-    var isEditing by remember { mutableStateOf(true) }
+    var savedText by remember { mutableStateOf("") }
+    var isEditing by remember { mutableStateOf(false) }
 
     if (isEditing) {
-        TextEditorScreen { enteredText ->
-            savedText = enteredText
-            isEditing = false
-        }
+        EditarTexto(
+            initialText = savedText,
+            onTextChange = { enteredText ->
+                savedText = enteredText
+            },
+            onEditingFinished = {
+                isEditing = false
+            }
+        )
     } else {
-        TextDisplayScreen(savedText)
+        MostrarTexto(savedText)
         Button(onClick = { isEditing = true }) {
             Text("Edit")
         }
     }
 }
-
 @Composable
 fun BottomAppBar10(
     onButtonClickedFuncApp: () -> Unit,
@@ -142,29 +147,36 @@ fun BottomAppBar10(
 
 
 @Composable
-fun TextEditorScreen(onTextChange: (String) -> Unit) {
-    var text by remember { mutableStateOf(" ") }
-    Column (
-        modifier = Modifier
-        .fillMaxSize()
-        .padding(16.dp),
-        verticalArrangement = Arrangement.Center) {
-        OutlinedTextField(
-            modifier = Modifier
-                .padding(vertical = 10.dp)
-                .fillMaxSize(),
-            value = text,
-            label = { Text(text = "Escribe aquí") },
-            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-            onValueChange = { newText ->
-                onTextChange(newText)
-            }
+fun EditarTexto(
+    initialText: String,
+    onTextChange: (String) -> Unit,
+    onEditingFinished: () -> Unit
+) {
+    var description by remember { mutableStateOf(initialText) }
+
+    LaunchedEffect(description) {
+        onTextChange(description)
+    }
+
+    Column(modifier = Modifier.fillMaxSize().padding(20.dp)) {
+        TextField(
+            value = description,
+            onValueChange = {
+                description = it
+            },
+            label = { Text("Escribe aqui") },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done 
+            ),
+            keyboardActions = KeyboardActions(onDone = {
+                onEditingFinished()
+            })
         )
     }
 }
 
 @Composable
-fun TextDisplayScreen(text: String) {
+fun MostrarTexto(text: String) {
     Column(
         modifier = Modifier
             .fillMaxSize()
