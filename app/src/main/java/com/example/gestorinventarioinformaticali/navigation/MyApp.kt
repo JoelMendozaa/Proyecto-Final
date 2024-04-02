@@ -13,7 +13,7 @@ import com.example.gestorinventarioinformaticali.pantallas.login.Login
 import com.example.gestorinventarioinformaticali.pantallas.login.Register
 import com.example.gestorinventarioinformaticali.pantallas.product.ActDesc
 import com.example.gestorinventarioinformaticali.pantallas.product.InfoProduct
-import com.example.gestorinventarioinformaticali.pantallas.product.Productos
+import com.example.gestorinventarioinformaticali.pantallas.product.Producto
 import com.example.gestorinventarioinformaticali.pantallas.stock.SectionStock
 import com.example.gestorinventarioinformaticali.pantallas.stock.Stock
 import com.example.gestorinventarioinformaticali.pantallas.user.User
@@ -120,12 +120,11 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
             )
         }
         composable(route = ScreenList.Product.name){
-            Productos(
+            Producto(
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.Stock.name) },
                 onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
-                onButtonClickedInfoProduct = { navController.navigate(ScreenList.InfoProduct.name) },
                 navController = navController,
                 viewModel = viewModel
             )

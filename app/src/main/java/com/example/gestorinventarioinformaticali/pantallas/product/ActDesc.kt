@@ -23,6 +23,7 @@ import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.rememberTopAppBarState
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.ImeAction
@@ -42,7 +43,6 @@ fun ActDesc(
     onButtonClickedUser: () -> Unit,
     navController: NavHostController
 ){
-    var descriptionText by remember { mutableStateOf("") }
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         topBar = {
@@ -77,7 +77,7 @@ fun ActDesc(
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Descripcion() {
-    var savedText by remember { mutableStateOf("") }
+    var savedText by rememberSaveable { mutableStateOf("") }
     var isEditing by remember { mutableStateOf(false) }
 
     if (isEditing) {
@@ -158,7 +158,9 @@ fun EditarTexto(
         onTextChange(description)
     }
 
-    Column(modifier = Modifier.fillMaxSize().padding(20.dp)) {
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(20.dp)) {
         TextField(
             value = description,
             onValueChange = {
@@ -166,7 +168,7 @@ fun EditarTexto(
             },
             label = { Text("Escribe aqui") },
             keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done 
+                imeAction = ImeAction.Done
             ),
             keyboardActions = KeyboardActions(onDone = {
                 onEditingFinished()

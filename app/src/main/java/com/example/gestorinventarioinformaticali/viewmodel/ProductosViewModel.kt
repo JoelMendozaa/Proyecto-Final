@@ -37,4 +37,7 @@ class ProductosViewModel (private val dao: ProductosDatabaseDao): ViewModel(){
     fun borrarProducto(productos: tablaProductos) = viewModelScope.launch {
         dao.borrarProducto(productos = productos)
     }
+    fun buscarProductos(query: String): Flow<List<tablaProductos>> {
+        return dao.buscarProductos(query)
+    }
 }

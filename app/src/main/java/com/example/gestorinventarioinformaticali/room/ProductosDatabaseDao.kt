@@ -24,4 +24,8 @@ interface ProductosDatabaseDao {
 
     @Delete
     suspend fun borrarProducto(productos: tablaProductos)
+
+    @Query("SELECT * FROM productos WHERE nombre LIKE '%' || :query || '%' OR marca LIKE '%' || :query || '%'")
+    fun buscarProductos(query: String): Flow<List<tablaProductos>>
+
 }
