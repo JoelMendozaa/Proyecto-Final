@@ -28,7 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.gestorinventarioinformaticali.models.Productos
+import com.example.gestorinventarioinformaticali.models.tablaProductos
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -96,7 +96,7 @@ fun ContentEditarView(
                     .padding(bottom = 15.dp)
             )
             Button(onClick = {
-                val nombre = Productos(id = id, nombre = nombre!!, marca = marca!!)
+                val nombre = tablaProductos(id = id, nombre = nombre!!, marca = marca!!)
 
                 viewModel.actualizarProducto(nombre)
                 navController.popBackStack()

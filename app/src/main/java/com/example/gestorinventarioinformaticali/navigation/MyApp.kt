@@ -105,7 +105,8 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 onButtonClickedHome = {  navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
-                navController = navController
+                navController = navController,
+                viewModel = viewModel
             )
         }
         composable(route = ScreenList.Stock.name){

@@ -47,7 +47,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
-import com.example.gestorinventarioinformaticali.models.Productos
+import com.example.gestorinventarioinformaticali.models.tablaProductos
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 
@@ -105,7 +105,7 @@ fun Producto(
 
 @Composable
 fun ProductItem(
-    producto: Productos,
+    producto: tablaProductos,
     onItemClick: () -> Unit,
     onClickDelete: () -> Unit
 ) {
@@ -195,7 +195,9 @@ val listaProducto = listOf(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun BarraBusqueda2(navController: NavHostController){
+fun BarraBusqueda2(
+    navController: NavHostController
+){
     val context = LocalContext.current
     var query by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }

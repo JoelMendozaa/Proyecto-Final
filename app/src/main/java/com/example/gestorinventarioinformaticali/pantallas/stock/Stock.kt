@@ -35,7 +35,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gestorinventarioinformaticali.R
-import com.example.gestorinventarioinformaticali.models.Productos
+import com.example.gestorinventarioinformaticali.models.tablaProductos
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 
@@ -56,7 +56,6 @@ fun Stock(
             TopAppBar(
                 title = { Text(text = "Stock") }
             )
-            Divider(modifier = Modifier.padding(10.dp))
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -80,12 +79,12 @@ fun Stock(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            stocks.forEach { stock ->
+            stocks.forEach { stockItem ->
                 StockItem(
-                    producto = stock,
-                    onItemClick = { navController.navigate("editar/${stock.id}/${stock.nombre}/${stock.marca}") }
+                    producto = stockItem,
+                    onItemClick = { navController.navigate("editar/${stockItem.id}/${stockItem.nombre}/${stockItem.marca}") }
                 ) {
-                    viewModel.borrarProducto(stock)
+                    viewModel.borrarProducto(stockItem)
                 }
             }
         }
@@ -94,7 +93,7 @@ fun Stock(
 
 @Composable
 fun StockItem(
-    producto: Productos,
+    producto: tablaProductos,
     onItemClick: () -> Unit,
     onClickDelete: () -> Unit
 ) {
