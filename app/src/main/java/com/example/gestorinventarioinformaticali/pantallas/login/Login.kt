@@ -2,14 +2,18 @@ package com.example.gestorinventarioinformaticali.pantallas.login
 
 import android.icu.text.AlphabeticIndex.Bucket.LabelType
 import android.inputmethodservice.Keyboard
+import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Visibility
@@ -18,6 +22,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -29,7 +34,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -58,6 +65,8 @@ fun Login(navController: NavController){
                     isCreateAccount = false
                 ){
                     email, password ->
+                    Log.d("Gestori de inventario", "Logueando con $email y $password")
+
                 }
             }
             else {
@@ -66,12 +75,33 @@ fun Login(navController: NavController){
                     isCreateAccount = true
                 ) {
                     email, password ->
+                    Log.d("Gestori de inventario", "Creando cuenta con $email y $password")
                 }
             }
+        }
+        Spacer(modifier = Modifier.height(15.dp))
+        Row (
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically
+        ){
+            val text1 =
+                if (showLoginForm.value) "¿No tienes cuenta?"
+                else "¿Ya tienes cuenta?"
+            val text2 =
+                if (showLoginForm.value) "Registrate"
+                else "Inicia sesión"
+            Text(text = text1)
+            Text(text = text2,
+                modifier = Modifier
+                    .clickable { showLoginForm.value = !showLoginForm.value }
+                    .padding(start = 5.dp),
+                color = MaterialTheme.colorScheme.primary
+            )
         }
     }
 }
 
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun UserForm(
     isCreateAccount: Boolean = false,
@@ -86,6 +116,11 @@ fun UserForm(
     val passwordVisible = rememberSaveable {
         mutableStateOf(false)
     }
+    val valido = remember (email.value, password.value) {
+        email.value.trim().isNotEmpty() &&
+                password.value.trim().isNotEmpty()
+    }
+    val keyboardController = LocalSoftwareKeyboardController.current
     Column (
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -96,6 +131,35 @@ fun UserForm(
             passwordState = password,
             labelId = "Password",
             passwordVisible= passwordVisible
+        )
+        SubmitButton(
+            textId = if (isCreateAccount) "Crear cuenta" else "Login",
+            inputValido = valido
+        ){
+            onDone(email.value.trim(), password.value.trim())
+            keyboardController?.hide()
+        }
+    }
+}
+
+@Composable
+fun SubmitButton(
+    textId: String,
+    inputValido: Boolean,
+    onClic: () -> Unit
+) {
+    Button(
+        onClick = onClic,
+        modifier = Modifier
+            .padding(3.dp)
+            .fillMaxWidth(),
+        shape = CircleShape,
+        enabled = inputValido
+        ) {
+        Text(
+            text = textId,
+            modifier = Modifier
+                .padding(5.dp)
         )
     }
 }
@@ -139,7 +203,9 @@ fun PasswordVisibleIcon(
             Icons.Default.VisibilityOff
         else
             Icons.Default.Visibility
-    IconButton(onClick = { /*TODO*/ }) {
+    IconButton(onClick = {
+        passwordVisible.value = !passwordVisible.value
+    }) {
         Icon(
             imageVector = image,
             contentDescription = null)
