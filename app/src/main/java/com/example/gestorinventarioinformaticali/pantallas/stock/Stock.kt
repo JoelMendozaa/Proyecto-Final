@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.Card
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
@@ -40,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.models.tablaStock
+import com.example.gestorinventarioinformaticali.view.ContentInicioStockView
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
@@ -94,6 +96,13 @@ fun Stock(
                     }
                 }
             }
+//            item {
+//                ContentInicioStockView(
+//                    it = PaddingValues(16.dp),
+//                    navController = navController,
+//                    viewModel = viewModel
+//                )
+//            }
         }
     }
 }

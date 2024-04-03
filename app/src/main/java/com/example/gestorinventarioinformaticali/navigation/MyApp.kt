@@ -104,6 +104,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 viewModel = viewModel2
             )
         }
+
         composable(route = ScreenList.Stock.name){
             Stock(
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },

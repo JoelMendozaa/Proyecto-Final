@@ -13,14 +13,14 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class StockViewModel(private val dao2: StockDatabaseDao): ViewModel() {
-    val listaStock: Flow<List<tablaStock>> = dao2.obtenerStock()
-    var state2 by mutableStateOf(StockState())
+class StockViewModel(private val dao: StockDatabaseDao): ViewModel() {
+    val listaStock: Flow<List<tablaStock>> = dao.obtenerStock()
+    var state by mutableStateOf(StockState())
         private set
     init {
         viewModelScope.launch {
-            dao2.obtenerStock().collectLatest {
-                state2 = state2.copy(
+            dao.obtenerStock().collectLatest {
+                state = state.copy(
                     listaStock = it
                 )
             }
@@ -29,14 +29,14 @@ class StockViewModel(private val dao2: StockDatabaseDao): ViewModel() {
 
 
     fun agregarStock(stock: tablaStock) = viewModelScope.launch {
-        dao2.agregarStock(stocks = stock)
+        dao.agregarStock(stocks = stock)
     }
 
     fun actualizarStock(stock: tablaStock) = viewModelScope.launch {
-        dao2.actualizarStock(stocks = stock)
+        dao.actualizarStock(stocks = stock)
     }
 
     fun borrarStock(stock: tablaStock) = viewModelScope.launch {
-        dao2.borrarStock(stocks = stock)
+        dao.borrarStock(stocks = stock)
     }
 }

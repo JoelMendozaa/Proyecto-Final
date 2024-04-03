@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.Card
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
@@ -52,6 +53,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.models.tablaProductos
+import com.example.gestorinventarioinformaticali.view.ContentInicioView
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 import kotlinx.coroutines.flow.Flow
 
@@ -93,6 +95,7 @@ fun Producto(
                 .verticalScroll(rememberScrollState()),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+//            ContentInicioView(it = PaddingValues(16.dp), navController = navController, viewModel = viewModel)
             productos.forEach { producto ->
                 ProductItem(
                     producto = producto,
