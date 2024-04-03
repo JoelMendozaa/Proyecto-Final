@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -114,7 +115,7 @@ fun TopAppBar(navController: NavHostController) {
                     modifier = Modifier
                         .clickable { navController.navigate(ScreenList.Product.name) }
                         .padding(4.dp)
-
+                        .size(200.dp)
                 )
                 Image(
                     painter = painterResource(id = R.drawable.procesador),
@@ -122,6 +123,7 @@ fun TopAppBar(navController: NavHostController) {
                     modifier = Modifier
                         .clickable { navController.navigate(ScreenList.Product.name) }
                         .padding(4.dp)
+                        .size(200.dp)
                 )
             }
             DividerExample()

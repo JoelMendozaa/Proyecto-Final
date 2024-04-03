@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "958512758911",
-    "project_id": "gestion-de-inventario-241e9",
-    "storage_bucket": "gestion-de-inventario-241e9.appspot.com"
+    "project_number": "711497647540",
+    "project_id": "gestion-inventario-8c421",
+    "storage_bucket": "gestion-inventario-8c421.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:958512758911:android:99077d7b7c00b4b10a3f4a",
+        "mobilesdk_app_id": "1:711497647540:android:d3a64f4bd32c79e349dee1",
         "android_client_info": {
           "package_name": "com.example.gestorinventarioinformaticali"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyAjlQTUT3Y4lTYP_r58MsBNg2mLI3O9r0g"
+          "current_key": "AIzaSyBkWkCh9A725WuS3wjl1A1TQ78l6WQMXwk"
         }
       ],
       "services": {

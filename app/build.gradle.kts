@@ -3,7 +3,6 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
     // Google Firebase
-//    id("com.android.application")
     id("com.google.gms.google-services")}
 
 android {
@@ -78,6 +77,8 @@ dependencies {
 
     // Iconos extendidos
     implementation("androidx.compose.material:material-icons-extended:1.6.4")
+    implementation("com.google.firebase:firebase-auth-ktx:22.3.1")
+    implementation("com.google.firebase:firebase-firestore-ktx:24.11.0")
 
     // Navigation
     val nav_version = "2.7.7"
