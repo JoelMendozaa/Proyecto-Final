@@ -23,21 +23,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gestorinventarioinformaticali.models.tablaProductos
-import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
+import com.example.gestorinventarioinformaticali.models.tablaStock
+import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
+fun AgregarStock(navController: NavController, viewModel: StockViewModel){
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "Agregar Producto",
+                        "Agregar Stock",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -50,12 +52,12 @@ fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
             )
         }
     ) {
-        ContentAgregarView( it , navController, viewModel)
+        ContentAgregarStock( it , navController, viewModel)
     }
 }
 
 @Composable
-fun ContentAgregarView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
+fun ContentAgregarStock(it: PaddingValues, navController: NavController, viewModel: StockViewModel){
     var nombre by remember { mutableStateOf("") }
     var marca by remember { mutableStateOf("") }
     var stock by remember { mutableStateOf("") }
@@ -86,9 +88,19 @@ fun ContentAgregarView(it: PaddingValues, navController: NavController, viewMode
                     .padding(horizontal = 30.dp)
                     .padding(bottom = 15.dp)
             )
+            OutlinedTextField(
+                value = stock,
+                onValueChange = { stock = it},
+                label = { Text(text = "Stock") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(horizontal = 30.dp)
+                    .padding(bottom = 15.dp),
+                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
+            )
             Button(onClick = {
-                val nombre = tablaProductos(nombre = nombre, marca = marca)
-                viewModel.agregarProducto(nombre)
+                val nombre = tablaStock(nombre = nombre, marca = marca, stock = stock)
+                viewModel.agregarStock(nombre)
                 navController.popBackStack()
             }) {
                 Text(text = "Agregar")

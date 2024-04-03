@@ -17,9 +17,12 @@ import com.example.gestorinventarioinformaticali.pantallas.product.Producto
 import com.example.gestorinventarioinformaticali.pantallas.stock.SectionStock
 import com.example.gestorinventarioinformaticali.pantallas.stock.Stock
 import com.example.gestorinventarioinformaticali.pantallas.user.User
+import com.example.gestorinventarioinformaticali.view.AgregarStock
 import com.example.gestorinventarioinformaticali.view.AgregarView
+import com.example.gestorinventarioinformaticali.view.EditarStock
 import com.example.gestorinventarioinformaticali.view.EditarView
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
+import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
 enum class ScreenList{
     Login,
@@ -35,7 +38,7 @@ enum class ScreenList{
 }
 
 @Composable
-fun MyApp(navController: NavHostController = rememberNavController(), viewModel: ProductosViewModel) {
+fun MyApp(navController: NavHostController = rememberNavController(), viewModel: ProductosViewModel, viewModel2: StockViewModel) {
     NavHost(
         navController = navController,
         startDestination = ScreenList.Login.name
@@ -106,7 +109,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 onButtonClickedHome = {  navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 navController = navController,
-                viewModel = viewModel
+                viewModel = viewModel2
             )
         }
         composable(route = ScreenList.Stock.name){
@@ -115,7 +118,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
-                viewModel = viewModel,
+                viewModel = viewModel2,
                 navController = navController
             )
         }
@@ -132,11 +135,10 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
         composable("agregar"){
             AgregarView(navController, viewModel)
         }
-        composable("editar/{id}/{nombre}/{marca}/{stock}", arguments = listOf(
+        composable("editar/{id}/{nombre}/{marca}/", arguments = listOf(
             navArgument("id"){ type = NavType.IntType},
             navArgument("nombre"){ type = NavType.StringType},
             navArgument("marca"){ type = NavType.StringType},
-            navArgument("stock"){type = NavType.StringType}
         )){
             EditarView(
                 navController,
@@ -144,7 +146,24 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 it.arguments!!.getInt("id"),
                 it.arguments?.getString("nombre"),
                 it.arguments?.getString("marca"),
-                it.arguments?.getString("stock")
+            )
+        }
+        composable("agregar"){
+            AgregarStock(navController, viewModel2)
+        }
+        composable("editar/{id}/{nombre}/{marca}/{stock}", arguments = listOf(
+            navArgument("id"){ type = NavType.IntType},
+            navArgument("nombre"){ type = NavType.StringType},
+            navArgument("marca"){type = NavType.StringType},
+            navArgument("stock"){type = NavType.StringType}
+        )){
+            EditarStock(
+                navController,
+                viewModel2,
+                it.arguments!!.getInt("id"),
+                it.arguments!!.getString("nombre"),
+                it.arguments!!.getString("marca"),
+                it.arguments!!.getString("stock")
             )
         }
     }

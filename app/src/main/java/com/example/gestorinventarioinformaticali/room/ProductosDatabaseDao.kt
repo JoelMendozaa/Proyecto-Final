@@ -6,6 +6,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
 import com.example.gestorinventarioinformaticali.models.tablaProductos
+import com.example.gestorinventarioinformaticali.models.tablaStock
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -29,3 +30,4 @@ interface ProductosDatabaseDao {
     fun buscarProductos(query: String): Flow<List<tablaProductos>>
 
 }
+

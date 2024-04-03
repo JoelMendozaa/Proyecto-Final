@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.navigation.ScreenList
-import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
+import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
 @Composable
 fun SectionStock(
@@ -40,7 +40,7 @@ fun SectionStock(
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
     navController: NavHostController,
-    viewModel: ProductosViewModel
+    viewModel: StockViewModel
 ){
     Column() {
         Scaffold(

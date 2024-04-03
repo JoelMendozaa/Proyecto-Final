@@ -17,17 +17,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
+import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
 @Composable
-fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
-    val state = viewModel.state
+fun ContentInicioStockView(it: PaddingValues, navController: NavController, viewModel: StockViewModel){
+    val state = viewModel.state2
 
     Column (
         modifier = Modifier.padding(it)
     ) {
         LazyColumn(){
-            items (state.listaProductos){
+            items (state.listaStock){
                 Box(
                     modifier = Modifier
                         .padding(8.dp)
@@ -39,12 +39,13 @@ fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel
                     ) {
                         Text(text = it.nombre)
                         Text(text = it.marca)
+                        Text(text = it.stock)
                         IconButton(
-                            onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}") }
+                            onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}/${it.stock}") }
                         ) {
                             Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit")
                         }
-                        IconButton(onClick = { viewModel.borrarProducto(it) }) {
+                        IconButton(onClick = { viewModel.borrarStock(it) }) {
                             Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
                         }
                     }

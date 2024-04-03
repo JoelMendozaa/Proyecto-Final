@@ -252,7 +252,7 @@ fun BarraBusqueda2(
             .wrapContentHeight(),
         placeholder = { Text(text = "Buscar") },
         leadingIcon = {
-            IconButton(onClick = { /* TODO: Implementar lógica para abrir menú */ }) {
+            IconButton(onClick = { /* TODO*/ }) {
                 Icon(imageVector = Icons.Default.Menu, contentDescription = null)
             }
         },

@@ -2,6 +2,9 @@ plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("kotlin-kapt")
+    // Google Firebase
+//    id("com.android.application")
+//    id("com.google.gms.google-services")
 }
 
 android {
@@ -85,5 +88,7 @@ dependencies {
     // Coil
     implementation("io.coil-kt:coil-compose:1.4.0")
 
-
+    //Google
+//    implementation(platform("com.google.firebase:firebase-bom:32.8.0"))
+//    implementation("com.google.firebase:firebase-analytics")
 }

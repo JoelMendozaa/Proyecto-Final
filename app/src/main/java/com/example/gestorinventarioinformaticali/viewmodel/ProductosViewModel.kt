@@ -14,10 +14,11 @@ import kotlinx.coroutines.launch
 
 
 
-class ProductosViewModel (private val dao: ProductosDatabaseDao): ViewModel(){
+class ProductosViewModel(private val dao: ProductosDatabaseDao): ViewModel() {
     val listaProductos: Flow<List<tablaProductos>> = dao.obtenerProducto()
     var state by mutableStateOf(ProductosState())
         private set
+
 
     init {
         viewModelScope.launch {
@@ -28,16 +29,22 @@ class ProductosViewModel (private val dao: ProductosDatabaseDao): ViewModel(){
             }
         }
     }
-    fun  agregarProducto(productos: tablaProductos) = viewModelScope.launch {
+
+    fun agregarProducto(productos: tablaProductos) = viewModelScope.launch {
         dao.agregarProducto(productos = productos)
     }
+
     fun actualizarProducto(productos: tablaProductos) = viewModelScope.launch {
         dao.actualizarProducto(productos = productos)
     }
+
     fun borrarProducto(productos: tablaProductos) = viewModelScope.launch {
         dao.borrarProducto(productos = productos)
     }
+
     fun buscarProductos(query: String): Flow<List<tablaProductos>> {
         return dao.buscarProductos(query)
     }
+
+
 }
