@@ -122,3 +122,8 @@
 - Eliminar Register.kt ya que se hizo dentro de Login.kt
 - Errores:
 -  - Fallo al implementar la funcion de ContentInicioView y ContentInicioStockView en sus respectivas pantallas (Pendiente)
+
+
+# Webgrafía
+Para hacer CRUD con ROOM he seguido el siguiente video [Video](https://www.youtube.com/watch?v=XbV2NwYIeXg)
+Para realizar la autenticación con Firebase he seguido estos videos [Video1](https://www.youtube.com/watch?v=lC_mgTqiaSM) | [Video2](https://www.youtube.com/watch?v=NFot9_bSFhw&list=WL&index=2)
