@@ -125,5 +125,5 @@
 
 
 # Webgrafía
-Para hacer CRUD con ROOM he seguido el siguiente video [Video](https://www.youtube.com/watch?v=XbV2NwYIeXg)
-Para realizar la autenticación con Firebase he seguido estos videos [Video1](https://www.youtube.com/watch?v=lC_mgTqiaSM) | [Video2](https://www.youtube.com/watch?v=NFot9_bSFhw&list=WL&index=2)
+- Para hacer CRUD con ROOM he seguido el siguiente video [Video](https://www.youtube.com/watch?v=XbV2NwYIeXg)
+- Para realizar la autenticación con Firebase he seguido estos videos [Video1](https://www.youtube.com/watch?v=lC_mgTqiaSM) | [Video2](https://www.youtube.com/watch?v=NFot9_bSFhw&list=WL&index=2)
