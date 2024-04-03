@@ -42,10 +42,12 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.navigation.ScreenList
+import com.example.gestorinventarioinformaticali.viewmodel.LoginViewModel
 
 @Composable
 fun Login(
     navController: NavController,
+    viewModel: LoginViewModel = androidx.lifecycle.viewmodel.compose.viewModel()
 ){
     // True = Login; False = Create
     val showLoginForm = rememberSaveable {
@@ -68,7 +70,9 @@ fun Login(
                 ){
                     email, password ->
                     Log.d("Gestori de inventario", "Logueando con $email y $password")
-                    navController.navigate(ScreenList.Principal.name)
+                    viewModel.signInWithEmailAndPassword(email, password){
+                        navController.navigate(ScreenList.Principal.name)
+                    }
                 }
             }
             else {
@@ -78,6 +82,9 @@ fun Login(
                 ) {
                     email, password ->
                     Log.d("Gestor de inventario", "Creando cuenta con $email y $password")
+                    viewModel.createUserWithEmailAndPassword(email, password){
+                        navController.navigate(ScreenList.Principal.name)
+                    }
                 }
             }
         }
@@ -245,79 +252,3 @@ fun InputField(
         )
     )
 }
-
-
-
-//@Composable
-//fun Login(
-//    buttonClickedRegister: () ->  Unit,
-//    buttonClickedLogin: () -> Unit,
-//){
-//    var user by rememberSaveable { mutableStateOf("") }
-//    var password by remember { mutableStateOf("") }
-//    val valido = remember (user,password){ user.trim().isNotEmpty() && password.trim().isNotEmpty() }
-//
-//
-//    Column (modifier = Modifier
-//        .fillMaxSize()
-//        .padding(vertical = 25.dp),
-//        verticalArrangement = Arrangement.Center,
-//        horizontalAlignment = Alignment.CenterHorizontally
-//    ){
-//        Image(painter = painterResource(id = R.drawable.logo), contentDescription = "Logo")
-//        OutLineTextFieldUser(user = user){ newUser ->
-//            user = newUser
-//        }
-//
-//        OutLineTextFieldPassword(password = password) { newPassword ->
-//            password = newPassword
-//        }
-//        Row (modifier = Modifier
-//            .padding(15.dp),
-//            horizontalArrangement = Arrangement.Center
-//        ){
-//            Button(onClick = {
-//                buttonClickedRegister()
-//            }) {
-//                Text(text = "Register")
-//            }
-//
-//            Spacer(modifier = Modifier.padding(5.dp))
-//
-//            Button(onClick = {
-//                buttonClickedLogin()
-//            },
-//                enabled = valido
-//            ) {
-//                Text (text = "Login")
-//            }
-//        }
-//    }
-//}
-//
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Composable
-//fun OutLineTextFieldUser(user: String, onUserChange: (String) -> Unit) {
-//    OutlinedTextField(
-//        modifier = Modifier.padding(vertical = 10.dp),
-//        value = user,
-//        label = { Text(text = "Introduce tu usuario o correo") },
-//        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
-//        onValueChange = {
-//                newValue ->
-//            onUserChange(newValue)
-//        }
-//    )
-//}
-//
-//@OptIn(ExperimentalMaterial3Api::class)
-//@Composable
-//fun OutLineTextFieldPassword(password: String, onPasswordChange: (String) -> Unit) {
-//    OutlinedTextField(
-//        value = password,
-//        onValueChange = { newValue -> onPasswordChange(newValue) },
-//        label = { Text(text = "Introduce tu contraseña") },
-//        visualTransformation = PasswordVisualTransformation(),
-//        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password)
-//    )
-//}
