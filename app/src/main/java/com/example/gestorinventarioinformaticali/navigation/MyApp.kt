@@ -44,10 +44,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
         startDestination = ScreenList.Login.name
     ) {
         composable(route = ScreenList.Login.name) {
-            Login(
-                buttonClickedRegister = { navController.navigate(ScreenList.Register.name) },
-                buttonClickedLogin = { navController.navigate(ScreenList.Principal.name) },
-            )
+            Login(navController = navController)
         }
         composable(route = ScreenList.Register.name) {
             Register(

@@ -77,6 +77,9 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
+    // Iconos extendidos
+    implementation("androidx.compose.material:material-icons-extended:1.6.4")
+
     // Navigation
     val nav_version = "2.7.7"
     implementation("androidx.navigation:navigation-compose:$nav_version")
