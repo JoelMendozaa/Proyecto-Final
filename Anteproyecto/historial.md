@@ -113,5 +113,12 @@
 - Errores:
 -  - Se tuvo que quitar Categorias y Stock de Room debido a que fallaba la base de datos internamente impidiendo que se pueda modificar el archivo donde estaba el error ya que no se podia editar.
    - A la hora de Actualizar la descripcion no se guarda. (Pendiente)
-   - A la hora de arreglar el CRUD de producto.kt hay que arreglar las paginas respetivas que contienen esas funciones ya que están mezcladas con Stock.kt (Pendiente)
+   - A la hora de arreglar el CRUD de producto.kt hay que arreglar las paginas respetivas que contienen esas funciones ya que están mezcladas con Stock.kt (Arreglado)
 
+## Día 03
+- Agregar API de Firebase
+- Mejorar el login
+- Arreglar el CRUD de Stock.kt y Productos.kt
+- Eliminar Register.kt ya que se hizo dentro de Login.kt
+- Errores:
+-  - Fallo al implementar la funcion de ContentInicioView y ContentInicioStockView en sus respectivas pantallas (Pendiente)
