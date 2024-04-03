@@ -10,7 +10,6 @@ import androidx.navigation.navArgument
 import com.example.gestorinventarioinformaticali.view.Principal
 import com.example.gestorinventarioinformaticali.pantallas.infoApp.FuncApp
 import com.example.gestorinventarioinformaticali.pantallas.login.Login
-import com.example.gestorinventarioinformaticali.pantallas.login.Register
 import com.example.gestorinventarioinformaticali.pantallas.product.ActDesc
 import com.example.gestorinventarioinformaticali.pantallas.product.InfoProduct
 import com.example.gestorinventarioinformaticali.pantallas.product.Producto
@@ -26,7 +25,6 @@ import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
 enum class ScreenList{
     Login,
-    Register,
     User,
     Principal,
     InfoProduct,
@@ -44,11 +42,8 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
         startDestination = ScreenList.Login.name
     ) {
         composable(route = ScreenList.Login.name) {
-            Login(navController = navController)
-        }
-        composable(route = ScreenList.Register.name) {
-            Register(
-                buttonClickedPrincipal = { navController.navigate(ScreenList.Principal.name) }
+            Login(
+                navController = navController
             )
         }
         composable(route = ScreenList.Principal.name) {
