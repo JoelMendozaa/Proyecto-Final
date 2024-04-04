@@ -14,11 +14,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
@@ -41,9 +43,11 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.models.tablaStock
+import com.example.gestorinventarioinformaticali.pantallas.product.ProductItem
 import com.example.gestorinventarioinformaticali.view.ContentInicioStockView
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
+import kotlinx.coroutines.flow.Flow
 
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
@@ -59,7 +63,7 @@ fun Stock(
     val stocks by viewModel.listaStock.collectAsState(initial = emptyList())
     Scaffold(
         topBar = {
-           TopAppBar9()
+           TopAppBar9(stocksViewModel = viewModel)
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -97,10 +101,11 @@ fun Stock(
                             navController.navigate(
                                 "editar/${stockItem.id}/${stockItem.nombre}/${stockItem.marca}/${stockItem.stock}"
                             )
+                        },
+                        onClickDelete = {
+                            viewModel.borrarStock(stockItem)
                         }
-                    ) {
-                        viewModel.borrarStock(stockItem)
-                    }
+                    )
                 }
             }
         }
@@ -127,10 +132,7 @@ fun StockItem(
             Text(text = "Marca: ${existencia.marca}")
             Text(text = "Stock: ${existencia.stock}")
             Spacer(modifier = Modifier.height(8.dp))
-            Row(
-                horizontalArrangement = Arrangement.End,
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Row{
                 Button(onClick = onItemClick) {
                     Text(text = "Editar")
                 }
@@ -139,6 +141,21 @@ fun StockItem(
                     Text(text = "Eliminar")
                 }
             }
+        }
+    }
+}
+
+@Composable
+fun ListaStocks(stocks: Flow<List<tablaStock>>){
+    val listaStockState by stocks.collectAsState(initial = emptyList())
+    Column {
+        listaStockState.forEach { stock ->
+            StockItem(
+                modifier = Modifier.padding(2.dp),
+                existencia = stock,
+                onItemClick = { /*TODO*/ },
+                onClickDelete = { /* TODO */ }
+            )
         }
     }
 }
@@ -158,7 +175,7 @@ fun BottomAppBar9(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedFuncApp
                 ) {
-                    Icon(Icons.Filled.Star, contentDescription = "FuncApp")
+                    Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
                 }
                 IconButton(
                     modifier = Modifier.weight(2f),
@@ -194,7 +211,7 @@ fun BottomAppBar9(
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TopAppBar9() {
+fun TopAppBar9(stocksViewModel: StockViewModel) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
@@ -213,6 +230,7 @@ fun TopAppBar9() {
     ) { innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
             item {
+                ListaStocks(stocks = stocksViewModel.listaStock)
             }
         }
     }

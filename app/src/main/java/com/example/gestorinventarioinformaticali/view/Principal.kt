@@ -13,6 +13,7 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
@@ -31,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -87,7 +89,9 @@ fun TopAppBar(navController: NavHostController) {
                         "InformaticaLI",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis,
-                        fontSize = 30.sp
+                        fontSize = 30.sp,
+                        fontWeight = FontWeight.Bold,
+                        color = Color.Blue
                     )
                 },
                 scrollBehavior = scrollBehavior
@@ -100,7 +104,12 @@ fun TopAppBar(navController: NavHostController) {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text = "CATEGORIA", fontSize = 28.sp)
+            Text(
+                text = "CATEGORÍA",
+                fontSize = 28.sp,
+                fontWeight = FontWeight.Bold,
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
 
             Row(
                 modifier = Modifier
@@ -130,8 +139,12 @@ fun TopAppBar(navController: NavHostController) {
                     .padding(vertical = 70.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(text = "PRODUCTOS", fontSize = 28.sp)
-
+                Text(
+                    text = "PRODUCTOS",
+                    fontSize = 28.sp,
+                    fontWeight = FontWeight.Bold,
+                    modifier = Modifier.padding(bottom = 8.dp)
+                    )
                 LazyRow(
                     modifier = Modifier
                         .padding(3.dp)
@@ -187,7 +200,7 @@ fun BottomAppBar(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedFuncApp
                 ) {
-                    Icon(Icons.Filled.Star, contentDescription = "FuncApp")
+                    Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
                 }
                 IconButton(
                     modifier = Modifier.weight(2f),

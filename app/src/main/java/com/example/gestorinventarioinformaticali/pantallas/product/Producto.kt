@@ -22,6 +22,8 @@ import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.AttachFile
+import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
@@ -30,6 +32,7 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.IconButton
@@ -97,14 +100,14 @@ fun Producto(
                 items(productos) { producto ->
                     ProductItem(
                         producto = producto,
-                        onItemClick = { navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}") }
-                    ) {
-                        viewModel.borrarProducto(producto)
-                    }
+                        onItemClick = { navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}") },
+                        onClickDelete = {
+                            viewModel.borrarProducto(producto)
+                        }
+                    )
                 }
             }
         }
-
     }
 }
 
@@ -125,20 +128,18 @@ fun ProductItem(
             Text(text = "Nombre: ${producto.nombre}")
             Text(text = "Marca: ${producto.marca}")
             Spacer(modifier = Modifier.height(8.dp))
-            Button(onClick = onItemClick) {
-                Text(text = "Editar")
-            }
-        }
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Button(onClick = onClickDelete) {
-                Text(text = "Eliminar")
+
+            Row {
+                Button(onClick = onItemClick) {
+                    Text(text = "Editar")
+                }
+                Button(onClick = onClickDelete) {
+                    Text(text = "Eliminar")
+                }
             }
         }
     }
 }
-
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -172,7 +173,11 @@ fun ListaProductos(productos: Flow<List<tablaProductos>>) {
 
     LazyColumn {
         items(listaProductosState) { producto ->
-            Text(text = "Nombre: ${producto.nombre}, Marca: ${producto.marca}")
+            ProductItem(
+                producto = producto,
+                onItemClick = { /*TODO*/ },
+                onClickDelete = { /*TODO*/ }
+            )
         }
     }
 }
@@ -191,7 +196,7 @@ fun BottomAppBar12(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedFuncApp
                 ) {
-                    Icon(Icons.Filled.Star, contentDescription = "FuncApp")
+                    Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
                 }
                 IconButton(
                     modifier = Modifier.weight(2f),
@@ -225,11 +230,6 @@ fun BottomAppBar12(
     }
 }
 
-data class Product(
-    val nombre: String,
-    val marca: String,
-)
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BarraBusqueda2(
@@ -252,19 +252,31 @@ fun BarraBusqueda2(
         onActiveChange = { active = it },
         modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight(),
+            .wrapContentHeight()
+            .padding(start = 4.dp, end = 4.dp),
         placeholder = { Text(text = "Buscar") },
-        leadingIcon = {
-            IconButton(onClick = { /* TODO*/ }) {
-                Icon(imageVector = Icons.Default.Menu, contentDescription = null)
-            }
-        },
         trailingIcon = {
-            IconButton(
-                onClick = { onSearch(query) },
-                enabled = query.isNotEmpty()
-            ) {
-                Icon(imageVector = Icons.Default.Search, contentDescription = null)
+            if (active) {
+                IconButton(
+                    onClick = {
+                        query = ""
+                        active = false
+                    }
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Clear,
+                        contentDescription = "Clear",
+                    )
+                }
+            } else {
+                IconButton(
+                    onClick = { active = true },
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.Search,
+                        contentDescription = "Search",
+                    )
+                }
             }
         }
     ) {

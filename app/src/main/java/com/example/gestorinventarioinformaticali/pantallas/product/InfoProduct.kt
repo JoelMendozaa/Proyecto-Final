@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Star
@@ -82,7 +83,7 @@ fun BottomAppBar3(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedFuncApp
                 ) {
-                    Icon(Icons.Filled.Star, contentDescription = "FuncApp")
+                    Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
                 }
                 IconButton(
                     modifier = Modifier.weight(2f),

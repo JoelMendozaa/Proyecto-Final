@@ -14,6 +14,7 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Star
@@ -63,7 +64,7 @@ fun User(
                     actions = {
                         IconButton(modifier = Modifier.weight(2f),
                             onClick = { onButtonClickedInfoApp() }) {
-                            Icon(Icons.Filled.Star, contentDescription = "InfoApp")
+                            Icon(Icons.Default.AttachFile, contentDescription = "InfoApp")
                         }
                         IconButton(modifier = Modifier.weight(2f),
                             onClick = { onButtonClickedStock() }
