@@ -30,6 +30,7 @@ import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
+import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.IconButton
@@ -43,45 +44,14 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.models.tablaProductos
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
-import kotlinx.coroutines.flow.Flow
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopAppBar12(productosViewModel: ProductosViewModel) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    BarraBusqueda2(navController = rememberNavController(), viewModel = productosViewModel)
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        "Productos",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
-            ListaProductos(productos = productosViewModel.listaProductos)
-        }
-    }
-}
-
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,10 +64,31 @@ fun Producto(
     viewModel: ProductosViewModel,
     navController: NavController
 ) {
-    val productos by viewModel.listaProductos.collectAsState(initial = emptyList())
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
         topBar = {
-            TopAppBar12(productosViewModel = viewModel)
+            Column {
+                CenterAlignedTopAppBar(
+                    title = {
+                        Text(
+                            "Productos",
+                            maxLines = 1,
+                            overflow = TextOverflow.Ellipsis,
+                        )
+                    },
+                    scrollBehavior = scrollBehavior,
+                )
+            }
+        },
+        content = {
+            BarraBusqueda2(navController = navController, viewModel = viewModel)
+            ContentInicioView(
+                it,
+                navController,
+                viewModel,
+                modifier = Modifier.padding(top = 100.dp)
+            )
+
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -114,98 +105,35 @@ fun Producto(
                 onButtonClickedUser = onButtonClickedUser
             )
         }
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            ContentInicioView(it = PaddingValues(16.dp), navController = navController, viewModel = viewModel)
-            LazyColumn {
-                items(productos) { producto ->
-                    ProductItem(
-                        producto = producto,
-                        onItemClick = {
-                            navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}")
-                        }
-                    )
-                    {
-                        viewModel.borrarProducto(producto)
-                    }
-                }
-            }
-        }
-    }
+    )
 }
 
 @Composable
-fun ProductItem(
-    producto: tablaProductos,
-    onItemClick: () -> Unit,
-    onClickDelete: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onItemClick)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(text = "Nombre: ${producto.nombre}")
-            Text(text = "Marca: ${producto.marca}")
-            Spacer(modifier = Modifier.height(8.dp))
-
-            Row {
-                Button(onClick = onItemClick) {
-                    Text(text = "Editar")
-                }
-                Button(onClick = onClickDelete) {
-                    Text(text = "Eliminar")
-                }
-            }
-        }
-    }
-}
-
-
-@Composable
-fun ListaProductos(productos: Flow<List<tablaProductos>>) {
-    val listaProductosState by productos.collectAsState(initial = emptyList())
-
-    LazyColumn {
-        items(listaProductosState) { producto ->
-            ProductItem(
-                producto = producto,
-                onItemClick = { /*TODO*/ },
-                onClickDelete = { /*TODO*/ }
-            )
-        }
-    }
-}
-
-@Composable
-fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
+fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel, modifier: Modifier){
     val state = viewModel.state
     Column {
         LazyColumn {
             items (state.listaProductos){
-                Box(
+                Card(
                     modifier = Modifier
-                        .padding(8.dp)
+                        .padding(top = 65.dp, start = 8.dp, end = 8.dp)
                         .fillMaxWidth()
                 ){
                     Column (
                         modifier = Modifier
                             .padding(12.dp)
                     ) {
-                        Text(text = it.nombre)
-                        Text(text = it.marca)
-                        IconButton(
-                            onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}") }
-                        ) {
-                            Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit")
-                        }
-                        IconButton(onClick = { viewModel.borrarProducto(it) }) {
-                            Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
+                        Text(text = "Nombre: ${it.nombre}")
+                        Text(text = "Marca: ${it.marca}")
+                        Row{
+                            Button(
+                                onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}") }
+                            ) {
+                                Text(text = "Editar")
+                            }
+                            Button(onClick = { viewModel.borrarProducto(it) }) {
+                                Text(text = "Elininar")
+                            }
                         }
                     }
                 }
@@ -219,8 +147,8 @@ fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BarraBusqueda2(
-    navController: NavHostController,
-    viewModel: ProductosViewModel
+    navController: NavController,
+    viewModel: ProductosViewModel,
 ) {
     val context = LocalContext.current
     var query by remember { mutableStateOf("") }
@@ -271,11 +199,29 @@ fun BarraBusqueda2(
 
             LazyColumn {
                 items(productos.value) { producto ->
-                    ProductItem(
-                        producto = producto,
-                        onItemClick = { /*TODO*/ },
-                        onClickDelete = { /*TODO*/}
-                    )
+                    Card (
+                        modifier = Modifier
+                            .padding(top = 65.dp, start = 8.dp, end = 8.dp)
+                            .fillMaxWidth()
+                    ) {
+                        Column(
+                            modifier = Modifier
+                                .padding(12.dp)
+                        ) {
+                            Text(text = "Nombre: ${producto.nombre}")
+                            Text(text = "Marca: ${producto.marca}")
+                            Row {
+                                Button(
+                                    onClick = { navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}") }
+                                ) {
+                                    Text(text = "Editar")
+                                }
+                                Button(onClick = { viewModel.borrarProducto(producto) }) {
+                                    Text(text = "Eliminar")
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }

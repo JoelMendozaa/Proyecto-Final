@@ -1,6 +1,8 @@
 package com.example.gestorinventarioinformaticali.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.rememberNavController
@@ -37,6 +39,7 @@ enum class ScreenList{
 
 @Composable
 fun MyApp(navController: NavHostController = rememberNavController(), viewModel: ProductosViewModel, viewModel2: StockViewModel) {
+    val descriptionState = remember { mutableStateOf("") }
     NavHost(
         navController = navController,
         startDestination = ScreenList.Login.name
@@ -66,26 +69,31 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) }
             )
         }
-        composable(route = ScreenList.InfoProduct.name){
+        composable(route = ScreenList.InfoProduct.name) {
             InfoProduct(
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 navController = navController,
+                description = descriptionState.value,
                 onButtonClickedActDesc = { navController.navigate(ScreenList.ActDesc.name) }
             )
         }
-        composable(route = ScreenList.ActDesc.name){
+        composable(route = ScreenList.ActDesc.name) {
             ActDesc(
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
                 onButtonClickedHome = { navController.navigate(ScreenList.Principal.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 navController = navController,
+                onDescriptionChanged = { description ->
+                    descriptionState.value = description
+                    navController.navigate(ScreenList.InfoProduct.name)
+                }
             )
         }
-        composable(route = ScreenList.FuncApp.name){
+                composable(route = ScreenList.FuncApp.name){
             FuncApp(
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },

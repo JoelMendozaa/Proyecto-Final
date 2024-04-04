@@ -116,7 +116,8 @@ fun InfoProduct(
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
     onButtonClickedActDesc: () -> Unit,
-    navController: NavHostController
+    navController: NavHostController,
+    description: String
 ) {
     Scaffold(
         topBar = {
@@ -136,6 +137,7 @@ fun InfoProduct(
     ){ innerPadding ->
         LazyColumn (modifier = Modifier.padding(innerPadding)) {
             item {
+                MostrarTexto(text = description)
             }
         }
     }

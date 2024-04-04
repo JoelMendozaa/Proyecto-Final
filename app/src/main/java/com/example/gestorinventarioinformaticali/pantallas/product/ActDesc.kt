@@ -42,7 +42,8 @@ fun ActDesc(
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
-    navController: NavHostController
+    navController: NavHostController,
+    onDescriptionChanged: (String) -> Unit // Nuevo parámetro para pasar la descripción
 ){
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
     Scaffold(
@@ -69,7 +70,7 @@ fun ActDesc(
     ) { innerPadding ->
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
             item {
-                Descripcion()
+                Descripcion(onDescriptionChanged) // Pasamos la función a Descripcion
             }
         }
     }
@@ -77,7 +78,9 @@ fun ActDesc(
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun Descripcion() {
+fun Descripcion(
+    onDescriptionChanged: (String) -> Unit
+) {
     var savedText by rememberSaveable { mutableStateOf("") }
     var isEditing by remember { mutableStateOf(false) }
 
@@ -89,6 +92,7 @@ fun Descripcion() {
             },
             onEditingFinished = {
                 isEditing = false
+                onDescriptionChanged(savedText)
             }
         )
     } else {
@@ -98,7 +102,6 @@ fun Descripcion() {
         }
     }
 }
-
 @Composable
 fun EditarTexto(
     initialText: String,

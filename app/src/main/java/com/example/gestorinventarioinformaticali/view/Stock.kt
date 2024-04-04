@@ -60,7 +60,6 @@ fun Stock(
     navController: NavController
 ) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    val stocks by viewModel.listaStock.collectAsState(initial = emptyList())
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
