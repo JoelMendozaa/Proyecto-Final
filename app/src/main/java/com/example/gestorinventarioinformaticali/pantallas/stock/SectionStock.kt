@@ -74,7 +74,42 @@ fun TopAppBar5(navController: NavHostController) {
                     Spacer(modifier = Modifier.padding(2.dp))
                     Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "CPU") }
                 }
-                // Otras filas similares de botones con diferentes categorías de stock
+                Row (
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ){
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "PSU") }
+                    Spacer(modifier = Modifier.padding(2.dp))
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "RAM") }
+                    Spacer(modifier = Modifier.padding(2.dp))
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "SSD") }
+                }
+                Row (
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ){
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "HDD") }
+                    Spacer(modifier = Modifier.padding(2.dp))
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Teclados") }
+                    Spacer(modifier = Modifier.padding(2.dp))
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Ratones") }
+                }
+                Row (
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    verticalAlignment = Alignment.CenterVertically,
+                    horizontalArrangement = Arrangement.Center
+                ){
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Monitores") }
+                    Spacer(modifier = Modifier.padding(2.dp))
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Accesorios") }
+                    Spacer(modifier = Modifier.padding(2.dp))
+                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Torres") }
+                }
             }
         }
     }
