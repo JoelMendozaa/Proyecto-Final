@@ -38,14 +38,20 @@ import com.example.gestorinventarioinformaticali.R
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ActDesc(
+    // Lambdas para manejar eventos de botones y control de navegación
     onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
+    // Controlador de navegación para la aplicación
     navController: NavHostController,
-    onDescriptionChanged: (String) -> Unit // Nuevo parámetro para pasar la descripción
+    // Función para manejar cambios en la descripción del producto
+    onDescriptionChanged: (String) -> Unit
 ){
+    // Configuración del comportamiento de desplazamiento del AppBar
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    // Composición de la pantalla utilizando Scaffold
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -60,6 +66,7 @@ fun ActDesc(
             )
         },
         bottomBar = {
+            // BottomAppBar que contiene botones de acción
             BottomAppBar10(
                 onButtonClickedFuncApp = onButtonClickedFuncApp,
                 onButtonClickedStock = onButtonClickedStock,
@@ -68,23 +75,28 @@ fun ActDesc(
             )
         },
     ) { innerPadding ->
+        // Columna de desplazamiento perezoso que contiene la descripción
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
             item {
-                Descripcion(onDescriptionChanged) // Pasamos la función a Descripcion
+                // Componente para editar la descripción, pasando la función para manejar cambios
+                Descripcion(onDescriptionChanged)
             }
         }
     }
 }
 
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Descripcion(
+    // Función para manejar cambios en la descripción del producto
     onDescriptionChanged: (String) -> Unit
 ) {
+    // Estado mutable para el texto de la descripción y para controlar si se está editando
     var savedText by rememberSaveable { mutableStateOf("") }
     var isEditing by remember { mutableStateOf(false) }
 
+    // Renderizado condicional basado en si se está editando o no
     if (isEditing) {
+        // Componente para editar el texto
         EditarTexto(
             initialText = savedText,
             onTextChange = { enteredText ->
@@ -92,28 +104,37 @@ fun Descripcion(
             },
             onEditingFinished = {
                 isEditing = false
+                // Llama a la función para manejar cambios en la descripción
                 onDescriptionChanged(savedText)
             }
         )
     } else {
+        // Componente para mostrar el texto de la descripción y un botón para editar
         MostrarTexto(savedText)
         Button(onClick = { isEditing = true }) {
             Text("Edit")
         }
     }
 }
+
 @Composable
 fun EditarTexto(
+    // Texto inicial para la edición
     initialText: String,
+    // Función para manejar cambios en el texto
     onTextChange: (String) -> Unit,
+    // Función para manejar el final de la edición
     onEditingFinished: () -> Unit
 ) {
+    // Estado mutable para el texto en edición
     var description by remember { mutableStateOf(initialText) }
 
+    // Efecto de lanzamiento para reflejar cambios en el texto
     LaunchedEffect(description) {
         onTextChange(description)
     }
 
+    // Columna que contiene un TextField para editar el texto
     Column(modifier = Modifier
         .fillMaxSize()
         .padding(20.dp)) {
@@ -135,6 +156,7 @@ fun EditarTexto(
 
 @Composable
 fun MostrarTexto(text: String) {
+    // Columna que muestra el texto de la descripción
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -148,20 +170,24 @@ fun MostrarTexto(text: String) {
 
 @Composable
 fun BottomAppBar10(
+    // Lambdas para manejar eventos de botones de acción
     onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
 ) {
+    // Fila que contiene los botones de acción en el BottomAppBar
     Row {
         BottomAppBar(
             actions = {
+                // Icono y acción para FuncApp
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedFuncApp
                 ) {
                     Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
                 }
+                // Icono y acción para Stock
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedStock
@@ -171,6 +197,7 @@ fun BottomAppBar10(
                         contentDescription = "Stock",
                     )
                 }
+                // Icono y acción para Home
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedHome
@@ -180,6 +207,7 @@ fun BottomAppBar10(
                         contentDescription = "Home",
                     )
                 }
+                // Icono y acción para User
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedUser
@@ -193,4 +221,3 @@ fun BottomAppBar10(
         )
     }
 }
-

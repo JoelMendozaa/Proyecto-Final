@@ -49,19 +49,25 @@ import kotlinx.coroutines.flow.Flow
 
 
 @OptIn(ExperimentalMaterial3Api::class)
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Stock(
+    // Lambdas para manejar eventos de botones
     onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
+    // ViewModel para manejar la lógica de la vista de stock
     viewModel: StockViewModel,
+    // Controlador de navegación para la aplicación
     navController: NavController
 ) {
+    // Configuración del comportamiento de desplazamiento del AppBar
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    // Composición de la pantalla utilizando Scaffold
     Scaffold(
         topBar = {
+            // AppBar centrado con título "Stock"
             CenterAlignedTopAppBar(
                 title = {
                     Text(
@@ -74,6 +80,7 @@ fun Stock(
             )
         },
         bottomBar = {
+            // BottomAppBar que contiene botones de acción
             BottomAppBar9(
                 onButtonClickedFuncApp = onButtonClickedFuncApp,
                 onButtonClickedStock = onButtonClickedStock,
@@ -82,6 +89,7 @@ fun Stock(
             )
         },
         floatingActionButton = {
+            // Botón flotante para agregar un nuevo elemento de stock
             FloatingActionButton(
                 onClick = { navController.navigate("agregar2") }
             ) {
@@ -89,6 +97,7 @@ fun Stock(
             }
         }
     ) {
+        // Contenido principal de la vista de stock
         ContentInicioStockView(
             it,
             navController,
@@ -97,14 +106,15 @@ fun Stock(
     }
 }
 
-
-
 @Composable
 fun ContentInicioStockView(it: PaddingValues, navController: NavController, viewModel: StockViewModel){
+    // Obtiene el estado del ViewModel de Stock
     val state = viewModel.state
     Column {
+        // Columna con un LazyColumn que muestra los elementos de stock
         LazyColumn {
             items (state.listaStock){
+                // Tarjeta que muestra los detalles del elemento de stock
                 Card(
                     modifier = Modifier
                         .padding(top = 65.dp, start = 8.dp, end = 8.dp)
@@ -118,11 +128,13 @@ fun ContentInicioStockView(it: PaddingValues, navController: NavController, view
                         Text(text = "Marca: ${it.marca}")
                         Text(text = "Stock: ${it.stock}")
                         Row {
+                            // Botón para editar el elemento de stock
                             Button(
-                                onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}/${it.stock}") }
+                                onClick = { navController.navigate("editar2/${it.id}/${it.nombre}/${it.marca}/${it.stock}") }
                             ) {
                                 Text(text = "Editar")
                             }
+                            // Botón para eliminar el elemento de stock
                             Button(onClick = { viewModel.borrarStock(it) }) {
                                 Text(text = "Eliminar")
                             }
@@ -134,23 +146,26 @@ fun ContentInicioStockView(it: PaddingValues, navController: NavController, view
     }
 }
 
-
 @Composable
 fun BottomAppBar9(
+    // Lambdas para manejar eventos de botones de acción
     onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
 ) {
+    // Fila que contiene los botones de acción en el BottomAppBar
     Row {
         BottomAppBar(
             actions = {
+                // Icono y acción para FuncApp
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedFuncApp
                 ) {
                     Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
                 }
+                // Icono y acción para Stock
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedStock
@@ -160,6 +175,7 @@ fun BottomAppBar9(
                         contentDescription = "Stock",
                     )
                 }
+                // Icono y acción para Home
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedHome
@@ -169,6 +185,7 @@ fun BottomAppBar9(
                         contentDescription = "Home",
                     )
                 }
+                // Icono y acción para User
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedUser

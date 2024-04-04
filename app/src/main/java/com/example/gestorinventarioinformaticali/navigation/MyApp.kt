@@ -26,6 +26,7 @@ import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
 enum class ScreenList{
+    // Enumeración que define las diferentes pantallas de la aplicación
     Login,
     User,
     Principal,
@@ -39,18 +40,24 @@ enum class ScreenList{
 
 @Composable
 fun MyApp(navController: NavHostController = rememberNavController(), viewModel: ProductosViewModel, viewModel2: StockViewModel) {
+    // Estado mutable para descripción de producto
     val descriptionState = remember { mutableStateOf("") }
+
+    // Componente de navegación que define las rutas y composables de la aplicación
     NavHost(
         navController = navController,
-        startDestination = ScreenList.Login.name
+        startDestination = ScreenList.Login.name // Pantalla de inicio
     ) {
+        // Composable para la pantalla de inicio de sesión
         composable(route = ScreenList.Login.name) {
             Login(
                 navController = navController
             )
         }
+        // Composable para la pantalla principal
         composable(route = ScreenList.Principal.name) {
             Principal(
+                // Lambdas para manejar eventos de botones y control de navegación
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
                 onButtonClickedPrincipal = { navController.navigate(ScreenList.Principal.name) },
@@ -60,8 +67,10 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 navController = navController
             )
         }
-        composable(route = ScreenList.User.name){
+        // Composable para la pantalla de usuario
+        composable(route = ScreenList.User.name) {
             User(
+                // Lambdas para manejar eventos de botones y control de navegación
                 onButtonClickedLogin = { navController.navigate(ScreenList.Login.name) },
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedUser = { navController.navigate(ScreenList.User.name) },
@@ -93,7 +102,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 }
             )
         }
-                composable(route = ScreenList.FuncApp.name){
+        composable(route = ScreenList.FuncApp.name){
             FuncApp(
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
                 onButtonClickedStock = { navController.navigate(ScreenList.SectionStock.name) },
@@ -112,7 +121,6 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 viewModel = viewModel2
             )
         }
-
         composable(route = ScreenList.Stock.name){
             Stock(
                 onButtonClickedFuncApp = { navController.navigate(ScreenList.FuncApp.name) },
@@ -133,10 +141,11 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 viewModel = viewModel
             )
         }
-        
+        // Pantalla para agregar un nuevo producto
         composable("agregar1"){
             AgregarView(navController, viewModel)
         }
+        // Pantalla para editar un producto existente
         composable("editar/{id}/{nombre}/{marca}/", arguments = listOf(
             navArgument("id"){ type = NavType.IntType},
             navArgument("nombre"){ type = NavType.StringType},
@@ -145,15 +154,17 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
             EditarView(
                 navController,
                 viewModel,
-                it.arguments!!.getInt("id"),
+                it.arguments!!.getInt("id") ?: 0,
                 it.arguments?.getString("nombre"),
                 it.arguments?.getString("marca"),
             )
         }
+        // Pantalla para agregar un nuevo elemento de stock
         composable("agregar2"){
             AgregarStock(navController, viewModel2)
         }
-        composable("editar/{id}/{nombre}/{marca}/{stock}", arguments = listOf(
+        // Pantalla para editar un elemento de stock existente
+        composable("editar2/{id}/{nombre}/{marca}/{stock}", arguments = listOf(
             navArgument("id"){ type = NavType.IntType},
             navArgument("nombre"){ type = NavType.StringType},
             navArgument("marca"){type = NavType.StringType},

@@ -12,37 +12,43 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-class ProductosViewModel(private val dao: ProductosDatabaseDao): ViewModel() {
+class ProductosViewModel(private val dao: ProductosDatabaseDao) : ViewModel() {
+    // Flujo de lista de productos obtenidos de la base de datos
     val listaProductos: Flow<List<tablaProductos>> = dao.obtenerProducto()
+
+    // Estado mutable para mantener el estado de la lista de productos
     var state by mutableStateOf(ProductosState())
         private set
 
-
+    // Inicialización del ViewModel
     init {
         viewModelScope.launch {
-            dao.obtenerProducto().collectLatest {
+            // Observar el flujo de lista de productos y actualizar el estado cuando cambie
+            dao.obtenerProducto().collectLatest { productos ->
                 state = state.copy(
-                    listaProductos = it
+                    listaProductos = productos // Actualizar la lista de productos en el estado
                 )
             }
         }
     }
 
-    fun agregarProducto(productos: tablaProductos) = viewModelScope.launch {
-        dao.agregarProducto(productos = productos)
+    // Función para agregar un nuevo producto a la base de datos
+    fun agregarProducto(producto: tablaProductos) = viewModelScope.launch {
+        dao.agregarProducto(productos = producto)
     }
 
-    fun actualizarProducto(productos: tablaProductos) = viewModelScope.launch {
-        dao.actualizarProducto(productos = productos)
+    // Función para actualizar un producto existente en la base de datos
+    fun actualizarProducto(producto: tablaProductos) = viewModelScope.launch {
+        dao.actualizarProducto(productos = producto)
     }
 
-    fun borrarProducto(productos: tablaProductos) = viewModelScope.launch {
-        dao.borrarProducto(productos = productos)
+    // Función para eliminar un producto de la base de datos
+    fun borrarProducto(producto: tablaProductos) = viewModelScope.launch {
+        dao.borrarProducto(productos = producto)
     }
 
+    // Función para buscar productos en la base de datos según una consulta dada
     fun buscarProductos(query: String): Flow<List<tablaProductos>> {
         return dao.buscarProductos(query)
     }
-
-
 }

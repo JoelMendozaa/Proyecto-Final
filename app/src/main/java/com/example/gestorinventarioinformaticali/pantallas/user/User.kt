@@ -39,10 +39,14 @@ import com.example.gestorinventarioinformaticali.view.BottomAppBar9
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar2(onButtonClickedLogin: () -> Unit) {
+    // Configuración del comportamiento de desplazamiento para la barra superior
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    // Scaffold que contiene la barra superior
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
+            // Barra superior centrada con título "Usuario"
             CenterAlignedTopAppBar(
                 title = {
                     Text(
@@ -56,7 +60,9 @@ fun TopAppBar2(onButtonClickedLogin: () -> Unit) {
         },
     ) { innerPadding ->
         Column(modifier = Modifier.padding(innerPadding)) {
+            // Columna para el contenido debajo de la barra superior
             Column {
+                // Texto "Cerrar Sesión"
                 OutlinedText()
                 Row(
                     modifier = Modifier
@@ -74,7 +80,6 @@ fun TopAppBar2(onButtonClickedLogin: () -> Unit) {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun User(
     onButtonClickedFuncApp: () -> Unit,
@@ -83,11 +88,14 @@ fun User(
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
 ){
+    // Scaffold que contiene la barra superior, el contenido y la barra inferior
     Scaffold(
         topBar = {
+            // Barra superior personalizada
             TopAppBar2(onButtonClickedLogin)
         },
         bottomBar = {
+            // Barra inferior personalizada
             BottomAppBar9(
                 onButtonClickedFuncApp = onButtonClickedFuncApp,
                 onButtonClickedStock = onButtonClickedStock,
@@ -97,7 +105,9 @@ fun User(
         },
         modifier = Modifier.padding(15.dp)
     ){ innerPadding ->
+        // Columna para el contenido con desplazamiento vertical
         Column (modifier = Modifier.verticalScroll(rememberScrollState())) {
+            // Contenido de texto y botón "Cerrar Sesión"
             OutlinedText()
             Row (modifier = Modifier
                 .padding(innerPadding),
@@ -115,6 +125,7 @@ fun User(
 
 @Composable
 fun OutlinedText (){
+    // Estados para los campos de entrada
     var nombre by remember { mutableStateOf("") }
     var apellido by rememberSaveable { mutableStateOf("") }
     var correo by remember { mutableStateOf("") }
@@ -126,7 +137,10 @@ fun OutlinedText (){
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Icono de usuario
         Icon(imageVector = Icons.Filled.AccountCircle, contentDescription = "User", modifier = Modifier.size(200.dp) )
+
+        // Campos de entrada para nombre, correo, apellido, teléfono y DNI
         OutLineTextFieldNombre(user = nombre) { newNombre ->
             nombre = newNombre
         }
@@ -153,10 +167,10 @@ fun OutlinedText (){
     }
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldNombre(user: String, onNombreChange: (String) -> Unit) {
+    // Campo de entrada para el nombre
     OutlinedTextField(
         modifier = Modifier.padding(vertical = 10.dp),
         value = user,
@@ -167,10 +181,10 @@ fun OutLineTextFieldNombre(user: String, onNombreChange: (String) -> Unit) {
     )
 }
 
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldCorreo(correo: String, onCorreoChange: (String) -> Unit) {
+    // Campo de entrada para el correo
     OutlinedTextField(
         modifier = Modifier.padding(vertical = 10.dp),
         value = correo,
@@ -184,6 +198,7 @@ fun OutLineTextFieldCorreo(correo: String, onCorreoChange: (String) -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldApellido(apellido: String, onApellidoChange: (String) -> Unit) {
+    // Campo de entrada para el apellido
     OutlinedTextField(
         value = apellido,
         onValueChange = { newValue -> onApellidoChange(newValue) },
@@ -194,6 +209,7 @@ fun OutLineTextFieldApellido(apellido: String, onApellidoChange: (String) -> Uni
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldTelefono(numero: String, onUserChange: (String) -> Unit) {
+    // Campo de entrada para el teléfono
     OutlinedTextField(
         modifier = Modifier
             .padding(vertical = 10.dp)
@@ -210,6 +226,7 @@ fun OutLineTextFieldTelefono(numero: String, onUserChange: (String) -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun OutLineTextFieldDNI(dni: String, onDniChange: (String) -> Unit) {
+    // Campo de entrada para el DNI
     OutlinedTextField(
         modifier = Modifier
             .padding(vertical = 10.dp)
@@ -221,4 +238,3 @@ fun OutLineTextFieldDNI(dni: String, onDniChange: (String) -> Unit) {
         }
     )
 }
-

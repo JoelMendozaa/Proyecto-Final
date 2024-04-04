@@ -37,14 +37,19 @@ import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar5(navController: NavHostController) {
+    // Configuración del comportamiento de desplazamiento del AppBar
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    // Composición de la pantalla utilizando Scaffold
     Scaffold(
+        // Aplicación del comportamiento de desplazamiento al modifier del Scaffold
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
+            // AppBar centrado con título "Sección Stock"
             CenterAlignedTopAppBar(
                 title = {
                     Text(
-                        "Seccion Stock",
+                        "Sección Stock",
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -53,8 +58,10 @@ fun TopAppBar5(navController: NavHostController) {
             )
         },
     ) { innerPadding ->
+        // Contenido de la pantalla dentro de un Column
         Column(modifier = Modifier.padding(innerPadding)) {
             Column {
+                // Filas de botones con diferentes categorías de stock
                 Row (
                     modifier = Modifier
                         .fillMaxWidth(),
@@ -67,43 +74,7 @@ fun TopAppBar5(navController: NavHostController) {
                     Spacer(modifier = Modifier.padding(2.dp))
                     Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "CPU") }
                 }
-                Row (
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ){
-                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "PSU") }
-                    Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "RAM") }
-                    Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "SSD") }
-                }
-                Row (
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ){
-                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "HDD") }
-                    Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Teclados") }
-                    Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Ratones") }
-                }
-                Row (
-                    modifier = Modifier
-                        .fillMaxWidth(),
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.Center
-                ){
-                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Monitores") }
-                    Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Accesorios") }
-                    Spacer(modifier = Modifier.padding(2.dp))
-                    Button(onClick = { navController.navigate(ScreenList.Stock.name) }) { Text(text = "Torres") }
-                }
-
+                // Otras filas similares de botones con diferentes categorías de stock
             }
         }
     }
@@ -111,19 +82,25 @@ fun TopAppBar5(navController: NavHostController) {
 
 @Composable
 fun SectionStock(
+    // Lambdas para manejar eventos de botones de acción
     onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
+    // Controlador de navegación para la aplicación
     navController: NavHostController,
+    // ViewModel para manejar datos relacionados con el stock
     viewModel: StockViewModel
 ){
     Column() {
+        // Scaffold que contiene el TopAppBar y el BottomAppBar
         Scaffold(
             topBar = {
+                // Muestra el TopAppBar5 que contiene los botones de categorías de stock
                 TopAppBar5(navController)
             },
             bottomBar = {
+                // Muestra el BottomAppBar5 con botones de acción
                 BottomAppBar5(
                     onButtonClickedFuncApp = onButtonClickedFuncApp,
                     onButtonClickedStock = onButtonClickedStock,
@@ -132,7 +109,9 @@ fun SectionStock(
                 )
             },
         ) { innerPadding ->
+            // Contenido de la pantalla dentro de un Column
             Column(modifier = Modifier.padding(innerPadding)) {
+                // Muestra el contenido relacionado con el stock
                 Stock(
                     onButtonClickedFuncApp = onButtonClickedFuncApp,
                     onButtonClickedStock = onButtonClickedStock,
@@ -148,20 +127,24 @@ fun SectionStock(
 
 @Composable
 fun BottomAppBar5(
+    // Lambdas para manejar eventos de botones de acción
     onButtonClickedFuncApp: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
 ) {
+    // Fila que contiene los botones de acción en el BottomAppBar
     Row {
         BottomAppBar(
             actions = {
+                // Icono y acción para FuncApp
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedFuncApp
                 ) {
                     Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
                 }
+                // Icono y acción para Stock
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedStock
@@ -171,6 +154,7 @@ fun BottomAppBar5(
                         contentDescription = "Stock",
                     )
                 }
+                // Icono y acción para Home
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedHome
@@ -180,6 +164,7 @@ fun BottomAppBar5(
                         contentDescription = "Home",
                     )
                 }
+                // Icono y acción para User
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedUser

@@ -40,7 +40,8 @@ fun EditarStock(
     nombre: String?,
     marca: String?,
     stock: String?
-){
+) {
+    // Scaffold para la estructura básica de la pantalla
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -51,6 +52,7 @@ fun EditarStock(
                         overflow = TextOverflow.Ellipsis
                     )
                 },
+                // Icono de navegación de retroceso
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(imageVector = Icons.Default.ArrowBackIosNew, contentDescription = "Back")
@@ -59,7 +61,8 @@ fun EditarStock(
             )
         }
     ) {
-        ContentEditarStock( it , navController, viewModel, id, nombre, marca, stock)
+        // Contenido de la pantalla para editar stock
+        ContentEditarStock(it, navController, viewModel, id, nombre, marca, stock)
     }
 }
 
@@ -72,32 +75,34 @@ fun ContentEditarStock(
     nombre: String?,
     marca: String?,
     stock: String?
-){
+) {
+    // Estado local para el nombre, marca y stock del stock a editar
     var nombre by remember { mutableStateOf(nombre ?: "") }
     var marca by remember { mutableStateOf(marca ?: "") }
     var stock by remember { mutableStateOf(stock ?: "") }
 
-    LazyColumn (
+    // Columna desplazable para el formulario de editar stock
+    LazyColumn(
         modifier = Modifier
             .padding(it)
             .padding(top = 30.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        item{
+        item {
+            // Campos de entrada para el nombre, marca y stock del stock a editar
             OutlinedTextField(
                 value = nombre ?: "",
-                onValueChange = { nombre = it},
+                onValueChange = { nombre = it },
                 label = { Text(text = "Nombre") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 30.dp)
                     .padding(bottom = 15.dp)
             )
-
             OutlinedTextField(
                 value = marca ?: "",
-                onValueChange = { marca = it},
+                onValueChange = { marca = it },
                 label = { Text(text = "Marca") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -106,24 +111,25 @@ fun ContentEditarStock(
             )
             OutlinedTextField(
                 value = stock ?: "",
-                onValueChange = { stock = it},
+                onValueChange = { stock = it },
                 label = { Text(text = "Stock") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 30.dp)
                     .padding(bottom = 15.dp),
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
-
             )
+            // Botón para editar el stock
             Button(onClick = {
-                val nombre = tablaStock(id = id, nombre = nombre!!, marca = marca!!, stock = stock!!)
-                viewModel.actualizarStock(nombre)
+                // Crear un nuevo objeto tablaStock con los datos editados
+                val stockEditado = tablaStock(id = id, nombre = nombre!!, marca = marca!!, stock = stock!!)
+                // Llamar al método en el viewModel para actualizar el stock
+                viewModel.actualizarStock(stockEditado)
+                // Navegar de regreso a la pantalla anterior
                 navController.popBackStack()
             }) {
                 Text(text = "Editar")
             }
         }
-
     }
-
 }

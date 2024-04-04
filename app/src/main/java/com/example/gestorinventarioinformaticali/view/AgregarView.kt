@@ -32,7 +32,8 @@ import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
+fun AgregarView(navController: NavController, viewModel: ProductosViewModel) {
+    // Scaffold para la estructura básica de la pantalla
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -43,6 +44,7 @@ fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
                         overflow = TextOverflow.Ellipsis
                     )
                 },
+                // Icono de navegación de retroceso
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(imageVector = Icons.Default.ArrowBackIosNew, contentDescription = "Back")
@@ -51,26 +53,30 @@ fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
             )
         }
     ) {
-        ContentAgregarView( it , navController, viewModel)
+        // Contenido de la pantalla para agregar producto
+        ContentAgregarView(it, navController, viewModel)
     }
 }
 
 @Composable
-fun ContentAgregarView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
+fun ContentAgregarView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel) {
+    // Estado local para el nombre y marca del nuevo producto
     var nombre by remember { mutableStateOf("") }
     var marca by remember { mutableStateOf("") }
 
-    LazyColumn (
+    // Columna desplazable para el formulario de agregar producto
+    LazyColumn(
         modifier = Modifier
             .padding(it)
             .padding(top = 30.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        item{
+        item {
+            // Campos de entrada para el nombre y marca del producto
             OutlinedTextField(
                 value = nombre,
-                onValueChange = { nombre = it},
+                onValueChange = { nombre = it },
                 label = { Text(text = "Nombre") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -79,21 +85,24 @@ fun ContentAgregarView(it: PaddingValues, navController: NavController, viewMode
             )
             OutlinedTextField(
                 value = marca,
-                onValueChange = { marca = it},
+                onValueChange = { marca = it },
                 label = { Text(text = "Marca") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 30.dp)
                     .padding(bottom = 15.dp)
             )
+            // Botón para agregar el nuevo producto
             Button(onClick = {
-                val nombre = tablaProductos(nombre = nombre, marca = marca)
-                viewModel.agregarProducto(nombre)
+                // Crear un nuevo objeto tablaProductos con los datos ingresados
+                val nuevoProducto = tablaProductos(nombre = nombre, marca = marca)
+                // Llamar al método en el viewModel para agregar el producto
+                viewModel.agregarProducto(nuevoProducto)
+                // Navegar de regreso a la pantalla anterior
                 navController.popBackStack()
             }) {
                 Text(text = "Agregar")
             }
         }
     }
-
 }

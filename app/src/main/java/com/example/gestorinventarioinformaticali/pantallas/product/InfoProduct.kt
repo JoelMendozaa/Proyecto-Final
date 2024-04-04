@@ -36,20 +36,20 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
 
-
-
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar3(
     navController: NavController,
     onButtonClickedActDesc: () -> Unit,
 ) {
+    // Configuración del comportamiento de desplazamiento para la barra superior
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    // Scaffold que contiene la barra superior
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
+            // Barra superior centrada con título "Producto"
             CenterAlignedTopAppBar(
                 title = {
                     Text(
@@ -62,7 +62,9 @@ fun TopAppBar3(
             )
         }
     ) { innerPadding ->
+        // Columna para contener el contenido debajo de la barra superior
         LazyColumn(modifier = Modifier.padding(innerPadding)) {
+            // Elemento para mostrar la imagen del producto y el botón de edición
             item {
                 Box(
                     modifier = Modifier
@@ -76,14 +78,15 @@ fun TopAppBar3(
                         verticalAlignment = Alignment.CenterVertically,
                         horizontalArrangement = Arrangement.Center
                     ) {
+                        // Imagen del producto
                         Image(
                             painter = painterResource(id = R.drawable.procesador2),
                             contentDescription = "Ejemplo imagen",
                         )
                     }
+                    // Botón de edición en la esquina superior derecha
                     Box(
-                        modifier = Modifier
-                            .align(Alignment.TopEnd)
+                        modifier = Modifier.align(Alignment.TopEnd)
                     ){
                         Row(
                             modifier = Modifier.fillMaxWidth()
@@ -95,6 +98,7 @@ fun TopAppBar3(
                     }
                 }
             }
+            // Elemento para mostrar el nombre del producto
             item {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -108,7 +112,6 @@ fun TopAppBar3(
     }
 }
 
-
 @Composable
 fun InfoProduct(
     onButtonClickedFuncApp: () -> Unit,
@@ -119,14 +122,17 @@ fun InfoProduct(
     navController: NavHostController,
     description: String
 ) {
+    // Scaffold que contiene la barra superior y el contenido
     Scaffold(
         topBar = {
+            // Barra superior personalizada
             TopAppBar3(
                 navController = navController,
                 onButtonClickedActDesc = onButtonClickedActDesc
             )
         },
         bottomBar = {
+            // Barra inferior personalizada
             BottomAppBar3(
                 onButtonClickedFuncApp = onButtonClickedFuncApp,
                 onButtonClickedStock = onButtonClickedStock,
@@ -135,7 +141,9 @@ fun InfoProduct(
             )
         },
     ){ innerPadding ->
+        // Columna para el contenido
         LazyColumn (modifier = Modifier.padding(innerPadding)) {
+            // Elemento para mostrar la descripción del producto
             item {
                 MostrarTexto(text = description)
             }
@@ -150,15 +158,18 @@ fun BottomAppBar3(
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
 ) {
+    // Barra inferior que contiene los botones de navegación
     Row {
         BottomAppBar(
             actions = {
+                // Botón de FuncApp
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedFuncApp
                 ) {
                     Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
                 }
+                // Botón de Stock
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedStock
@@ -168,6 +179,7 @@ fun BottomAppBar3(
                         contentDescription = "Stock",
                     )
                 }
+                // Botón de Home
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedHome
@@ -177,6 +189,7 @@ fun BottomAppBar3(
                         contentDescription = "Home",
                     )
                 }
+                // Botón de Usuario
                 IconButton(
                     modifier = Modifier.weight(2f),
                     onClick = onButtonClickedUser

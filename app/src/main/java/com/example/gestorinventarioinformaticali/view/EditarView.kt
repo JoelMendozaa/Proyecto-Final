@@ -31,7 +31,14 @@ import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditarView(navController: NavController, viewModel: ProductosViewModel, id: Int, nombre: String?, marca: String?){
+fun EditarView(
+    navController: NavController,
+    viewModel: ProductosViewModel,
+    id: Int,
+    nombre: String?,
+    marca: String?,
+) {
+    // Scaffold para la estructura básica de la pantalla
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -42,6 +49,7 @@ fun EditarView(navController: NavController, viewModel: ProductosViewModel, id: 
                         overflow = TextOverflow.Ellipsis
                     )
                 },
+                // Icono de navegación de retroceso
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(imageVector = Icons.Default.ArrowBackIosNew, contentDescription = "Back")
@@ -50,7 +58,8 @@ fun EditarView(navController: NavController, viewModel: ProductosViewModel, id: 
             )
         }
     ) {
-        ContentEditarView( it , navController, viewModel, id, nombre, marca)
+        // Contenido de la pantalla para editar el producto
+        ContentEditarView(it, navController, viewModel, id, nombre, marca)
     }
 }
 
@@ -62,47 +71,50 @@ fun ContentEditarView(
     id: Int,
     nombre: String?,
     marca: String?,
-){
+) {
+    // Estado local para el nombre y marca del producto a editar
     var nombre by remember { mutableStateOf(nombre ?: "") }
     var marca by remember { mutableStateOf(marca ?: "") }
 
-    LazyColumn (
+    // Columna desplazable para el formulario de editar producto
+    LazyColumn(
         modifier = Modifier
             .padding(it)
             .padding(top = 30.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        item{
+        item {
+            // Campos de entrada para el nombre y marca del producto a editar
             OutlinedTextField(
                 value = nombre ?: "",
-                onValueChange = { nombre = it},
+                onValueChange = { nombre = it },
                 label = { Text(text = "Nombre") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 30.dp)
                     .padding(bottom = 15.dp)
             )
-
             OutlinedTextField(
                 value = marca ?: "",
-                onValueChange = { marca = it},
+                onValueChange = { marca = it },
                 label = { Text(text = "Marca") },
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(horizontal = 30.dp)
                     .padding(bottom = 15.dp)
             )
-
+            // Botón para editar el producto
             Button(onClick = {
-                val nombre = tablaProductos(id = id, nombre = nombre!!, marca = marca!!)
-                viewModel.actualizarProducto(nombre)
+                // Crear un nuevo objeto tablaProductos con los datos editados
+                val productoEditado = tablaProductos(id = id, nombre = nombre!!, marca = marca!!)
+                // Llamar al método en el viewModel para actualizar el producto
+                viewModel.actualizarProducto(productoEditado)
+                // Navegar de regreso a la pantalla anterior
                 navController.popBackStack()
             }) {
                 Text(text = "Editar")
             }
         }
-
     }
-
 }

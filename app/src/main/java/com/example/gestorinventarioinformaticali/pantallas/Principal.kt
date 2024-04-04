@@ -41,10 +41,14 @@ import com.example.gestorinventarioinformaticali.navigation.ScreenList
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar(navController: NavHostController) {
+    // Configuración del comportamiento de desplazamiento para la barra superior
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    // Scaffold que contiene la barra superior
     Scaffold(
         modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
+            // Barra superior centrada con título "InformaticaLI"
             CenterAlignedTopAppBar(
                 title = {
                     Text(
@@ -66,6 +70,7 @@ fun TopAppBar(navController: NavHostController) {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            // Título "CATEGORÍA"
             Text(
                 text = "CATEGORÍA",
                 fontSize = 28.sp,
@@ -73,11 +78,13 @@ fun TopAppBar(navController: NavHostController) {
                 modifier = Modifier.padding(bottom = 8.dp)
             )
 
+            // Row para mostrar las imágenes de las categorías con desplazamiento horizontal
             Row(
                 modifier = Modifier
                     .horizontalScroll(ScrollState(0))
                     .padding(3.dp)
             ) {
+                // Imagen de la categoría "Tarjeta"
                 Image(
                     painter = painterResource(id = R.drawable.tarjeta),
                     contentDescription = "Tarjeta",
@@ -86,6 +93,7 @@ fun TopAppBar(navController: NavHostController) {
                         .padding(4.dp)
                         .size(200.dp)
                 )
+                // Imagen de la categoría "Procesador"
                 Image(
                     painter = painterResource(id = R.drawable.procesador),
                     contentDescription = "Procesador",
@@ -95,7 +103,11 @@ fun TopAppBar(navController: NavHostController) {
                         .size(200.dp)
                 )
             }
+
+            // Separador entre categorías
             DividerExample()
+
+            // Columna para mostrar el título "PRODUCTOS" y las imágenes de productos con desplazamiento horizontal
             Column(
                 modifier = Modifier
                     .padding(vertical = 70.dp),
@@ -112,6 +124,7 @@ fun TopAppBar(navController: NavHostController) {
                         .padding(3.dp)
                 ) {
                     item {
+                        // Imágenes de productos con enlaces a la pantalla de información del producto
                         Image(
                             painter = painterResource(id = R.drawable.procesador2),
                             contentDescription = "Procesador",
@@ -158,11 +171,14 @@ fun Principal(
     navController: NavHostController,
 ) {
 
+    // Scaffold que contiene la barra superior y la barra inferior
     Scaffold(
         topBar = {
+            // Barra superior personalizada
             TopAppBar(navController)
         },
         bottomBar = {
+            // Barra inferior personalizada
             BottomAppBar(
                 onButtonClickedFuncApp = onButtonClickedFuncApp,
                 onButtonClickedStock = onButtonClickedStock,
@@ -184,6 +200,7 @@ fun Principal(
 
 @Composable
 fun DividerExample() {
+    // Ejemplo de un divisor
     Column(modifier = Modifier.padding(20.dp)) {
         Divider(thickness = 1.dp, color = Color.Black)
     }
@@ -196,6 +213,7 @@ fun BottomAppBar(
     onButtonClickedHome: () -> Unit,
     onButtonClickedUser: () -> Unit,
 ) {
+    // Barra inferior que contiene iconos de acciones
     Row {
         BottomAppBar(
             actions = {
@@ -236,6 +254,3 @@ fun BottomAppBar(
         )
     }
 }
-
-
-

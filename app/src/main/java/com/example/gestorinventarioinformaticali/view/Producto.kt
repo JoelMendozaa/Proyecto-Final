@@ -64,9 +64,13 @@ fun Producto(
     viewModel: ProductosViewModel,
     navController: NavController
 ) {
+    // Configuración del comportamiento de desplazamiento para la barra superior
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+
+    // Scaffold define la estructura básica de la pantalla
     Scaffold(
         topBar = {
+            // Barra superior centrada con el título "Productos"
             Column {
                 CenterAlignedTopAppBar(
                     title = {
@@ -81,6 +85,7 @@ fun Producto(
             }
         },
         content = {
+            // Contenido principal de la pantalla, incluyendo la barra de búsqueda y la lista de productos
             BarraBusqueda2(navController = navController, viewModel = viewModel)
             ContentInicioView(
                 it,
@@ -91,6 +96,7 @@ fun Producto(
 
         },
         floatingActionButton = {
+            // Botón flotante para agregar nuevos productos
             FloatingActionButton(
                 onClick = { navController.navigate("agregar1") }
             ) {
@@ -98,6 +104,7 @@ fun Producto(
             }
         },
         bottomBar = {
+            // Barra inferior que contiene botones de acción
             BottomAppBar12(
                 onButtonClickedFuncApp = onButtonClickedFuncApp,
                 onButtonClickedStock = onButtonClickedStock,
@@ -110,10 +117,14 @@ fun Producto(
 
 @Composable
 fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel, modifier: Modifier){
+    // Obtiene el estado de la vista del ViewModel
     val state = viewModel.state
+
     Column {
+        // Columna que contiene una lista de productos
         LazyColumn {
             items (state.listaProductos){
+                // Elemento de la lista representado por una Card que muestra información del producto
                 Card(
                     modifier = Modifier
                         .padding(top = 65.dp, start = 8.dp, end = 8.dp)
@@ -123,16 +134,16 @@ fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel
                         modifier = Modifier
                             .padding(12.dp)
                     ) {
-                        Text(text = "Nombre: ${it.nombre}")
-                        Text(text = "Marca: ${it.marca}")
+                        Text(text = "Nombre: ${it.nombre}") // Muestra el nombre del producto
+                        Text(text = "Marca: ${it.marca}")   // Muestra la marca del producto
                         Row{
                             Button(
                                 onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}") }
                             ) {
-                                Text(text = "Editar")
+                                Text(text = "Editar")  // Botón para editar el producto
                             }
                             Button(onClick = { viewModel.borrarProducto(it) }) {
-                                Text(text = "Elininar")
+                                Text(text = "Elininar") // Botón para eliminar el producto
                             }
                         }
                     }
@@ -142,22 +153,25 @@ fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel
     }
 }
 
-
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BarraBusqueda2(
     navController: NavController,
     viewModel: ProductosViewModel,
 ) {
+    // Obtiene el contexto local
     val context = LocalContext.current
+
+    // Estado del texto de búsqueda y su activación
     var query by remember { mutableStateOf("") }
     var active by remember { mutableStateOf(false) }
 
+    // Manejador de búsqueda
     val onSearch: (String) -> Unit = {
         active = false
     }
 
+    // Barra de búsqueda
     SearchBar(
         query = query,
         onQueryChange = { query = it },
@@ -170,6 +184,7 @@ fun BarraBusqueda2(
             .padding(start = 4.dp, end = 4.dp),
         placeholder = { Text(text = "Buscar") },
         trailingIcon = {
+            // Icono de limpieza de búsqueda o de activación de búsqueda
             if (active) {
                 IconButton(
                     onClick = {
@@ -195,6 +210,7 @@ fun BarraBusqueda2(
         }
     ) {
         if (query.isNotEmpty()) {
+            // Realiza una búsqueda de productos basada en la consulta y muestra los resultados
             val productos = viewModel.buscarProductos(query).collectAsState(initial = emptyList())
 
             LazyColumn {
@@ -210,16 +226,6 @@ fun BarraBusqueda2(
                         ) {
                             Text(text = "Nombre: ${producto.nombre}")
                             Text(text = "Marca: ${producto.marca}")
-                            Row {
-                                Button(
-                                    onClick = { navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}") }
-                                ) {
-                                    Text(text = "Editar")
-                                }
-                                Button(onClick = { viewModel.borrarProducto(producto) }) {
-                                    Text(text = "Eliminar")
-                                }
-                            }
                         }
                     }
                 }
@@ -236,6 +242,7 @@ fun BottomAppBar12(
     onButtonClickedUser: () -> Unit,
 ) {
     Row {
+        // Barra inferior con botones de acción para diferentes funciones de la aplicación
         BottomAppBar(
             actions = {
                 IconButton(

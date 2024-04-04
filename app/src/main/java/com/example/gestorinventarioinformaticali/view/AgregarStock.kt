@@ -34,7 +34,8 @@ import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AgregarStock(navController: NavController, viewModel: StockViewModel){
+fun AgregarStock(navController: NavController, viewModel: StockViewModel) {
+    // Scaffold para la estructura básica de la pantalla
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -45,6 +46,7 @@ fun AgregarStock(navController: NavController, viewModel: StockViewModel){
                         overflow = TextOverflow.Ellipsis
                     )
                 },
+                // Icono de navegación de retroceso
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
                         Icon(imageVector = Icons.Default.ArrowBackIosNew, contentDescription = "Back")
@@ -53,27 +55,31 @@ fun AgregarStock(navController: NavController, viewModel: StockViewModel){
             )
         }
     ) {
-        ContentAgregarStock( it , navController, viewModel)
+        // Contenido de la pantalla para agregar stock
+        ContentAgregarStock(it, navController, viewModel)
     }
 }
 
 @Composable
-fun ContentAgregarStock(it: PaddingValues, navController: NavController, viewModel: StockViewModel){
+fun ContentAgregarStock(it: PaddingValues, navController: NavController, viewModel: StockViewModel) {
+    // Estado local para el nombre, marca y stock del nuevo elemento de stock
     var nombre by remember { mutableStateOf("") }
     var marca by remember { mutableStateOf("") }
     var stock by remember { mutableStateOf("") }
 
-    LazyColumn (
+    // Columna desplazable para el formulario de agregar stock
+    LazyColumn(
         modifier = Modifier
             .padding(it)
             .padding(top = 30.dp)
             .fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        item{
+        item {
+            // Campos de entrada para el nombre, marca y stock
             OutlinedTextField(
                 value = nombre,
-                onValueChange = { nombre = it},
+                onValueChange = { nombre = it },
                 label = { Text(text = "Nombre") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -82,7 +88,7 @@ fun ContentAgregarStock(it: PaddingValues, navController: NavController, viewMod
             )
             OutlinedTextField(
                 value = marca,
-                onValueChange = { marca = it},
+                onValueChange = { marca = it },
                 label = { Text(text = "Marca") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -91,7 +97,7 @@ fun ContentAgregarStock(it: PaddingValues, navController: NavController, viewMod
             )
             OutlinedTextField(
                 value = stock,
-                onValueChange = { stock = it},
+                onValueChange = { stock = it },
                 label = { Text(text = "Stock") },
                 modifier = Modifier
                     .fillMaxWidth()
@@ -99,14 +105,17 @@ fun ContentAgregarStock(it: PaddingValues, navController: NavController, viewMod
                     .padding(bottom = 15.dp),
                 keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number)
             )
+            // Botón para agregar el nuevo elemento de stock
             Button(onClick = {
-                val nombre = tablaStock(nombre = nombre, marca = marca, stock = stock)
-                viewModel.agregarStock(nombre)
+                // Crear un nuevo objeto tablaStock con los datos ingresados
+                val nuevoStock = tablaStock(nombre = nombre, marca = marca, stock = stock)
+                // Llamar al método en el viewModel para agregar el stock
+                viewModel.agregarStock(nuevoStock)
+                // Navegar de regreso a la pantalla anterior
                 navController.popBackStack()
             }) {
                 Text(text = "Agregar")
             }
         }
     }
-
 }
