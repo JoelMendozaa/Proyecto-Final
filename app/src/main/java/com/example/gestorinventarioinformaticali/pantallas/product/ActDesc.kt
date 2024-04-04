@@ -98,6 +98,51 @@ fun Descripcion() {
         }
     }
 }
+
+@Composable
+fun EditarTexto(
+    initialText: String,
+    onTextChange: (String) -> Unit,
+    onEditingFinished: () -> Unit
+) {
+    var description by remember { mutableStateOf(initialText) }
+
+    LaunchedEffect(description) {
+        onTextChange(description)
+    }
+
+    Column(modifier = Modifier
+        .fillMaxSize()
+        .padding(20.dp)) {
+        TextField(
+            value = description,
+            onValueChange = {
+                description = it
+            },
+            label = { Text("Escribe aqui") },
+            keyboardOptions = KeyboardOptions.Default.copy(
+                imeAction = ImeAction.Done
+            ),
+            keyboardActions = KeyboardActions(onDone = {
+                onEditingFinished()
+            })
+        )
+    }
+}
+
+@Composable
+fun MostrarTexto(text: String) {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+    ) {
+        Text(text = "Descripcion: ")
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(text = text)
+    }
+}
+
 @Composable
 fun BottomAppBar10(
     onButtonClickedFuncApp: () -> Unit,
@@ -146,47 +191,3 @@ fun BottomAppBar10(
     }
 }
 
-
-@Composable
-fun EditarTexto(
-    initialText: String,
-    onTextChange: (String) -> Unit,
-    onEditingFinished: () -> Unit
-) {
-    var description by remember { mutableStateOf(initialText) }
-
-    LaunchedEffect(description) {
-        onTextChange(description)
-    }
-
-    Column(modifier = Modifier
-        .fillMaxSize()
-        .padding(20.dp)) {
-        TextField(
-            value = description,
-            onValueChange = {
-                description = it
-            },
-            label = { Text("Escribe aqui") },
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Done
-            ),
-            keyboardActions = KeyboardActions(onDone = {
-                onEditingFinished()
-            })
-        )
-    }
-}
-
-@Composable
-fun MostrarTexto(text: String) {
-    Column(
-        modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
-    ) {
-        Text(text = "Descripcion: ")
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(text = text)
-    }
-}

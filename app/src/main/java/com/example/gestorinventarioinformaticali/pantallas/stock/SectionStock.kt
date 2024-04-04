@@ -34,92 +34,6 @@ import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.navigation.ScreenList
 import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
-@Composable
-fun SectionStock(
-    onButtonClickedFuncApp: () -> Unit,
-    onButtonClickedStock: () -> Unit,
-    onButtonClickedHome: () -> Unit,
-    onButtonClickedUser: () -> Unit,
-    navController: NavHostController,
-    viewModel: StockViewModel
-){
-    Column() {
-        Scaffold(
-            topBar = {
-                TopAppBar5(navController)
-            },
-            bottomBar = {
-                BottomAppBar5(
-                    onButtonClickedFuncApp = onButtonClickedFuncApp,
-                    onButtonClickedStock = onButtonClickedStock,
-                    onButtonClickedHome = onButtonClickedHome,
-                    onButtonClickedUser = onButtonClickedUser
-                )
-            },
-        ) { innerPadding ->
-            Column(modifier = Modifier.padding(innerPadding)) {
-                Stock(
-                    onButtonClickedFuncApp = onButtonClickedFuncApp,
-                    onButtonClickedStock = onButtonClickedStock,
-                    onButtonClickedHome = onButtonClickedHome,
-                    onButtonClickedUser = onButtonClickedUser,
-                    viewModel = viewModel,
-                    navController = navController
-                )
-            }
-        }
-    }
-}
-
-
-@Composable
-fun BottomAppBar5(
-    onButtonClickedFuncApp: () -> Unit,
-    onButtonClickedStock: () -> Unit,
-    onButtonClickedHome: () -> Unit,
-    onButtonClickedUser: () -> Unit,
-) {
-    Row {
-        BottomAppBar(
-            actions = {
-                IconButton(
-                    modifier = Modifier.weight(2f),
-                    onClick = onButtonClickedFuncApp
-                ) {
-                    Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
-                }
-                IconButton(
-                    modifier = Modifier.weight(2f),
-                    onClick = onButtonClickedStock
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_bar_chart_24),
-                        contentDescription = "Stock",
-                    )
-                }
-                IconButton(
-                    modifier = Modifier.weight(2f),
-                    onClick = onButtonClickedHome
-                ) {
-                    Icon(
-                        Icons.Filled.Home,
-                        contentDescription = "Home",
-                    )
-                }
-                IconButton(
-                    modifier = Modifier.weight(2f),
-                    onClick = onButtonClickedUser
-                ) {
-                    Icon(
-                        Icons.Filled.AccountCircle,
-                        contentDescription = "User",
-                    )
-                }
-            }
-        )
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar5(navController: NavHostController) {
@@ -192,5 +106,90 @@ fun TopAppBar5(navController: NavHostController) {
 
             }
         }
+    }
+}
+
+@Composable
+fun SectionStock(
+    onButtonClickedFuncApp: () -> Unit,
+    onButtonClickedStock: () -> Unit,
+    onButtonClickedHome: () -> Unit,
+    onButtonClickedUser: () -> Unit,
+    navController: NavHostController,
+    viewModel: StockViewModel
+){
+    Column() {
+        Scaffold(
+            topBar = {
+                TopAppBar5(navController)
+            },
+            bottomBar = {
+                BottomAppBar5(
+                    onButtonClickedFuncApp = onButtonClickedFuncApp,
+                    onButtonClickedStock = onButtonClickedStock,
+                    onButtonClickedHome = onButtonClickedHome,
+                    onButtonClickedUser = onButtonClickedUser
+                )
+            },
+        ) { innerPadding ->
+            Column(modifier = Modifier.padding(innerPadding)) {
+                Stock(
+                    onButtonClickedFuncApp = onButtonClickedFuncApp,
+                    onButtonClickedStock = onButtonClickedStock,
+                    onButtonClickedHome = onButtonClickedHome,
+                    onButtonClickedUser = onButtonClickedUser,
+                    viewModel = viewModel,
+                    navController = navController
+                )
+            }
+        }
+    }
+}
+
+@Composable
+fun BottomAppBar5(
+    onButtonClickedFuncApp: () -> Unit,
+    onButtonClickedStock: () -> Unit,
+    onButtonClickedHome: () -> Unit,
+    onButtonClickedUser: () -> Unit,
+) {
+    Row {
+        BottomAppBar(
+            actions = {
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedFuncApp
+                ) {
+                    Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
+                }
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedStock
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_bar_chart_24),
+                        contentDescription = "Stock",
+                    )
+                }
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedHome
+                ) {
+                    Icon(
+                        Icons.Filled.Home,
+                        contentDescription = "Home",
+                    )
+                }
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedUser
+                ) {
+                    Icon(
+                        Icons.Filled.AccountCircle,
+                        contentDescription = "User",
+                    )
+                }
+            }
+        )
     }
 }

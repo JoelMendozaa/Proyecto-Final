@@ -26,6 +26,49 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar4() {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "Funcionamiento App",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                scrollBehavior = scrollBehavior,
+            )
+        },
+    ) { innerPadding ->
+        Column(modifier = Modifier.padding(innerPadding)) {
+            Text(
+                modifier = Modifier.padding(20.dp),
+                text = "La aplicación es muy sencilla"
+            )
+            Text(
+                modifier = Modifier.padding(20.dp),
+                text = "Para poder añadir stock debemos dirigirnos al " +
+                    "bottombar y presionar el icono de barras, dentro seleccionamos que sección vamos " +
+                    "editar, añadir o eliminar y dentro nos aparece las opciones"
+            )
+            Text(
+                modifier = Modifier.padding(20.dp),
+                text = "Para actualizar los productos, debemos ir al productos y presionar el icono " +
+                        "de editar donde nos permite luego editar la descripcion"
+            )
+            Text(
+                modifier = Modifier.padding(20.dp),
+                text = "Para añadir o editar los productos de una categoria debemos ingresar dentro " +
+                        "de las categorias y ahí nos aparece la opción para añadir y editarla"
+            )
+        }
+    }
+}
 
 @Composable
 fun FuncApp(
@@ -55,6 +98,8 @@ fun FuncApp(
         }
     }
 }
+
+
 @Composable
 fun BottomAppBar4(
     onButtonClickedFuncApp: () -> Unit,
@@ -100,50 +145,5 @@ fun BottomAppBar4(
                 }
             }
         )
-    }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopAppBar4() {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        "Funcionamiento App",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
-            Text(
-                modifier = Modifier.padding(20.dp),
-                text = "La aplicación es muy sencilla"
-            )
-            Text(
-                modifier = Modifier.padding(20.dp),
-                text = "Para poder añadir stock debemos dirigirnos al " +
-                    "bottombar y presionar el icono de barras, dentro seleccionamos que sección vamos " +
-                    "editar, añadir o eliminar y dentro nos aparece las opciones"
-            )
-            Text(
-                modifier = Modifier.padding(20.dp),
-                text = "Para actualizar los productos, debemos ir al productos y presionar el icono " +
-                        "de editar donde nos permite luego editar la descripcion"
-            )
-            Text(
-                modifier = Modifier.padding(20.dp),
-                text = "Para añadir o editar los productos de una categoria debemos ingresar dentro " +
-                        "de las categorias y ahí nos aparece la opción para añadir y editarla"
-            )
-        }
     }
 }

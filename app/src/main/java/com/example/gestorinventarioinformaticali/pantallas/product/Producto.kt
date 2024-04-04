@@ -60,6 +60,33 @@ import com.example.gestorinventarioinformaticali.view.ContentInicioView
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 import kotlinx.coroutines.flow.Flow
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar12(productosViewModel: ProductosViewModel) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    BarraBusqueda2(navController = rememberNavController(), viewModel = productosViewModel)
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "Productos",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                scrollBehavior = scrollBehavior,
+            )
+        },
+    ) { innerPadding ->
+        Column(modifier = Modifier.padding(innerPadding)) {
+            ListaProductos(productos = productosViewModel.listaProductos)
+        }
+    }
+}
+
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -141,31 +168,6 @@ fun ProductItem(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopAppBar12(productosViewModel: ProductosViewModel) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    BarraBusqueda2(navController = rememberNavController(), viewModel = productosViewModel)
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        "Productos",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
-            ListaProductos(productos = productosViewModel.listaProductos)
-        }
-    }
-}
 
 @Composable
 fun ListaProductos(productos: Flow<List<tablaProductos>>) {
@@ -182,53 +184,6 @@ fun ListaProductos(productos: Flow<List<tablaProductos>>) {
     }
 }
 
-@Composable
-fun BottomAppBar12(
-    onButtonClickedFuncApp: () -> Unit,
-    onButtonClickedStock: () -> Unit,
-    onButtonClickedHome: () -> Unit,
-    onButtonClickedUser: () -> Unit,
-) {
-    Row {
-        BottomAppBar(
-            actions = {
-                IconButton(
-                    modifier = Modifier.weight(2f),
-                    onClick = onButtonClickedFuncApp
-                ) {
-                    Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
-                }
-                IconButton(
-                    modifier = Modifier.weight(2f),
-                    onClick = onButtonClickedStock
-                ) {
-                    Icon(
-                        painter = painterResource(id = R.drawable.baseline_bar_chart_24),
-                        contentDescription = "Stock",
-                    )
-                }
-                IconButton(
-                    modifier = Modifier.weight(2f),
-                    onClick = onButtonClickedHome
-                ) {
-                    Icon(
-                        Icons.Filled.Home,
-                        contentDescription = "Home",
-                    )
-                }
-                IconButton(
-                    modifier = Modifier.weight(2f),
-                    onClick = onButtonClickedUser
-                ) {
-                    Icon(
-                        Icons.Filled.AccountCircle,
-                        contentDescription = "User",
-                    )
-                }
-            }
-        )
-    }
-}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -293,5 +248,53 @@ fun BarraBusqueda2(
                 }
             }
         }
+    }
+}
+
+@Composable
+fun BottomAppBar12(
+    onButtonClickedFuncApp: () -> Unit,
+    onButtonClickedStock: () -> Unit,
+    onButtonClickedHome: () -> Unit,
+    onButtonClickedUser: () -> Unit,
+) {
+    Row {
+        BottomAppBar(
+            actions = {
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedFuncApp
+                ) {
+                    Icon(Icons.Default.AttachFile, contentDescription = "FuncApp")
+                }
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedStock
+                ) {
+                    Icon(
+                        painter = painterResource(id = R.drawable.baseline_bar_chart_24),
+                        contentDescription = "Stock",
+                    )
+                }
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedHome
+                ) {
+                    Icon(
+                        Icons.Filled.Home,
+                        contentDescription = "Home",
+                    )
+                }
+                IconButton(
+                    modifier = Modifier.weight(2f),
+                    onClick = onButtonClickedUser
+                ) {
+                    Icon(
+                        Icons.Filled.AccountCircle,
+                        contentDescription = "User",
+                    )
+                }
+            }
+        )
     }
 }

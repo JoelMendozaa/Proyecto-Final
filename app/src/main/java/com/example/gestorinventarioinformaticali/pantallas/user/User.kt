@@ -1,6 +1,5 @@
 package com.example.gestorinventarioinformaticali.pantallas.user
 
-import androidx.compose.foundation.gestures.scrollable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,8 +15,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -44,6 +41,45 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.gestorinventarioinformaticali.R
 
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar2(onButtonClickedLogin: () -> Unit) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "Usuario",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                scrollBehavior = scrollBehavior,
+            )
+        },
+    ) { innerPadding ->
+        Column(modifier = Modifier.padding(innerPadding)) {
+            Column {
+                OutlinedText()
+                Row(
+                    modifier = Modifier
+                        .padding(innerPadding),
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Button(onClick = {
+                        onButtonClickedLogin()
+                    }) {
+                        Text(text = "Cerrar Sesión")
+                    }
+                }
+            }
+        }
+    }
+}
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -219,41 +255,3 @@ fun OutLineTextFieldDNI(dni: String, onDniChange: (String) -> Unit) {
     )
 }
 
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopAppBar2(onButtonClickedLogin: () -> Unit) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        "Usuario",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        },
-    ) { innerPadding ->
-        Column(modifier = Modifier.padding(innerPadding)) {
-            Column {
-                OutlinedText()
-                Row(
-                    modifier = Modifier
-                        .padding(innerPadding),
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Button(onClick = {
-                        onButtonClickedLogin()
-                    }) {
-                        Text(text = "Cerrar Sesión")
-                    }
-                }
-            }
-        }
-    }
-}

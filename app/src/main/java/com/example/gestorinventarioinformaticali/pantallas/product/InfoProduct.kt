@@ -37,6 +37,78 @@ import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
 
 
+
+
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar3(
+    navController: NavController,
+    onButtonClickedActDesc: () -> Unit,
+) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "Producto",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                scrollBehavior = scrollBehavior,
+            )
+        }
+    ) { innerPadding ->
+        LazyColumn(modifier = Modifier.padding(innerPadding)) {
+            item {
+                Box(
+                    modifier = Modifier
+                        .size(height = 200.dp, width = 450.dp)
+                        .fillMaxWidth()
+                        .padding(vertical = 8.dp)
+                        .background(color = MaterialTheme.colorScheme.secondary)
+                ) {
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        verticalAlignment = Alignment.CenterVertically,
+                        horizontalArrangement = Arrangement.Center
+                    ) {
+                        Image(
+                            painter = painterResource(id = R.drawable.procesador2),
+                            contentDescription = "Ejemplo imagen",
+                        )
+                    }
+                    Box(
+                        modifier = Modifier
+                            .align(Alignment.TopEnd)
+                    ){
+                        Row(
+                            modifier = Modifier.fillMaxWidth()
+                        ){
+                            IconButton(onClick = onButtonClickedActDesc) {
+                                Icon(imageVector = Icons.Filled.Edit, contentDescription = "Editar")
+                            }
+                        }
+                    }
+                }
+            }
+            item {
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalAlignment = Alignment.Top,
+                    horizontalArrangement = Arrangement.Center
+                ) {
+                    Text(text = "Nombre Producto")
+                }
+            }
+        }
+    }
+}
+
+
 @Composable
 fun InfoProduct(
     onButtonClickedFuncApp: () -> Unit,
@@ -114,74 +186,5 @@ fun BottomAppBar3(
                 }
             }
         )
-    }
-}
-
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopAppBar3(
-    navController: NavController,
-    onButtonClickedActDesc: () -> Unit,
-) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        "Producto",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        }
-    ) { innerPadding ->
-        LazyColumn(modifier = Modifier.padding(innerPadding)) {
-            item {
-                Box(
-                    modifier = Modifier
-                        .size(height = 200.dp, width = 450.dp)
-                        .fillMaxWidth()
-                        .padding(vertical = 8.dp)
-                        .background(color = MaterialTheme.colorScheme.secondary)
-                ) {
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        verticalAlignment = Alignment.CenterVertically,
-                        horizontalArrangement = Arrangement.Center
-                    ) {
-                        Image(
-                            painter = painterResource(id = R.drawable.procesador2),
-                            contentDescription = "Ejemplo imagen",
-                        )
-                    }
-                    Box(
-                        modifier = Modifier
-                            .align(Alignment.TopEnd)
-                    ){
-                        Row(
-                            modifier = Modifier.fillMaxWidth()
-                        ){
-                            IconButton(onClick = onButtonClickedActDesc) {
-                                Icon(imageVector = Icons.Filled.Edit, contentDescription = "Editar")
-                            }
-                        }
-                    }
-                }
-            }
-            item {
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    verticalAlignment = Alignment.Top,
-                    horizontalArrangement = Arrangement.Center
-                ) {
-                    Text(text = "Nombre Producto")
-                }
-            }
-        }
     }
 }

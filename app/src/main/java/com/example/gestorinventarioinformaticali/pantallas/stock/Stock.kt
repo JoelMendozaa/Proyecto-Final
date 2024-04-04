@@ -50,6 +50,33 @@ import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 import kotlinx.coroutines.flow.Flow
 
 
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun TopAppBar9(stocksViewModel: StockViewModel) {
+    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    Scaffold(
+        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        topBar = {
+            CenterAlignedTopAppBar(
+                title = {
+                    Text(
+                        "Stock",
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
+                },
+                scrollBehavior = scrollBehavior,
+            )
+        }
+    ) { innerPadding ->
+        LazyColumn(modifier = Modifier.padding(innerPadding)) {
+            item {
+                ListaStocks(stocks = stocksViewModel.listaStock)
+            }
+        }
+    }
+}
+
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
 fun Stock(
@@ -160,7 +187,6 @@ fun ListaStocks(stocks: Flow<List<tablaStock>>){
     }
 }
 
-
 @Composable
 fun BottomAppBar9(
     onButtonClickedFuncApp: () -> Unit,
@@ -206,32 +232,5 @@ fun BottomAppBar9(
                 }
             }
         )
-    }
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun TopAppBar9(stocksViewModel: StockViewModel) {
-    val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
-    Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
-        topBar = {
-            CenterAlignedTopAppBar(
-                title = {
-                    Text(
-                        "Stock",
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                },
-                scrollBehavior = scrollBehavior,
-            )
-        }
-    ) { innerPadding ->
-        LazyColumn(modifier = Modifier.padding(innerPadding)) {
-            item {
-                ListaStocks(stocks = stocksViewModel.listaStock)
-            }
-        }
     }
 }

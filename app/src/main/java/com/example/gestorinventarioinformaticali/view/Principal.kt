@@ -40,42 +40,6 @@ import com.example.gestorinventarioinformaticali.R
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.navigation.ScreenList
 
-
-@Composable
-fun Principal(
-    onButtonClickedFuncApp: () -> Unit,
-    onButtonClickedStock: () -> Unit,
-    onButtonClickedPrincipal: () -> Unit,
-    onButtonClickedUser: () -> Unit,
-    onButtonClickedInfoProduct: () -> Unit,
-    onButtonClickedProduct: () -> Unit,
-    navController: NavHostController,
-) {
-
-    Scaffold(
-        topBar = {
-            TopAppBar(navController)
-        },
-        bottomBar = {
-            BottomAppBar(
-                onButtonClickedFuncApp = onButtonClickedFuncApp,
-                onButtonClickedStock = onButtonClickedStock,
-                onButtonClickedHome = onButtonClickedPrincipal,
-                onButtonClickedUser = onButtonClickedUser
-            )
-        },
-    ) { innerPadding ->
-        Column(
-            modifier = Modifier
-                .padding(innerPadding)
-                .fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ){
-
-        }
-    }
-}
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TopAppBar(navController: NavHostController) {
@@ -144,7 +108,7 @@ fun TopAppBar(navController: NavHostController) {
                     fontSize = 28.sp,
                     fontWeight = FontWeight.Bold,
                     modifier = Modifier.padding(bottom = 8.dp)
-                    )
+                )
                 LazyRow(
                     modifier = Modifier
                         .padding(3.dp)
@@ -183,6 +147,48 @@ fun TopAppBar(navController: NavHostController) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun Principal(
+    onButtonClickedFuncApp: () -> Unit,
+    onButtonClickedStock: () -> Unit,
+    onButtonClickedPrincipal: () -> Unit,
+    onButtonClickedUser: () -> Unit,
+    onButtonClickedInfoProduct: () -> Unit,
+    onButtonClickedProduct: () -> Unit,
+    navController: NavHostController,
+) {
+
+    Scaffold(
+        topBar = {
+            TopAppBar(navController)
+        },
+        bottomBar = {
+            BottomAppBar(
+                onButtonClickedFuncApp = onButtonClickedFuncApp,
+                onButtonClickedStock = onButtonClickedStock,
+                onButtonClickedHome = onButtonClickedPrincipal,
+                onButtonClickedUser = onButtonClickedUser
+            )
+        },
+    ) { innerPadding ->
+        Column(
+            modifier = Modifier
+                .padding(innerPadding)
+                .fillMaxSize(),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ){
+
+        }
+    }
+}
+
+@Composable
+fun DividerExample() {
+    Column(modifier = Modifier.padding(20.dp)) {
+        Divider(thickness = 1.dp, color = Color.Black)
     }
 }
 
@@ -234,10 +240,5 @@ fun BottomAppBar(
     }
 }
 
-@Composable
-fun DividerExample() {
-    Column(modifier = Modifier.padding(20.dp)) {
-        Divider(thickness = 1.dp, color = Color.Black)
-    }
-}
+
 
