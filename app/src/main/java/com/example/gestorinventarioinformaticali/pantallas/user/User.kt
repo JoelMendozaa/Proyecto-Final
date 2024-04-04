@@ -40,7 +40,7 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.gestorinventarioinformaticali.R
-
+import com.example.gestorinventarioinformaticali.pantallas.stock.BottomAppBar9
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -84,49 +84,23 @@ fun TopAppBar2(onButtonClickedLogin: () -> Unit) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun User(
-    onButtonClickedInfoApp: () -> Unit,
+    onButtonClickedFuncApp: () -> Unit,
     onButtonClickedLogin: () -> Unit,
     onButtonClickedStock: () -> Unit,
     onButtonClickedHome: () -> Unit,
-    onButtonClickedUser: () -> Unit
+    onButtonClickedUser: () -> Unit,
 ){
     Scaffold(
         topBar = {
             TopAppBar2(onButtonClickedLogin)
         },
         bottomBar = {
-            Row (modifier = Modifier.fillMaxWidth()) {
-                BottomAppBar(
-                    actions = {
-                        IconButton(modifier = Modifier.weight(2f),
-                            onClick = { onButtonClickedInfoApp() }) {
-                            Icon(Icons.Default.AttachFile, contentDescription = "InfoApp")
-                        }
-                        IconButton(modifier = Modifier.weight(2f),
-                            onClick = { onButtonClickedStock() }
-                        ) {
-                            Icon(
-                                painter = painterResource(id = R.drawable.baseline_bar_chart_24),
-                                contentDescription = "Stock",
-                            )
-                        }
-                        IconButton(modifier = Modifier.weight(2f),
-                            onClick = { onButtonClickedHome() }) {
-                            Icon(
-                                Icons.Filled.Home,
-                                contentDescription = "Home",
-                            )
-                        }
-                        IconButton(modifier = Modifier.weight(2f),
-                            onClick = { onButtonClickedUser() }) {
-                            Icon(
-                                Icons.Filled.AccountCircle,
-                                contentDescription = "User",
-                            )
-                        }
-                    }
-                )
-            }
+            BottomAppBar9(
+                onButtonClickedFuncApp = onButtonClickedFuncApp,
+                onButtonClickedStock = onButtonClickedStock,
+                onButtonClickedHome = onButtonClickedHome,
+                onButtonClickedUser = onButtonClickedUser
+            )
         },
         modifier = Modifier.padding(15.dp)
     ){ innerPadding ->
