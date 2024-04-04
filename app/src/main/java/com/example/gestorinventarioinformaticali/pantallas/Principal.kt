@@ -111,7 +111,6 @@ fun TopAppBar(navController: NavHostController) {
                     modifier = Modifier
                         .padding(3.dp)
                 ) {
-
                     item {
                         Image(
                             painter = painterResource(id = R.drawable.procesador2),
