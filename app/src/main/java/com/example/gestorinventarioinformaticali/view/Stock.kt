@@ -1,4 +1,4 @@
-package com.example.gestorinventarioinformaticali.pantallas.stock
+package com.example.gestorinventarioinformaticali.view
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Column
@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.Card
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -21,8 +21,9 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AttachFile
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
@@ -43,19 +44,24 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.models.tablaStock
-import com.example.gestorinventarioinformaticali.pantallas.product.ProductItem
-import com.example.gestorinventarioinformaticali.view.ContentInicioStockView
-import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 import kotlinx.coroutines.flow.Flow
 
 
 @OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @Composable
-fun TopAppBar9(stocksViewModel: StockViewModel) {
+fun Stock(
+    onButtonClickedFuncApp: () -> Unit,
+    onButtonClickedStock: () -> Unit,
+    onButtonClickedHome: () -> Unit,
+    onButtonClickedUser: () -> Unit,
+    viewModel: StockViewModel,
+    navController: NavController
+) {
     val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior(rememberTopAppBarState())
+    val stocks by viewModel.listaStock.collectAsState(initial = emptyList())
     Scaffold(
-        modifier = Modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
@@ -67,37 +73,6 @@ fun TopAppBar9(stocksViewModel: StockViewModel) {
                 },
                 scrollBehavior = scrollBehavior,
             )
-        }
-    ) { innerPadding ->
-        LazyColumn(modifier = Modifier.padding(innerPadding)) {
-            item {
-                ListaStocks(stocks = stocksViewModel.listaStock)
-            }
-        }
-    }
-}
-
-@SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
-@Composable
-fun Stock(
-    onButtonClickedFuncApp: () -> Unit,
-    onButtonClickedStock: () -> Unit,
-    onButtonClickedHome: () -> Unit,
-    onButtonClickedUser: () -> Unit,
-    viewModel: StockViewModel,
-    navController: NavController
-) {
-    val stocks by viewModel.listaStock.collectAsState(initial = emptyList())
-    Scaffold(
-        topBar = {
-           TopAppBar9(stocksViewModel = viewModel)
-        },
-        floatingActionButton = {
-            FloatingActionButton(
-                onClick = { navController.navigate("agregar2") }
-            ) {
-                Icon(imageVector = Icons.Default.Add, contentDescription = "Agregar")
-            }
         },
         bottomBar = {
             BottomAppBar9(
@@ -106,86 +81,60 @@ fun Stock(
                 onButtonClickedHome = onButtonClickedHome,
                 onButtonClickedUser = onButtonClickedUser
             )
-        }
-    ) {
-        Column {
-            ContentInicioStockView(
-                it = PaddingValues(16.dp),
-                navController = navController,
-                viewModel = viewModel
-            )
-        }
-        LazyColumn(
-            modifier = Modifier
-                .padding(16.dp)
-        ) {
-            stocks.forEach { stockItem ->
-                item {
-                    StockItem(
-                        modifier = Modifier.fillMaxSize(),
-                        existencia = stockItem,
-                        onItemClick = {
-                            navController.navigate(
-                                "editar/${stockItem.id}/${stockItem.nombre}/${stockItem.marca}/${stockItem.stock}"
-                            )
-                        },
-                        onClickDelete = {
-                            viewModel.borrarStock(stockItem)
-                        }
-                    )
-                }
+        },
+        floatingActionButton = {
+            FloatingActionButton(
+                onClick = { navController.navigate("agregar2") }
+            ) {
+                Icon(imageVector = Icons.Default.Add, contentDescription = "Agregar")
             }
         }
+    ) {
+        ContentInicioStockView(
+            it,
+            navController,
+            viewModel
+        )
     }
 }
 
-@Composable
-fun StockItem(
-    modifier : Modifier,
-    existencia: tablaStock,
-    onItemClick: () -> Unit,
-    onClickDelete: () -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(onClick = onItemClick)
-            .padding(top = 10.dp)
-    ) {
-        Column(
-            modifier = Modifier.padding(16.dp)
-        ) {
-            Text(text = "Nombre: ${existencia.nombre}")
-            Text(text = "Marca: ${existencia.marca}")
-            Text(text = "Stock: ${existencia.stock}")
-            Spacer(modifier = Modifier.height(8.dp))
-            Row{
-                Button(onClick = onItemClick) {
-                    Text(text = "Editar")
-                }
-                Spacer(modifier = Modifier.width(8.dp))
-                Button(onClick = onClickDelete) {
-                    Text(text = "Eliminar")
-                }
-            }
-        }
-    }
-}
+
 
 @Composable
-fun ListaStocks(stocks: Flow<List<tablaStock>>){
-    val listaStockState by stocks.collectAsState(initial = emptyList())
+fun ContentInicioStockView(it: PaddingValues, navController: NavController, viewModel: StockViewModel){
+    val state = viewModel.state
     Column {
-        listaStockState.forEach { stock ->
-            StockItem(
-                modifier = Modifier.padding(2.dp),
-                existencia = stock,
-                onItemClick = { /*TODO*/ },
-                onClickDelete = { /* TODO */ }
-            )
+        LazyColumn {
+            items (state.listaStock){
+                Card(
+                    modifier = Modifier
+                        .padding(top = 65.dp, start = 8.dp, end = 8.dp)
+                        .fillMaxWidth()
+                ){
+                    Column (
+                        modifier = Modifier
+                            .padding(12.dp)
+                    ) {
+                        Text(text = "Nombre: ${it.nombre}")
+                        Text(text = "Marca: ${it.marca}")
+                        Text(text = "Stock: ${it.stock}")
+                        Row {
+                            Button(
+                                onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}/${it.stock}") }
+                            ) {
+                                Text(text = "Editar")
+                            }
+                            Button(onClick = { viewModel.borrarStock(it) }) {
+                                Text(text = "Eliminar")
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }
+
 
 @Composable
 fun BottomAppBar9(
@@ -234,3 +183,4 @@ fun BottomAppBar9(
         )
     }
 }
+

@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -43,7 +44,7 @@ fun EditarView(navController: NavController, viewModel: ProductosViewModel, id: 
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(imageVector = Icons.Default.ArrowBackIosNew, contentDescription = "Back")
                     }
                 }
             )
@@ -62,8 +63,8 @@ fun ContentEditarView(
     nombre: String?,
     marca: String?,
 ){
-    var nombre by remember { mutableStateOf("") }
-    var marca by remember { mutableStateOf("") }
+    var nombre by remember { mutableStateOf(nombre ?: "") }
+    var marca by remember { mutableStateOf(marca ?: "") }
 
     LazyColumn (
         modifier = Modifier

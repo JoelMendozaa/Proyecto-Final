@@ -20,16 +20,27 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GestorInventarioInformaticaLITheme {
-                val database = Room.databaseBuilder(this, ProductosDatabase::class.java, "db_productos").build()
-                val database2 = Room.databaseBuilder( this, StockDatabase::class.java, "db_stock").build()
-                val dao = database.productoDao()
-                val dao2 = database2.stockDao()
-                val viewModel = ProductosViewModel(dao)
-                val viewModel2 = StockViewModel(dao2)
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
+                    val database = Room.databaseBuilder(
+                        this,
+                        ProductosDatabase::class.java,
+                        "db_productos"
+                    ).build()
+                    val database2 = Room.databaseBuilder(
+                        this,
+                        StockDatabase::class.java,
+                        "db_stock"
+                    ).build()
+
+                    val dao = database.productoDao()
+                    val dao2 = database2.stockDao()
+
+                    val viewModel = ProductosViewModel(dao)
+                    val viewModel2 = StockViewModel(dao2)
+
                     MyApp(viewModel = viewModel, viewModel2 = viewModel2)
                 }
             }

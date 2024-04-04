@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -32,7 +33,14 @@ import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun EditarStock(navController: NavController, viewModel: StockViewModel, id: Int, nombre: String?, marca: String?, stock: String?){
+fun EditarStock(
+    navController: NavController,
+    viewModel: StockViewModel,
+    id: Int,
+    nombre: String?,
+    marca: String?,
+    stock: String?
+){
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -45,7 +53,7 @@ fun EditarStock(navController: NavController, viewModel: StockViewModel, id: Int
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(imageVector = Icons.Default.ArrowBackIosNew, contentDescription = "Back")
                     }
                 }
             )
@@ -65,9 +73,9 @@ fun ContentEditarStock(
     marca: String?,
     stock: String?
 ){
-    var nombre by remember { mutableStateOf("") }
-    var marca by remember { mutableStateOf("") }
-    var stock by remember { mutableStateOf("") }
+    var nombre by remember { mutableStateOf(nombre ?: "") }
+    var marca by remember { mutableStateOf(marca ?: "") }
+    var stock by remember { mutableStateOf(stock ?: "") }
 
     LazyColumn (
         modifier = Modifier

@@ -7,14 +7,14 @@ import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.example.gestorinventarioinformaticali.view.Principal
+import com.example.gestorinventarioinformaticali.pantallas.Principal
 import com.example.gestorinventarioinformaticali.pantallas.infoApp.FuncApp
 import com.example.gestorinventarioinformaticali.pantallas.login.Login
 import com.example.gestorinventarioinformaticali.pantallas.product.ActDesc
 import com.example.gestorinventarioinformaticali.pantallas.product.InfoProduct
-import com.example.gestorinventarioinformaticali.pantallas.product.Producto
+import com.example.gestorinventarioinformaticali.view.Producto
 import com.example.gestorinventarioinformaticali.pantallas.stock.SectionStock
-import com.example.gestorinventarioinformaticali.pantallas.stock.Stock
+import com.example.gestorinventarioinformaticali.view.Stock
 import com.example.gestorinventarioinformaticali.pantallas.user.User
 import com.example.gestorinventarioinformaticali.view.AgregarStock
 import com.example.gestorinventarioinformaticali.view.AgregarView
@@ -125,6 +125,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 viewModel = viewModel
             )
         }
+        
         composable("agregar1"){
             AgregarView(navController, viewModel)
         }

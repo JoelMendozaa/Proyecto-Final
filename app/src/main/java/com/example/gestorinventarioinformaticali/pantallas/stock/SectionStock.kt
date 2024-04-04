@@ -11,7 +11,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
@@ -32,6 +31,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.navigation.ScreenList
+import com.example.gestorinventarioinformaticali.view.Stock
 import com.example.gestorinventarioinformaticali.viewmodel.StockViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)

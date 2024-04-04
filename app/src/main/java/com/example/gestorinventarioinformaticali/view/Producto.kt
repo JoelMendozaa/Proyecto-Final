@@ -1,4 +1,4 @@
-package com.example.gestorinventarioinformaticali.pantallas.product
+package com.example.gestorinventarioinformaticali.view
 
 
 import android.annotation.SuppressLint
@@ -7,16 +7,14 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.material3.Card
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Icon
 import androidx.compose.material.icons.Icons
@@ -24,15 +22,14 @@ import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AttachFile
 import androidx.compose.material.icons.filled.Clear
+import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Text
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.IconButton
@@ -56,7 +53,6 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.gestorinventarioinformaticali.R
 import com.example.gestorinventarioinformaticali.models.tablaProductos
-import com.example.gestorinventarioinformaticali.view.ContentInicioView
 import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 import kotlinx.coroutines.flow.Flow
 
@@ -127,11 +123,13 @@ fun Producto(
                 items(productos) { producto ->
                     ProductItem(
                         producto = producto,
-                        onItemClick = { navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}") },
-                        onClickDelete = {
-                            viewModel.borrarProducto(producto)
+                        onItemClick = {
+                            navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}")
                         }
                     )
+                    {
+                        viewModel.borrarProducto(producto)
+                    }
                 }
             }
         }
@@ -183,6 +181,39 @@ fun ListaProductos(productos: Flow<List<tablaProductos>>) {
         }
     }
 }
+
+@Composable
+fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
+    val state = viewModel.state
+    Column {
+        LazyColumn {
+            items (state.listaProductos){
+                Box(
+                    modifier = Modifier
+                        .padding(8.dp)
+                        .fillMaxWidth()
+                ){
+                    Column (
+                        modifier = Modifier
+                            .padding(12.dp)
+                    ) {
+                        Text(text = it.nombre)
+                        Text(text = it.marca)
+                        IconButton(
+                            onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}") }
+                        ) {
+                            Icon(imageVector = Icons.Default.Edit, contentDescription = "Edit")
+                        }
+                        IconButton(onClick = { viewModel.borrarProducto(it) }) {
+                            Icon(imageVector = Icons.Default.Delete, contentDescription = "Delete")
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 
 
 @OptIn(ExperimentalMaterial3Api::class)
