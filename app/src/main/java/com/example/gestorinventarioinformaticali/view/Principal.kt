@@ -66,8 +66,7 @@ fun Principal(
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxSize()
-                .verticalScroll(ScrollState(0)),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ){
 
@@ -98,8 +97,7 @@ fun TopAppBar(navController: NavHostController) {
         Column(
             modifier = Modifier
                 .padding(innerPadding)
-                .fillMaxSize()
-                .verticalScroll(ScrollState(0)),
+                .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(text = "CATEGORIA", fontSize = 28.sp)

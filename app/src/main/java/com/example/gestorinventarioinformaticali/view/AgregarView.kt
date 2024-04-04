@@ -8,6 +8,7 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material3.Button
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -44,7 +45,7 @@ fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
                 },
                 navigationIcon = {
                     IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back")
+                        Icon(imageVector = Icons.Default.ArrowBackIosNew, contentDescription = "Back")
                     }
                 }
             )
@@ -58,7 +59,6 @@ fun AgregarView(navController: NavController, viewModel: ProductosViewModel){
 fun ContentAgregarView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
     var nombre by remember { mutableStateOf("") }
     var marca by remember { mutableStateOf("") }
-    var stock by remember { mutableStateOf("") }
 
     LazyColumn (
         modifier = Modifier

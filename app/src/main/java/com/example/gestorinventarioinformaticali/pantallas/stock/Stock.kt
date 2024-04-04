@@ -63,7 +63,7 @@ fun Stock(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate("agregar") }
+                onClick = { navController.navigate("agregar2") }
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Agregar")
             }
@@ -77,6 +77,13 @@ fun Stock(
             )
         }
     ) {
+        Column {
+            ContentInicioStockView(
+                it = PaddingValues(16.dp),
+                navController = navController,
+                viewModel = viewModel
+            )
+        }
         LazyColumn(
             modifier = Modifier
                 .padding(16.dp)
@@ -96,13 +103,6 @@ fun Stock(
                     }
                 }
             }
-//            item {
-//                ContentInicioStockView(
-//                    it = PaddingValues(16.dp),
-//                    navController = navController,
-//                    viewModel = viewModel
-//                )
-//            }
         }
     }
 }

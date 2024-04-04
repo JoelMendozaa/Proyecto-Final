@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
 class StockViewModel(private val dao: StockDatabaseDao): ViewModel() {
     val listaStock: Flow<List<tablaStock>> = dao.obtenerStock()
     var state by mutableStateOf(StockState())

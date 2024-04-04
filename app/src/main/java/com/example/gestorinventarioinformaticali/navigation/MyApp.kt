@@ -125,7 +125,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 viewModel = viewModel
             )
         }
-        composable("agregar"){
+        composable("agregar1"){
             AgregarView(navController, viewModel)
         }
         composable("editar/{id}/{nombre}/{marca}/", arguments = listOf(
@@ -141,7 +141,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
                 it.arguments?.getString("marca"),
             )
         }
-        composable("agregar"){
+        composable("agregar2"){
             AgregarStock(navController, viewModel2)
         }
         composable("editar/{id}/{nombre}/{marca}/{stock}", arguments = listOf(

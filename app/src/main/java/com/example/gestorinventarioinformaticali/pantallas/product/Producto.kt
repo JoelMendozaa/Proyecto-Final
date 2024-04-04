@@ -75,7 +75,7 @@ fun Producto(
         },
         floatingActionButton = {
             FloatingActionButton(
-                onClick = { navController.navigate("agregar") }
+                onClick = { navController.navigate("agregar1") }
             ) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "Agregar")
             }
@@ -90,21 +90,21 @@ fun Producto(
         }
     ) {
         Column(
-            modifier = Modifier
-                .padding(16.dp)
-                .verticalScroll(rememberScrollState()),
-            verticalArrangement = Arrangement.spacedBy(16.dp)
+            modifier = Modifier.padding(16.dp)
         ) {
-//            ContentInicioView(it = PaddingValues(16.dp), navController = navController, viewModel = viewModel)
-            productos.forEach { producto ->
-                ProductItem(
-                    producto = producto,
-                    onItemClick = { navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}") }
-                ) {
-                    viewModel.borrarProducto(producto)
+            ContentInicioView(it = PaddingValues(16.dp), navController = navController, viewModel = viewModel)
+            LazyColumn {
+                items(productos) { producto ->
+                    ProductItem(
+                        producto = producto,
+                        onItemClick = { navController.navigate("editar/${producto.id}/${producto.nombre}/${producto.marca}") }
+                    ) {
+                        viewModel.borrarProducto(producto)
+                    }
                 }
             }
         }
+
     }
 }
 

@@ -22,11 +22,8 @@ import com.example.gestorinventarioinformaticali.viewmodel.ProductosViewModel
 @Composable
 fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel: ProductosViewModel){
     val state = viewModel.state
-
-    Column (
-        modifier = Modifier.padding(it)
-    ) {
-        LazyColumn(){
+    Column {
+        LazyColumn {
             items (state.listaProductos){
                 Box(
                     modifier = Modifier
