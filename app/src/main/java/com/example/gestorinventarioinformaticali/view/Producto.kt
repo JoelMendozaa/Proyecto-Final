@@ -138,12 +138,14 @@ fun ContentInicioView(it: PaddingValues, navController: NavController, viewModel
                         Text(text = "Marca: ${it.marca}")   // Muestra la marca del producto
                         Row{
                             Button(
-                                onClick = { navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}") }
+                                onClick = {
+                                    navController.navigate("editar/${it.id}/${it.nombre}/${it.marca}")
+                                }
                             ) {
                                 Text(text = "Editar")  // Botón para editar el producto
                             }
                             Button(onClick = { viewModel.borrarProducto(it) }) {
-                                Text(text = "Elininar") // Botón para eliminar el producto
+                                Text(text = "Eliminar") // Botón para eliminar el producto
                             }
                         }
                     }

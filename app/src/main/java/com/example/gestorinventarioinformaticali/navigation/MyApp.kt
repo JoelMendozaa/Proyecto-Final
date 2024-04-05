@@ -146,7 +146,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
             AgregarView(navController, viewModel)
         }
         // Pantalla para editar un producto existente
-        composable("editar/{id}/{nombre}/{marca}/", arguments = listOf(
+        composable("editar/{id}/{nombre}/{marca}", arguments = listOf(
             navArgument("id"){ type = NavType.IntType},
             navArgument("nombre"){ type = NavType.StringType},
             navArgument("marca"){ type = NavType.StringType},
@@ -154,7 +154,7 @@ fun MyApp(navController: NavHostController = rememberNavController(), viewModel:
             EditarView(
                 navController,
                 viewModel,
-                it.arguments!!.getInt("id") ?: 0,
+                it.arguments!!.getInt("id"),
                 it.arguments?.getString("nombre"),
                 it.arguments?.getString("marca"),
             )
